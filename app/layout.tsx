@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Syne, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/ui/mini-navbar";
-import Footer from "@/components/Footer";
 import LenisProvider from "@/components/LenisProvider";
+import Nav from "@/components/Nav";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -18,25 +17,18 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "HMPS Administrasi Bisnis — Kabinet Sentra Nawasena 2026",
+  title: "HIMA Administrasi Bisnis Vokasi UB — 2026",
   description:
-    "HMPS Administrasi Bisnis Universitas Brawijaya — Kabinet Sentra Nawasena 2026. Merangkai Sinergi Wujudkan Aksi. Pusat pengembangan kompetensi dan inovasi mahasiswa.",
-  keywords: ["HMPS", "Administrasi Bisnis", "UB", "Sentra Nawasena", "HMPS Adbis"],
-  openGraph: {
-    title: "HMPS Administrasi Bisnis — Kabinet Sentra Nawasena 2026",
-    description: "Merangkai Sinergi Wujudkan Aksi",
-    type: "website",
-  },
+    "HIMA Administrasi Bisnis Vokasi UB — Kabinet Sentra Nawasena. Playful editorial, character-driven. Merangkai Sinergi Wujudkan Aksi.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id" className={`${syne.variable} ${jakarta.variable} h-full`}>
-      <body className="min-h-full flex flex-col antialiased overflow-x-clip">
+      <body className="min-h-full antialiased overflow-x-clip bg-[#FFFBF0] text-[#14141F]">
         <LenisProvider />
-        <Navbar />
-        <main className="flex-1 flex flex-col">{children}</main>
-        <Footer />
+        <Nav />
+        <main>{children}</main>
       </body>
     </html>
   );

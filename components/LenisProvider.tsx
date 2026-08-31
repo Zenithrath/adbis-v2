@@ -6,20 +6,17 @@ import Lenis from "lenis";
 export default function LenisProvider() {
   useEffect(() => {
     const lenis = new Lenis({
-      autoRaf: true,
-      lerp: 0.08,
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      gestureOrientation: "vertical",
     });
 
-    // expose for ScrollTrigger if needed
-    // @ts-expect-error global
-    window.lenis = lenis;
-
-    return () => {
-      lenis.destroy();
-    };
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    return () => lenis.destroy();
   }, []);
-
   return null;
 }
