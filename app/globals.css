@@ -1,28 +1,30 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-paper: #FFFBF0;
-  --color-paper-dark: #FFF0D6;
-  --color-ink: #14141F;
-  --color-coral: #FF6B4A;
-  --color-sky: #6CAEFF;
-  --color-mustard: #FFD23F;
-  --color-mint: #5ED9B3;
-  --color-lilac: #C9B6FF;
-  --color-pink: #FF8FA3;
+  --color-cream: #FAF3E8;
+  --color-blue: #B9CDF7;
+  --color-purple: #D3BFF5;
+  --color-pink: #F6C6E0;
+  --color-violet: #5B3FC9;
+  --color-ink: #2B2140;
+  --color-paper: #FAF3E8;
+  --color-mint: #8FE3C6;
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
   --font-syne: var(--font-syne);
-  --font-jakarta: var(--font-jakarta);
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #C9B6FF #FFFBF0;
-}
+* { scrollbar-width: thin; scrollbar-color: #D3BFF5 #FAF3E8; }
+
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 
 body {
-  background: #FFFBF0;
-  color: #14141F;
-  font-family: var(--font-jakarta), system-ui, sans-serif;
+  background: #FAF3E8;
+  color: #2B2140;
+  font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
@@ -33,32 +35,18 @@ body {
   letter-spacing: -0.04em;
   line-height: 0.9;
 }
-.syne-black {
-  font-family: var(--font-syne), sans-serif;
+.serif-display {
+  font-family: var(--font-serif), serif;
   font-weight: 800;
   letter-spacing: -0.03em;
+  line-height: 0.88;
 }
+.blob { border-radius: 42% 58% 60% 40% / 45% 35% 65% 55%; }
+.blob-2 { border-radius: 60% 40% 45% 55% / 55% 65% 35% 45%; }
 
-.blob {
-  border-radius: 42% 58% 60% 40% / 45% 35% 65% 55%;
-}
-.blob-2 {
-  border-radius: 60% 40% 45% 55% / 55% 65% 35% 45%;
-}
-
-/* book depth */
 .book-shadow {
-  box-shadow:
-    0 2px 10px rgba(20,20,31,0.08),
-    0 12px 40px rgba(20,20,31,0.12),
-    0 1px 0 rgba(20,20,31,0.08) inset;
+  box-shadow: 0 4px 16px rgba(43,33,64,0.08), 0 12px 36px rgba(43,33,64,0.12);
 }
-
-/* hide scrollbar */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-::selection {
-  background: #FFD23F;
-  color: #14141F;
-}
+::selection { background: #D3BFF5; color: #2B2140; }

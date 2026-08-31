@@ -1,379 +1,275 @@
 "use client";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import Lenis from "lenis";
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-
-/* ---------- tiny handmade doodles ---------- */
-function Star({ className = "", size = 20, fill = "#14141F" }: { className?: string; size?: number; fill?: string }) {
+function Star({ size = 16, fill = "#2B2140", cls = "" }: { size?: number; fill?: string; cls?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" className={className} style={{ fill }}>
+    <svg width={size} height={size} viewBox="0 0 24 24" className={cls} style={{ fill }}>
       <path d="M12 0L13.9 8.1L22 12L13.9 15.9L12 24L10.1 15.9L2 12L10.1 8.1L12 0Z" />
     </svg>
   );
 }
-function ArrowDoodle({ className = "" }: { className?: string }) {
-  return (
-    <svg width="88" height="28" viewBox="0 0 88 28" fill="none" className={className}>
-      <path d="M2 14 H70" stroke="#14141F" strokeWidth="2.2" strokeLinecap="round" />
-      <path d="M62 6 L76 14 L62 22" stroke="#14141F" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <path d="M8 14 C18 8, 28 20, 38 14" stroke="#FF6B4A" strokeWidth="1.6" strokeLinecap="round" fill="none" />
-    </svg>
-  );
-}
-function Scribble({ className = "" }: { className?: string }) {
-  return (
-    <svg width="120" height="18" viewBox="0 0 120 18" fill="none" className={className}>
-      <path d="M2 12 C 20 2, 40 16, 60 8 C 80 2, 100 14, 118 7" stroke="#FFD23F" strokeWidth="6" strokeLinecap="round" opacity="0.95" />
-    </svg>
-  );
-}
 
-/* ---------- sticker ---------- */
-function Sticker({ children, rotate = "-2deg", bg = "white", className = "" }: { children: React.ReactNode; rotate?: string; bg?: string; className?: string }) {
-  return (
-    <div
-      className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-full border-[2.5px] border-[#14141F] font-black text-xs tracking-wide shadow-[3px_3px_0_#14141F] ${className}`}
-      style={{ background: bg, rotate }}
-    >
-      {children}
-    </div>
-  );
-}
-
-/* ========== PAGE ========== */
 export default function Page() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
-  const blobY = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
+  const bookCoverRef = useRef<HTMLDivElement>(null);
+  const bookPageRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const aboutContentRef = useRef<HTMLDivElement>(null);
+  const wordmarkRef = useRef<HTMLDivElement>(null);
+  const iconRef = useRef<HTMLDivElement>(null);
+
+  // Lenis site-wide
+  useEffect(() => {
+    const lenis = new Lenis({ duration: 1.05, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+    const raf = (t: number) => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+    lenis.on("scroll", ScrollTrigger.update);
+    // @ts-ignore
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    return () => { lenis.destroy(); gsap.ticker.remove((time: number) => lenis.raf(time * 1000)); };
+  }, []);
+
+  // Home staged hero + cards reveal (light, no pin)
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".hero-logo", { y: 14, opacity: 0, duration: 0.6, ease: "power2.out" });
+      gsap.from(".hero-name", { y: 20, opacity: 0, duration: 0.7, delay: 0.15, ease: "power3.out" });
+      gsap.from(".hero-tagline span", { y: 18, opacity: 0, duration: 0.5, stagger: 0.08, delay: 0.45, ease: "power2.out" });
+
+      gsap.utils.toArray<HTMLElement>(".reveal-card").forEach((card, i) => {
+        gsap.from(card, {
+          y: 18, opacity: 0, duration: 0.55, delay: i * 0.08,
+          scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none reverse" },
+          ease: "power2.out",
+        });
+      });
+
+      gsap.from(".upcoming-strip", {
+        x: 24, opacity: 0, duration: 0.6,
+        scrollTrigger: { trigger: ".upcoming-strip", start: "top 88%" },
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
+  // Book transition Home -> About (PRD 5.2)
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const trigger = triggerRef.current, pin = pinRef.current, cover = bookCoverRef.current, page = bookPageRef.current, bg = bgRef.current, about = aboutContentRef.current;
+    if (!trigger || !pin || !cover || !page || !bg || !about) return;
+
+    if (prefersReduced) {
+      gsap.set(cover, { rotationY: 0, opacity: 0 });
+      gsap.set(page, { scaleX: 1, scaleY: 1 });
+      gsap.set(bg, { backgroundColor: "#D3BFF5" });
+      gsap.set(about, { opacity: 1, y: 0 });
+      gsap.set(wordmarkRef.current, { opacity: 0 });
+      gsap.set(iconRef.current, { opacity: 1, scale: 1 });
+      return;
+    }
+
+    const isMobile = window.innerWidth < 768;
+    // identical anchor: left 0% 50% for both
+    gsap.set([cover, page], { transformOrigin: "0% 50%", transformStyle: "preserve-3d" as any, backfaceVisibility: "hidden" as any });
+    gsap.set(cover, { rotationY: 0, opacity: 1, zIndex: 2 });
+    gsap.set(page, { scaleX: 1, scaleY: 1, zIndex: 1 });
+    gsap.set(bg, { backgroundColor: "#FAF3E8" });
+    gsap.set(about, { opacity: 0, y: 18 });
+    gsap.set(wordmarkRef.current, { opacity: 1, scale: 1 });
+    gsap.set(iconRef.current, { opacity: 0, scale: 0.8 });
+
+    // compute dynamic scale to fill viewport
+    const getScales = () => {
+      const rect = page.getBoundingClientRect();
+      const vw = window.innerWidth, vh = window.innerHeight;
+      const pad = isMobile ? 0 : 0; // page should fill viewport exactly
+      return { sx: (vw - pad) / rect.width, sy: (vh - pad) / rect.height };
+    };
+
+    let scales = getScales();
+    const onResize = () => { scales = getScales(); ScrollTrigger.refresh(); };
+    window.addEventListener("resize", onResize);
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger,
+        start: "top top",
+        end: "+=140%",
+        pin,
+        scrub: 1,
+        anticipatePin: 1,
+        // markers: true,
+      },
+    });
+
+    // Phase 1+2 overlap: cover rotate -115 and page scale together, bg crossfade
+    tl.to(cover, { rotationY: -115, duration: 0.55, ease: "power1.inOut" }, 0);
+    tl.to(page, { scaleX: scales.sx, scaleY: scales.sy, duration: 0.65, ease: "power1.inOut" }, 0);
+    tl.to(bg, { backgroundColor: "#D3BFF5", duration: 0.6, ease: "none" }, 0);
+    tl.to(wordmarkRef.current, { opacity: 0, scale: 0.92, duration: 0.3 }, 0);
+    tl.to(iconRef.current, { opacity: 1, scale: 1, duration: 0.3 }, 0.18);
+
+    // cover fade after rotate
+    tl.to(cover, { opacity: 0, duration: 0.18, ease: "power1.out" }, 0.5);
+
+    // about content fade after page fills (separate, not stretched)
+    tl.to(about, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 0.72);
+
+    // click dual-trigger
+    const onClick = () => {
+      const st = (tl.scrollTrigger as any);
+      if (!st) return;
+      const end = st.end;
+      gsap.to(window, { duration: 0.85, scrollTo: end, ease: "power2.inOut" });
+    };
+    cover.addEventListener("click", onClick);
+    page.addEventListener("click", onClick);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      cover.removeEventListener("click", onClick);
+      page.removeEventListener("click", onClick);
+      tl.kill();
+      ScrollTrigger.getAll().forEach((s) => s.kill());
+    };
+  }, []);
 
   return (
-    <div className="bg-[#FFFBF0] text-[#14141F] overflow-clip">
-      {/* ---------- HERO SCENE ---------- */}
-      <section ref={heroRef} id="hero" className="relative min-h-[100svh] flex flex-col overflow-hidden">
-        {/* paper texture dots - 8% */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.035]" style={{ backgroundImage: `radial-gradient(#14141F 1px, transparent 1px)`, backgroundSize: "18px 18px" }} />
-        {/* soft organic blobs bg ΓÇö 70% illustration feel */}
-        <motion.div style={{ y: blobY }} className="absolute -top-20 -right-20 w-[520px] h-[520px] bg-[#C9B6FF]/25 blob blur-[0px] pointer-events-none hidden lg:block" />
-        <motion.div style={{ y: blobY }} className="absolute -bottom-24 -left-24 w-[560px] h-[560px] bg-[#6CAEFF]/18 blob-2 pointer-events-none" />
-        <div className="absolute top-[18%] right-[8%] w-[180px] h-[180px] bg-[#FFD23F]/90 blob-3 border-[2.5px] border-[#14141F] hidden xl:flex items-center justify-center rotate-[-4deg] shadow-[4px_4px_0_#14141F]">
-          <span className="syne-black text-[11px] tracking-[0.14em] text-center leading-tight">SENTRA<br />NAWASENA<br />ΓÇö 2026</span>
-        </div>
-
-        {/* pixel accents ΓÇö 20% */}
-        <div className="absolute top-[96px] left-[6%] hidden lg:block opacity-90">
-          <div className="w-[36px] h-[36px] grid grid-cols-3 gap-[3px]">
-            {Array.from({ length: 9 }).map((_, i) => (
-              <span key={i} className={`w-[10px] h-[10px] border border-[#14141F] ${i % 3 === 0 ? "bg-[#FF6B4A]" : i % 2 === 0 ? "bg-[#FFD23F]" : "bg-white"}`} />
-            ))}
+    <div className="bg-[#FAF3E8] text-[#2B2140] overflow-clip">
+      {/* NAVBAR wordmark -> icon */}
+      <div className="fixed top-0 inset-x-0 z-30 pointer-events-none">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 h-[56px] flex items-center justify-between">
+          <div className="relative h-7 flex items-center">
+            <div ref={wordmarkRef} className="flex items-center gap-2">
+              <span className="w-8 h-8 rounded-full bg-[#2B2140] text-white grid place-items-center text-[10px] font-black">H</span>
+              <span className="font-black text-[13px] tracking-[0.08em]">HIMA ADBIS</span>
+              <span className="hidden sm:inline text-[10px] font-bold tracking-[0.14em] opacity-40">• VOKASI UB</span>
+            </div>
+            <div ref={iconRef} className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#2B2140] text-white grid place-items-center font-black text-[11px]">H</div>
           </div>
+          <span className="hidden sm:inline-flex items-center gap-2 bg-white border border-[#2B2140] px-3 py-1 rounded-full text-[11px] font-black">MENU</span>
         </div>
-        <div className="absolute bottom-[8%] right-[22%] hidden lg:block">
-          <div className="w-[56px] h-[14px] flex gap-[4px]">
-            <span className="flex-1 bg-[#14141F] h-[8px] mt-1" /><span className="flex-1 bg-[#5ED9B3] h-[8px] mt-1 border border-[#14141F]" /><span className="flex-1 bg-[#FFD23F] h-[8px] mt-1 border border-[#14141F]" />
-          </div>
-        </div>
+      </div>
 
-        <div className="relative mx-auto w-full max-w-[1440px] px-5 sm:px-6 lg:px-8 flex-1 flex flex-col justify-center pt-20 sm:pt-24 pb-10">
-          {/* eyebrow */}
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex items-center gap-3">
-            <span className="hidden sm:inline-flex items-center gap-2 text-[11px] font-black tracking-[0.18em] text-[#14141F]/45">EST. 2026 ΓÇö VOKASI UB</span>
-            <span className="w-6 h-px bg-[#14141F]/15 hidden sm:block" />
-            <span className="inline-flex bg-[#FFD23F] border border-[#14141F] px-2.5 py-1 rounded-full text-[10px] font-black tracking-[0.12em] shadow-[2px_2px_0_#14141F]">KABINET SENTRA NAWASENA</span>
-            <Star size={16} fill="#FF6B4A" className="hidden sm:block ml-1 animate-[spin_8s_linear_infinite]" />
-          </motion.div>
-
-          {/* big editorial type ΓÇö asymmetric, large */}
-          <motion.div style={{ y: heroY, scale: heroScale }} className="mt-6 sm:mt-8 relative">
-            <div className="flex flex-wrap items-start gap-3 sm:gap-4">
-              <motion.h1
-                initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.7, ease: [0.16,1,0.3,1] }}
-                className="syne-display text-[clamp(3.2rem,12vw,10.5rem)]"
-              >
-                <span className="block">HIMA</span>
-                <span className="block -mt-2 sm:-mt-4 ml-[6%] sm:ml-[9%] flex items-baseline gap-3">
-                  ADBIS
-                  <span className="hidden sm:inline-flex -translate-y-2">
-                    <Star size={22} fill="#6CAEFF" />
-                  </span>
-                </span>
-              </motion.h1>
-
-              {/* floating character card ΓÇö cartoon illustration 70% */}
-              <motion.div
-                initial={{ opacity: 0, rotate: 2, y: 16 }} animate={{ opacity: 1, rotate: -1.5, y: 0 }} transition={{ delay: 0.45, duration: 0.7 }}
-                className="hidden lg:flex ml-auto mt-6 mr-10 w-[320px] bg-white border-[2.5px] border-[#14141F] rounded-[22px] shadow-[6px_6px_0_#14141F] overflow-hidden"
-              >
-                <div className="flex-1 p-4">
-                  <div className="flex -space-x-2">
-                    {["#FF6B4A","#6CAEFF","#FFD23F","#5ED9B3"].map((c,i)=>(
-                      <span key={i} className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-black" style={{background:c}}>{i+1}</span>
-                    ))}
-                  </div>
-                  <p className="mt-3 text-[13px] font-bold leading-tight">Bukan organisasi biasa ΓÇö<br />tempat ide jadi aksi.</p>
-                  <div className="mt-3 flex items-center gap-2 text-[11px] font-black"><span className="w-2 h-2 bg-[#FF6B4A] rounded-full animate-pulse"/> 27 PROKER ΓÇó 8 DIVISI</div>
-                </div>
-                <div className="w-[112px] bg-[#FFF0D6] border-l-[2.5px] border-[#14141F] flex flex-col items-center justify-center p-3 gap-1">
-                  <span className="w-12 h-12 rounded-full bg-[#14141F] flex items-center justify-center text-white text-lg">ΓùÉ</span>
-                  <span className="text-[9px] font-black tracking-[0.12em]">VOKASI UB</span>
-                </div>
-              </motion.div>
+      {/* HOME */}
+      <section id="home" className="relative bg-[#FAF3E8] pt-16 sm:pt-20">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-6 lg:px-8">
+          {/* hero playful staged */}
+          <div className="py-8 sm:py-10">
+            <div className="hero-logo inline-flex items-center gap-2 bg-white border border-[#2B2140] px-3 py-1.5 rounded-full text-[11px] font-black shadow-[2px_2px_0_#2B2140]">
+              <span className="w-2 h-2 bg-[#5B3FC9] rounded-full" /> KABINET SENTRA NAWASENA — 2026
             </div>
-
-            {/* ADMINISTRASI BISNIS ΓÇö outline / doodle */}
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28, duration: 0.7 }} className="mt-1 sm:mt-2 relative">
-              <p className="syne-black text-[clamp(1.05rem,3.2vw,2.1rem)] tracking-[0.16em] text-[#14141F]/15">ADMINISTRASI BISNIS</p>
-              <div className="absolute left-0 right-0 top-1/2 h-px bg-[#14141F]/10 hidden sm:block" />
-              <div className="absolute left-[36%] -top-3 hidden sm:block"><Scribble /></div>
-            </motion.div>
-
-            {/* bottom row: tagline + cta vs sticker */}
-            <div className="mt-8 sm:mt-10 flex flex-col lg:flex-row lg:items-end gap-6 lg:gap-8">
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="max-w-[44ch] text-[15px] sm:text-[17px] leading-relaxed font-medium text-[#14141F]/75">
-                Organisasi kemahasiswaan yang <span className="doodle-underline font-black text-[#14141F]">merangkai sinergi</span> dan mewujudkan aksiΓÇö dari ruang kelas sampai dampak nyata.
-              </motion.p>
-
-              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.58 }} className="flex flex-wrap items-center gap-3 lg:ml-auto">
-                <a href="#kegiatan" className="inline-flex items-center gap-2 bg-[#14141F] text-white px-6 py-3 rounded-full font-black text-sm shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:translate-y-[-1px] transition">
-                  Lihat Kegiatan <span className="w-6 h-6 rounded-full bg-white text-[#14141F] flex items-center justify-center text-xs">ΓåÆ</span>
-                </a>
-                <a href="#manifesto" className="inline-flex items-center gap-2 bg-white border-[2.5px] border-[#14141F] px-5 py-3 rounded-full font-black text-sm shadow-[3px_3px_0_#14141F] hover:translate-y-[-1px] transition">
-                  Manifesto
-                </a>
-                <ArrowDoodle className="hidden sm:block ml-2 rotate-[-6deg] opacity-70" />
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* scroll hint */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="mt-auto pt-10 flex items-center gap-3 text-[10px] font-black tracking-[0.16em] text-[#14141F]/35">
-            <span className="w-6 h-6 rounded-full border border-[#14141F]/15 flex items-center justify-center">Γåô</span> SCROLL ΓÇö CERITA DIMULAI
-            <span className="hidden sm:block w-16 h-px bg-[#14141F]/10" />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ---------- MANIFESTO SCENE ΓÇö mustard chapter ---------- */}
-      <section id="manifesto" className="relative bg-[#FFD23F] border-y-[2.5px] border-[#14141F] overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: `radial-gradient(#14141F 1px, transparent 1px)`, backgroundSize: "16px 16px" }} />
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-6 lg:px-8 py-14 sm:py-20">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-12 items-start">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-white border-[2.5px] border-[#14141F] rounded-full px-3 py-1.5 shadow-[2px_2px_0_#14141F] rotate-[-1deg]">
-                <span className="w-2 h-2 bg-[#FF6B4A] rounded-full" /> <span className="text-[11px] font-black tracking-[0.14em]">02 ΓÇö MANIFESTO</span>
-              </div>
-              <h2 className="syne-display text-[clamp(2rem,6vw,4.2rem)] mt-5">
-                Merangkai<br />
-                <span className="inline-flex items-center gap-3">sinergi <Star size={28} fill="#14141F" className="hidden sm:block" /></span><br />
-                <span className="text-white" style={{ WebkitTextStroke: "2.5px #14141F", paintOrder: "stroke fill" }}>wujudkan aksi.</span>
-              </h2>
-              <div className="mt-6 flex flex-wrap gap-2">
-                <Sticker rotate="-1.5deg" bg="#6CAEFF">KOLABORATIF Γ£ª</Sticker>
-                <Sticker rotate="1.2deg" bg="#FF8FA3">INOVATIF</Sticker>
-                <Sticker rotate="-0.8deg" bg="white">BERDAMPAK</Sticker>
-              </div>
-            </div>
-
-            <div className="relative">
-              {/* cartoon illustration ΓÇö 3 abstract characters */}
-              <div className="bg-white border-[2.5px] border-[#14141F] rounded-[24px] shadow-[6px_6px_0_#14141F] p-5 sm:p-6">
-                <div className="flex gap-3">
-                  {[
-                    { bg: "#6CAEFF", emoji: "Γùæ", label: "Riset" },
-                    { bg: "#FF8FA3", emoji: "Γ¼ó", label: "Karya" },
-                    { bg: "#5ED9B3", emoji: "Γ£ª", label: "Aksi" },
-                  ].map((c) => (
-                    <div key={c.label} className="flex-1 aspect-[0.9] rounded-[18px] border-[2.5px] border-[#14141F] flex flex-col items-center justify-center gap-2" style={{ background: c.bg }}>
-                      <span className="w-12 h-12 rounded-full bg-white border-2 border-[#14141F] flex items-center justify-center text-xl">{c.emoji}</span>
-                      <span className="text-[11px] font-black tracking-[0.12em]">{c.label}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-4 text-[14px] leading-relaxed font-medium text-[#14141F]/75">Tiga pilar yang bikin HIMA beda: riset yang tajam, karya yang relevan, aksi yang dirasakan kampus & masyarakat.</p>
-                <div className="mt-4 h-px bg-[#14141F]/10" />
-                <div className="mt-3 flex items-center justify-between text-xs font-black">
-                  <span>2026 ΓÇó SENTRA NAWASENA</span><span className="px-2 py-1 bg-[#FFD23F] border border-[#14141F] rounded-full">VISI KABINET</span>
-                </div>
-              </div>
-
-              {/* doodle arrow floating */}
-              <div className="absolute -right-2 -bottom-6 hidden lg:block rotate-[8deg]">
-                <div className="bg-white border-[2px] border-[#14141F] rounded-full px-3 py-1.5 shadow-[2px_2px_0_#14141F] text-xs font-black">kita gerak bareng ΓåÆ</div>
-              </div>
-
-              {/* pixel accent */}
-              <div className="absolute -left-4 top-10 hidden lg:grid grid-cols-4 gap-1 opacity-60">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <span key={i} className="w-[7px] h-[7px] bg-[#14141F]" style={{ opacity: 0.12 + (i % 3) * 0.15 }} />
-                ))}
-              </div>
+            <h1 className="hero-name serif-display text-[clamp(2.6rem,8vw,5.8rem)] mt-4 leading-[0.9]">
+              <span className="block text-[12px] font-sans font-black tracking-[0.18em] opacity-40">from</span>
+              <span className="block">Idea</span>
+              <span className="block ml-[10%] sm:ml-[14%] flex items-baseline gap-3">to <span className="text-[#5B3FC9]">Done.</span><Star size={22} fill="#F6C6E0" cls="hidden sm:block" /></span>
+            </h1>
+            <div className="hero-tagline mt-4 flex flex-wrap gap-1.5 text-sm font-medium max-w-[52ch] leading-relaxed">
+              <span>Merangkai</span><span>sinergi</span><span>wujudkan</span><span>aksi</span><span className="opacity-40">—</span><span>perjalanan</span><span>visual</span><span>HIMA</span><span>ADBIS</span><span>dimulai</span><span>di</span><span>sini.</span>
             </div>
           </div>
 
-          {/* values ΓÇö editorial, not cards */}
-          <div className="mt-12 grid sm:grid-cols-3 gap-6 border-t-[2.5px] border-[#14141F]/10 pt-8">
+          {/* 4 highlight cards */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
-              { n: "01", t: "Ruang Tumbuh", d: "Setiap anggota punya panggung untuk coba, gagal, dan jadi lebih baik." },
-              { n: "02", t: "Kolaborasi Nyata", d: "Lintas divisi, lintas angkatan ΓÇö semua saling nyambung." },
-              { n: "03", t: "Dampak Terukur", d: "Program bukan seremonial, tapi ada output yang bisa dilihat." },
-            ].map((v) => (
-              <div key={v.n} className="flex gap-3">
-                <span className="syne-black text-2xl text-[#14141F]/15">{v.n}</span>
-                <div><p className="font-black text-sm">{v.t}</p><p className="text-sm leading-relaxed text-[#14141F]/60 mt-1">{v.d}</p></div>
+              { t: "Invest Adbis", c: "#D3BFF5", e: "◐" },
+              { t: "Bina Masyarakat", c: "#B9CDF7", e: "⬢" },
+              { t: "Market Day", c: "#F6C6E0", e: "✦" },
+              { t: "Sencrea", c: "#8FE3C6", e: "⬣" },
+            ].map((x) => (
+              <div key={x.t} className="reveal-card bg-white border-[2.5px] border-[#2B2140] rounded-[16px] p-4 shadow-[4px_4px_0_#2B2140]">
+                <span className="w-9 h-9 rounded-full border-2 border-[#2B2140] grid place-items-center text-sm" style={{ background: x.c }}>{x.e}</span>
+                <p className="mt-3 font-black text-sm leading-tight">{x.t}</p>
+                <p className="text-xs opacity-60 leading-relaxed mt-1">Program unggulan — reveal bertahap saat scroll.</p>
               </div>
+            ))}
+          </div>
+
+          {/* upcoming strip */}
+          <div className="upcoming-strip mt-8 bg-white border-[2.5px] border-[#2B2140] rounded-[14px] p-3 flex gap-3 overflow-x-auto no-scrollbar">
+            {["Upacara Opening","Workshop Invest","Bina Desa #1","Market Day Teaser"].map((u) => (
+              <span key={u} className="shrink-0 px-3 py-1.5 bg-[#FAF3E8] border border-[#2B2140] rounded-full text-xs font-bold">{u}</span>
+            ))}
+          </div>
+
+          <p className="mt-6 text-xs font-bold tracking-[0.12em] opacity-40 text-center">↓ Scroll atau klik buku untuk masuk ke About</p>
+        </div>
+      </section>
+
+      {/* BOOK TRANSITION Home -> About */}
+      <section ref={triggerRef} className="relative h-[190vh] bg-transparent">
+        <div ref={pinRef} className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center" style={{ perspective: "1600px" }}>
+          <div ref={bgRef} className="absolute inset-0 bg-[#FAF3E8]" />
+
+          {/* book layers identical pos/size, origin left */}
+          <div className="relative w-[min(92vw,520px)] h-[min(64vh,360px)] sm:w-[520px] sm:h-[360px] flex items-center justify-center" style={{ transformStyle: "preserve-3d" }}>
+            {/* page behind — will scale to viewport */}
+            <div
+              ref={bookPageRef}
+              className="absolute left-0 top-1/2 -translate-y-1/2 w-[280px] sm:w-[360px] h-[200px] sm:h-[260px] bg-[#D3BFF5] border-[2.5px] border-[#2B2140] rounded-r-[12px] rounded-l-[2px] shadow-[6px_6px_0_#2B2140] will-change-transform"
+              style={{ transformOrigin: "0% 50%" }}
+            >
+              <div className="absolute inset-0 p-4">
+                <span className="text-[10px] font-black tracking-[0.14em] opacity-40">PAGE — ABOUT</span>
+                <div className="mt-2 w-full h-px bg-[#2B2140]/10" />
+                <div className="mt-3 grid grid-cols-3 gap-2 opacity-20">
+                  <span className="h-2 bg-[#2B2140] rounded-full" /><span className="h-2 bg-white border border-[#2B2140] rounded-full" /><span className="h-2 bg-[#5B3FC9] rounded-full" />
+                </div>
+              </div>
+            </div>
+
+            {/* cover front — rotates */}
+            <div
+              ref={bookCoverRef}
+              className="absolute left-0 top-1/2 -translate-y-1/2 w-[280px] sm:w-[360px] h-[200px] sm:h-[260px] bg-white border-[2.5px] border-[#2B2140] rounded-r-[12px] rounded-l-[2px] shadow-[8px_8px_0_#2B2140] will-change-transform cursor-pointer"
+              style={{ transformOrigin: "0% 50%" }}
+            >
+              <div className="absolute top-0 inset-x-0 h-[28px] bg-[#5B3FC9] border-b-[2.5px] border-[#2B2140] flex items-center px-3 gap-1.5 rounded-tr-[10px]">
+                <span className="w-2.5 h-2.5 rounded-full bg-white border border-[#2B2140]/20" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#F6C6E0] border border-[#2B2140]/20" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#B9CDF7] border border-[#2B2140]/20" />
+                <span className="ml-auto text-[8px] font-black tracking-[0.12em] text-white">HIMA_ADBIS.EXE</span>
+              </div>
+              <div className="absolute inset-x-4 top-[44px] bottom-4 flex flex-col">
+                <span className="text-[10px] font-black tracking-[0.16em] opacity-40">KLIK ATAU SCROLL</span>
+                <span className="serif-display text-[28px] leading-none mt-1">Buka<br />Buku</span>
+                <span className="mt-1 text-xs font-medium opacity-60">Masuk ke cerita Sentra Nawasena</span>
+                <div className="mt-auto inline-flex items-center gap-2 bg-[#2B2140] text-white px-3 py-1.5 rounded-full text-xs font-black w-fit">
+                  Buka <span className="w-5 h-5 rounded-full bg-white text-[#2B2140] grid place-items-center">→</span>
+                </div>
+              </div>
+              {/* face motif */}
+              <div className="absolute right-6 top-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-[#FAF3E8] border-2 border-[#2B2140] hidden sm:grid place-items-center text-lg">◐</div>
+            </div>
+          </div>
+
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white border border-[#2B2140] px-3 py-1.5 rounded-full text-[10px] font-black shadow-[2px_2px_0_#2B2140]">
+            <span className="w-1.5 h-1.5 bg-[#5B3FC9] rounded-full animate-pulse" /> SCROLL / KLIK BUKU
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT — content separate, fade after scale */}
+      <section id="about" className="relative bg-[#D3BFF5] border-t-[2.5px] border-[#2B2140]">
+        <div ref={aboutContentRef} className="mx-auto max-w-[1440px] px-5 sm:px-6 lg:px-8 py-14 sm:py-20">
+          <span className="inline-flex bg-white border border-[#2B2140] px-3 py-1 rounded-full text-[11px] font-black">02 — ABOUT US</span>
+          <h2 className="serif-display text-[clamp(2rem,6vw,4rem)] mt-4 leading-[0.9]">Tentang<br /><span className="text-white" style={{ WebkitTextStroke: "2px #2B2140" as any }}>Sentra Nawasena</span></h2>
+          <p className="mt-4 max-w-[48ch] text-sm leading-relaxed font-medium opacity-70">Makna, Visi, dan Misi muncul bertahap — reveal per kalimat saat discroll, bukan blok penuh.</p>
+          <div className="mt-8 grid sm:grid-cols-3 gap-4">
+            {["Visi: satu statement calm, jadi jeda.", "Misi 1: check", "Misi 2: check"].map((m,i)=>(
+              <div key={i} className="bg-white border-[2.5px] border-[#2B2140] rounded-[14px] p-4 shadow-[3px_3px_0_#2B2140] text-sm font-bold">{m}</div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ---------- KEGIATAN SCENE ΓÇö editorial list, not card grid ---------- */}
-      <section id="kegiatan" className="relative bg-[#FFFBF0] border-b-[2.5px] border-[#14141F] overflow-hidden">
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-6 lg:px-8 py-14 sm:py-20">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <span className="inline-flex bg-[#C9B6FF] border-[2.5px] border-[#14141F] px-3 py-1.5 rounded-full text-[11px] font-black tracking-[0.14em] shadow-[2px_2px_0_#14141F] rotate-[-0.6deg]">03 ΓÇö KEGIATAN</span>
-              <h2 className="syne-display text-[clamp(2rem,6vw,4rem)] mt-4 leading-[0.9]">Apa yang<br />kita kerjakan</h2>
-            </div>
-            <p className="max-w-[36ch] text-sm leading-relaxed text-[#14141F]/60 font-medium">Empat program unggulan yang merangkum 27 proker ΓÇö kurasi paling esensial, bukan katalog.</p>
-          </div>
-
-          <div className="mt-10 border-t-[2.5px] border-[#14141F]">
-            {[
-              { no: "01", title: "INVEST ADBIS", dept: "PSDM", color: "#FFD23F", desc: "Investasi skill & wawasan paling padat tahun ini ΓÇö workshop, kelas, mentoring." },
-              { no: "02", title: "BINA MASYARAKAT", dept: "SOSMAS", color: "#FF8FA3", desc: "Pengabdian yang berkelanjutan, turun langsung, hasilnya kerasa." },
-              { no: "03", title: "MARKET DAY", dept: "BUMH", color: "#6CAEFF", desc: "Bazar karya dan bisnis mahasiswa ΓÇö panggung buat jualan & validasi ide." },
-              { no: "04", title: "SENCREA", dept: "MINBAK", color: "#5ED9B3", desc: "Pesta seni & kreativitas ΓÇö dari panggung sampai instalasi." },
-            ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: i * 0.06 }}
-                className="group grid lg:grid-cols-[120px_1fr_auto] gap-4 sm:gap-6 py-6 sm:py-7 border-b-[1.5px] border-[#14141F]/10 hover:bg-white/60 -mx-2 px-2 rounded-xl transition"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="syne-black text-3xl sm:text-4xl text-[#14141F]/12 group-hover:text-[#14141F]/20 transition">{item.no}</span>
-                  <span className="inline-flex px-2.5 py-1 rounded-full border border-[#14141F] text-[10px] font-black tracking-[0.12em]" style={{ background: item.color }}>{item.dept}</span>
-                </div>
-                <div>
-                  <h3 className="syne-black text-[clamp(1.4rem,3.2vw,2.2rem)] leading-none group-hover:translate-x-1 transition">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#14141F]/60 max-w-[56ch]">{item.desc}</p>
-                </div>
-                <div className="flex items-center gap-3 lg:justify-end">
-                  <span className="hidden sm:inline text-xs font-bold text-[#14141F]/40">Lihat detail</span>
-                  <span className="w-10 h-10 rounded-full bg-white border-[2px] border-[#14141F] flex items-center justify-center group-hover:bg-[#14141F] group-hover:text-white transition">ΓåÆ</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#14141F] text-white flex items-center justify-center text-xs">27</div>
-            <span className="text-sm font-bold">program total ΓÇö lihat semua di halaman program</span>
-            <a href="#" className="ml-auto inline-flex items-center gap-2 bg-white border-[2.5px] border-[#14141F] px-4 py-2 rounded-full font-black text-xs shadow-[2px_2px_0_#14141F]">LIHAT SEMUA ΓåÆ</a>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- ORANG SCENE ΓÇö lilac / character driven ---------- */}
-      <section id="orang" className="relative bg-[#C9B6FF] border-b-[2.5px] border-[#14141F] overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: `radial-gradient(#14141F 1px, transparent 1px)`, backgroundSize: "18px 18px" }} />
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-6 lg:px-8 py-14 sm:py-20 relative">
-          <div className="flex flex-wrap gap-3">
-            <Sticker bg="white" rotate="-1deg">04 ΓÇö ORANG</Sticker>
-            <Sticker bg="#FFD23F" rotate="1deg">8 DIVISI Γ£ª</Sticker>
-            <Sticker bg="#FF8FA3" rotate="-0.5deg">~60 PENGURUS</Sticker>
-          </div>
-          <div className="mt-6 grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-start">
-            <div>
-              <h2 className="syne-display text-[clamp(2rem,6vw,4rem)]">Orang-orang<br />di balik layar</h2>
-              <p className="mt-4 text-[15px] leading-relaxed font-medium text-[#14141F]/70 max-w-[42ch]">Bukan struktur kaku ΓÇö kami cerita sebagai karakter yang saling ngisi. Kenalan sama inti yang gerakin harian HIMA.</p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                <span className="px-3 py-1.5 bg-white border-[2px] border-[#14141F] rounded-full text-xs font-black">KETUA ΓÇó WAKIL</span>
-                <span className="px-3 py-1.5 bg-[#14141F] text-white rounded-full text-xs font-black">BPH INTI</span>
-                <span className="px-3 py-1.5 bg-white border border-[#14141F]/20 rounded-full text-xs font-bold">+ 8 KADIV</span>
-              </div>
-            </div>
-
-            {/* character blobs ΓÇö not photo grid */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4">
-              {[
-                { name: "Ketua", role: "HIMA", bg: "#FFF0D6" },
-                { name: "Wakil", role: "HIMA", bg: "#6CAEFF" },
-                { name: "Sekre", role: "BPH", bg: "#FF8FA3" },
-                { name: "Bendahara", role: "BPH", bg: "#FFD23F" },
-                { name: "PSDM", role: "Kadiv", bg: "#5ED9B3" },
-                { name: "SOSMAS", role: "Kadiv", bg: "white" },
-              ].map((p, i) => (
-                <motion.div
-                  key={p.name}
-                  initial={{ opacity: 0, y: 10, rotate: i % 2 ? 1 : -1 }}
-                  whileInView={{ opacity: 1, y: 0, rotate: i % 2 ? 0.6 : -0.6 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  className="bg-white border-[2.5px] border-[#14141F] rounded-[20px] shadow-[4px_4px_0_#14141F] p-3 flex flex-col items-center text-center"
-                >
-                  <span className="w-[64px] h-[64px] rounded-full border-[2.5px] border-[#14141F] flex items-center justify-center text-xl blob" style={{ background: p.bg }}>ΓùÉ</span>
-                  <span className="mt-2 font-black text-xs leading-none">{p.name}</span>
-                  <span className="text-[10px] font-bold tracking-[0.12em] text-[#14141F]/45">{p.role}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* pixel detail */}
-          <div className="absolute right-6 bottom-6 hidden lg:flex items-center gap-1.5 opacity-30">
-            <span className="w-2 h-2 bg-[#14141F]" /><span className="w-2 h-2 bg-[#FF6B4A]" /><span className="w-2 h-2 bg-white border border-[#14141F]" /><span className="w-2 h-2 bg-[#FFD23F] border border-[#14141F]" />
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- CTA SCENE ---------- */}
-      <section id="gabung" className="relative bg-[#FFFBF0] overflow-hidden">
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-6 lg:px-8 py-14 sm:py-20">
-          <div className="bg-[#14141F] text-white rounded-[28px] sm:rounded-[32px] border-[2.5px] border-[#14141F] shadow-[8px_8px_0_#C9B6FF] overflow-hidden relative">
-            <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: `radial-gradient(white 1px, transparent 1px)`, backgroundSize: "16px 16px" }} />
-            <div className="absolute -top-10 -right-10 w-[220px] h-[220px] bg-[#FF6B4A]/20 blob blur-[1px] pointer-events-none" />
-            <div className="relative grid lg:grid-cols-[1.15fr_0.85fr] gap-8 p-6 sm:p-10 lg:p-12 items-center">
-              <div>
-                <span className="inline-flex bg-[#FFD23F] text-[#14141F] border border-[#14141F] px-3 py-1 rounded-full text-[11px] font-black tracking-[0.14em]">05 ΓÇö GABUNG</span>
-                <h2 className="syne-display text-[clamp(2rem,6vw,4.2rem)] mt-4 leading-[0.9] text-white">
-                  Mau jadi<br />
-                  <span className="text-[#FFD23F]">bagian cerita?</span>
-                </h2>
-                <p className="mt-4 text-white/70 text-sm sm:text-[15px] leading-relaxed max-w-[44ch]">Open recruitment, aspirasi, dan roadmap karier ΓÇö semua pintu masuk ada di satu tempat. Pilih jalurmu.</p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a href="#" className="inline-flex items-center gap-2 bg-[#FF6B4A] text-white border-2 border-white px-6 py-3 rounded-full font-black text-sm shadow-[3px_3px_0_white] hover:translate-y-[-1px] transition">DAFTAR SEKARANG ΓåÆ</a>
-                  <a href="#" className="inline-flex items-center gap-2 bg-white text-[#14141F] px-6 py-3 rounded-full font-black text-sm">KIRIM ASPIRASI Γ£ª</a>
-                </div>
-              </div>
-
-              <div className="bg-white text-[#14141F] rounded-[20px] border-[2.5px] border-white p-5 sm:p-6">
-                <div className="flex items-center gap-2 text-[11px] font-black tracking-[0.14em]"><span className="w-2 h-2 bg-[#5ED9B3] rounded-full animate-pulse" /> ADBIS HUB ΓÇö ONE STOP</div>
-                <div className="mt-4 grid grid-cols-1 gap-3">
-                  {[
-                    { t: "Open Recruitment", d: "Form resmi, info seleksi transparan.", c: "#FFD23F" },
-                    { t: "Aspirasi Mahasiswa", d: "Ide & keluhan ΓÇö kami advokasi.", c: "#6CAEFF" },
-                    { t: "Career Roadmap", d: "Dari maba sampai siap kerja.", c: "#FF8FA3" },
-                  ].map((f) => (
-                    <div key={f.t} className="flex items-center gap-3 p-3 rounded-2xl border-[2px] border-[#14141F]/10 hover:border-[#14141F]/20 transition">
-                      <span className="w-10 h-10 rounded-full border-2 border-[#14141F] flex items-center justify-center text-sm" style={{ background: f.c }}>ΓåÆ</span>
-                      <div><p className="font-black text-sm leading-none">{f.t}</p><p className="text-xs text-[#14141F]/60">{f.d}</p></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-3 text-[11px] font-black tracking-[0.14em] text-[#14141F]/30">
-            <span>HIMA ADMINISTRASI BISNIS ΓÇö VOKASI UB ΓÇó ┬⌐ 2026 SENTRA NAWASENA</span>
-            <span className="flex items-center gap-2"><span className="w-2 h-2 bg-[#FF6B4A] rounded-full" /> PLAYFUL EDITORIAL ΓÇó BUILT WITH CARE</span>
-          </div>
-        </div>
-      </section>
+      <div className="h-[20vh] bg-[#FAF3E8] grid place-items-center text-xs font-black tracking-[0.14em] opacity-30">— lanjut Values & Culture / People / Work Program —</div>
     </div>
   );
 }
