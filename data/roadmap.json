@@ -1,0 +1,8 @@
+[
+  { "phase": "SEMESTER 1–2", "title": "Know Yourself", "desc": "Mengenali minat, potensi, kekuatan, dan arah karier.", "icon": "🔍", "color": "#c4ccff" },
+  { "phase": "SEMESTER 3", "title": "Build Your Skills", "desc": "Mengembangkan hard skill, soft skill, serta pengalaman melalui organisasi & kepanitiaan.", "icon": "🛠️", "color": "#ff9ebb" },
+  { "phase": "SEMESTER 4", "title": "Prepare for Internship", "desc": "Mempersiapkan CV, LinkedIn, interview, dan kebutuhan untuk melamar magang.", "icon": "📄", "color": "#fff9c4" },
+  { "phase": "SEMESTER 5", "title": "Internship Experience", "desc": "Menjalani magang dan mendapatkan pengalaman profesional di dunia kerja.", "icon": "💼", "color": "#3f41cc" },
+  { "phase": "SEMESTER 6", "title": "Career & Final Project Preparation", "desc": "Menyelesaikan tugas akhir sambil memperbarui CV, LinkedIn & persiapan rekrutmen.", "icon": "🎓", "color": "#ff9ebb" },
+  { "phase": "GRADUATION", "title": "Ready for Your Career", "desc": "Siap mengambil langkah menuju dunia profesional.", "icon": "🚀", "color": "#2d2a32" }
+]
