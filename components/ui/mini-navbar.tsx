@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 const AnimatedNavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
-  const defaultTextColor = "text-gray-300";
+  const defaultTextColor = "text-white/70";
   const hoverTextColor = "text-white";
   const textSizeClass = "text-sm";
 
@@ -49,10 +49,10 @@ export function Navbar() {
 
   const logoElement = (
     <Link href="/" className="relative w-5 h-5 flex items-center justify-center" aria-label="HMPS ADBIS Home">
-      <span className="absolute w-1.5 h-1.5 rounded-full bg-gray-200 top-0 left-1/2 transform -translate-x-1/2 opacity-80"></span>
-      <span className="absolute w-1.5 h-1.5 rounded-full bg-gray-200 left-0 top-1/2 transform -translate-y-1/2 opacity-80"></span>
-      <span className="absolute w-1.5 h-1.5 rounded-full bg-gray-200 right-0 top-1/2 transform -translate-y-1/2 opacity-80"></span>
-      <span className="absolute w-1.5 h-1.5 rounded-full bg-gray-200 bottom-0 left-1/2 transform -translate-x-1/2 opacity-80"></span>
+      <span className="absolute w-1.5 h-1.5 rounded-full bg-white top-0 left-1/2 transform -translate-x-1/2 opacity-90"></span>
+      <span className="absolute w-1.5 h-1.5 rounded-full bg-white left-0 top-1/2 transform -translate-y-1/2 opacity-90"></span>
+      <span className="absolute w-1.5 h-1.5 rounded-full bg-white right-0 top-1/2 transform -translate-y-1/2 opacity-90"></span>
+      <span className="absolute w-1.5 h-1.5 rounded-full bg-white bottom-0 left-1/2 transform -translate-x-1/2 opacity-90"></span>
     </Link>
   );
 
@@ -67,7 +67,7 @@ export function Navbar() {
   const loginButtonElement = (
     <Link
       href="/hub"
-      className="px-4 py-2 sm:px-3 text-xs sm:text-sm border border-[#333] bg-[rgba(31,31,31,0.62)] text-gray-300 rounded-full hover:border-white/50 hover:text-white transition-colors duration-200 w-full sm:w-auto inline-flex items-center justify-center text-center"
+      className="px-4 py-2 sm:px-3 text-xs sm:text-sm border border-white/15 bg-white/10 text-white/80 rounded-full hover:border-white/30 hover:bg-white/15 hover:text-white transition-colors duration-200 w-full sm:w-auto inline-flex items-center justify-center text-center backdrop-blur-md"
     >
       Hub
     </Link>
@@ -75,10 +75,10 @@ export function Navbar() {
 
   const signupButtonElement = (
     <div className="relative group w-full sm:w-auto">
-      <div className="absolute inset-0 -m-2 rounded-full hidden sm:block bg-gray-100 opacity-40 filter blur-lg pointer-events-none transition-all duration-300 ease-out group-hover:opacity-60 group-hover:blur-xl group-hover:-m-3"></div>
+      <div className="absolute inset-0 -m-2 rounded-full hidden sm:block bg-white opacity-20 filter blur-lg pointer-events-none transition-all duration-300 ease-out group-hover:opacity-30 group-hover:blur-xl group-hover:-m-3"></div>
       <Link
         href="/hub"
-        className="relative z-10 px-4 py-2 sm:px-3 text-xs sm:text-sm font-semibold text-black bg-gradient-to-br from-gray-100 to-gray-300 rounded-full hover:from-gray-200 hover:to-gray-400 transition-all duration-200 w-full sm:w-auto inline-flex items-center justify-center text-center"
+        className="relative z-10 px-4 py-2 sm:px-3 text-xs sm:text-sm font-semibold text-[#2d2a32] bg-white rounded-full hover:bg-white/90 transition-all duration-200 w-full sm:w-auto inline-flex items-center justify-center text-center shadow-[0_2px_10px_rgba(0,0,0,0.1)]"
       >
         Join Us
       </Link>
@@ -87,7 +87,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center pl-6 pr-6 py-3 backdrop-blur-sm ${headerShapeClass} border border-[#333] bg-[#1f1f1f57] w-[calc(100%-2rem)] sm:w-auto transition-[border-radius] duration-0 ease-in-out`}
+      className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center pl-6 pr-6 py-3 backdrop-blur-xl ${headerShapeClass} border border-white/15 bg-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)] w-[calc(100%-2rem)] sm:w-auto transition-[border-radius] duration-0 ease-in-out`}
     >
       <div className="flex items-center justify-between w-full gap-x-6 sm:gap-x-8">
         <div className="flex items-center">{logoElement}</div>
@@ -106,7 +106,7 @@ export function Navbar() {
         </div>
 
         <button
-          className="sm:hidden flex items-center justify-center w-8 h-8 text-gray-300 focus:outline-none"
+          className="sm:hidden flex items-center justify-center w-8 h-8 text-white/80 focus:outline-none"
           onClick={toggleMenu}
           aria-label={isOpen ? "Close Menu" : "Open Menu"}
         >
@@ -131,7 +131,7 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="text-gray-300 hover:text-white transition-colors w-full text-center"
+              className="text-white/70 hover:text-white transition-colors w-full text-center"
             >
               {link.label}
             </Link>
