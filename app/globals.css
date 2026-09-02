@@ -1,1 +1,187 @@
 @import "tailwindcss";
+
+/* ── Pastel palette ──────────────────────────────────────── */
+@theme {
+  --color-cream: #faf3e8;
+  --color-cream-deep: #f2e8d4;
+  --color-blue: #b9cdf7;
+  --color-blue-soft: #d4e1fb;
+  --color-purple: #d3bff5;
+  --color-purple-soft: #e6d9f9;
+  --color-pink: #f6c6e0;
+  --color-pink-soft: #fbe0ee;
+  --color-violet: #5b3fc9;
+  --color-violet-light: #7a5ee6;
+  --color-ink: #2b2140;
+  --color-mint: #8fe3c6;
+  --color-mint-soft: #b8f0dc;
+
+  /* Semantic aliases */
+  --color-bg-home: #faf3e8;
+  --color-bg-about: #d3bff5;
+  --color-bg-values: #8fe3c6;
+  --color-bg-people: #b9cdf7;
+  --color-bg-workprogram: #faf3e8;
+  --color-bg-hub: #f6c6e0;
+  --color-bg-contact: #faf3e8;
+
+  --font-family-display: var(--font-fraunces), "Georgia", serif;
+  --font-family-body: var(--font-plus-jakarta), "Segoe UI", sans-serif;
+  --font-family-accent: var(--font-syne), "Segoe UI", sans-serif;
+}
+
+/* ── Base ────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: auto; /* Lenis handles smooth scroll */
+    overflow-x: hidden;
+  }
+
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background: var(--color-purple);
+    color: var(--color-ink);
+  }
+}
+
+/* ── Typography utilities ────────────────────────────────── */
+@layer utilities {
+  .serif-display {
+    font-family: var(--font-family-display);
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .serif-display-italic {
+    font-family: var(--font-family-display);
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  .font-accent {
+    font-family: var(--font-family-accent);
+  }
+
+  .font-body {
+    font-family: var(--font-family-body);
+  }
+
+  .font-serif {
+    font-family: var(--font-family-display);
+  }
+}
+
+/* ── Book transition layers ──────────────────────────────── */
+.book-scene {
+  position: relative;
+  overflow: hidden;
+}
+
+.book-cover,
+.book-page {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0% 50%; /* left spine */
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.book-cover {
+  z-index: 3;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.book-page {
+  z-index: 2;
+}
+
+/* ── Blob decorations ────────────────────────────────────── */
+.blob {
+  border-radius: 42% 58% 62% 38% / 44% 52% 48% 56%;
+  filter: blur(40px);
+  opacity: 0.35;
+  will-change: transform;
+}
+
+/* ── Hero title bold style ───────────────────────────────── */
+.hero-title-bold {
+  font-family: var(--font-family-accent);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  -webkit-text-stroke: 2px currentColor;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ── Scroll reveal classes ───────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Card hover ──────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 50px -12px rgba(43, 33, 64, 0.18);
+}
+
+/* ── Lenis smooth scroll ─────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ── Scrollbar styling ───────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
