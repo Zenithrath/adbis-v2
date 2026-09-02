@@ -42,10 +42,6 @@ export default function RootLayout({
     >
       <body className="font-body antialiased">
         {children}
-        <div className="fixed right-0 top-1/2 z-50 flex h-40 w-12 -translate-y-1/2 flex-col items-center justify-center gap-3 rounded-l-2xl" style={{ background: "#faf3e8" }}>
-          <img src="/images/hmps-logo.png" alt="HMPS" className="h-10 w-10 object-contain" />
-          <img src="/images/sentra-logo.png" alt="Sentra" className="h-10 w-10 object-contain" />
-        </div>
       </body>
     </html>
   );
