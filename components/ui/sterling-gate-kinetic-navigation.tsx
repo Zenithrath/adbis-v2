@@ -318,32 +318,32 @@ export function Component() {
             <div className="menu-content-wrapper">
               <ul className="menu-list">
                 <li className="menu-list-item" data-shape="1">
-                  <a href="#" className="nav-link w-inline-block">
-                    <p className="nav-link-text">About us</p>
+                  <a href="/" onClick={closeMenu} className="nav-link w-inline-block">
+                    <p className="nav-link-text">Beranda</p>
                     <div className="nav-link-hover-bg"></div>
                   </a>
                 </li>
                 <li className="menu-list-item" data-shape="2">
-                  <a href="#" className="nav-link w-inline-block">
-                    <p className="nav-link-text">Our work</p>
+                  <a href="/about" onClick={closeMenu} className="nav-link w-inline-block">
+                    <p className="nav-link-text">Tentang Kabinet</p>
                     <div className="nav-link-hover-bg"></div>
                   </a>
                 </li>
                 <li className="menu-list-item" data-shape="3">
-                  <a href="#" className="nav-link w-inline-block">
-                    <p className="nav-link-text">Services</p>
+                  <a href="/about#visi" onClick={closeMenu} className="nav-link w-inline-block">
+                    <p className="nav-link-text">Visi Misi</p>
                     <div className="nav-link-hover-bg"></div>
                   </a>
                 </li>
                 <li className="menu-list-item" data-shape="4">
-                  <a href="#" className="nav-link w-inline-block">
-                    <p className="nav-link-text" data-menu-fade>Blog</p>
+                  <a href="/#proker" onClick={closeMenu} className="nav-link w-inline-block">
+                    <p className="nav-link-text" data-menu-fade>Program Kerja</p>
                     <div className="nav-link-hover-bg"></div>
                   </a>
                 </li>
                 <li className="menu-list-item" data-shape="5">
-                  <a href="#" className="nav-link w-inline-block">
-                    <p className="nav-link-text">Contact us</p>
+                  <a href="/about#values" onClick={closeMenu} className="nav-link w-inline-block">
+                    <p className="nav-link-text">Values & Culture</p>
                     <div className="nav-link-hover-bg"></div>
                   </a>
                 </li>

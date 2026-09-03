@@ -39,19 +39,19 @@ export function FooterTapedDesign({
 }: FooterTapedProps) {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className={cn("relative bg-[#3E43C7] overflow-hidden", className)}>
-      <div className="bg-grid-lines" />
-      <div className="pink-glow" />
-      <div className="pixel-spot-overlay" />
+    <footer className={cn("relative bg-[#FFF8C7] overflow-hidden", className)}>
+      <div className="bg-grid-lines-cream" />
+      <div className="pink-glow-cream" />
+      <div className="pixel-spot-overlay-cream opacity-60" />
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-10 sm:py-14">
-        {/* Main card — white with 3D border like PERIODE badge */}
-        <div className="relative bg-white rounded-[24px] border-[3px] border-[#111] shadow-[6px_6px_0px_#111] px-6 sm:px-10 py-10 flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12">
+        {/* Main card — BIRU biar kartu biru background cream nyatu proker */}
+        <div className="relative bg-[#4346D0] rounded-[24px] border-[3px] border-[#111] shadow-[6px_6px_0px_#111] px-6 sm:px-10 py-10 flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12">
           <div className="flex flex-col items-start gap-3 max-w-md">
-            <Link href="/" className="flex items-center gap-2.5 text-xl font-unbounded font-black tracking-tight text-[#111] hover:opacity-80 transition-opacity">
-              <span className="w-8 h-8 rounded-full bg-[#3E43C7] text-white flex items-center justify-center text-[10px] font-extrabold">HM</span>
+            <Link href="/" className="flex items-center gap-2.5 text-xl font-unbounded font-black tracking-tight text-white hover:opacity-80 transition-opacity">
+              <span className="w-8 h-8 rounded-full bg-white text-[#111] flex items-center justify-center text-[10px] font-extrabold border-2 border-[#111]">HM</span>
               <span>{brandName}</span>
             </Link>
-            <p className="text-[#111]/60 font-body text-sm leading-relaxed">{tagline}</p>
+            <p className="text-white/70 font-body text-sm leading-relaxed">{tagline}</p>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black bg-[#FFF8C7] text-[#111] border-2 border-[#111] shadow-[3px_3px_0px_#111]">
               ✦ Sentra Nawasena 2026
             </span>
@@ -59,34 +59,34 @@ export function FooterTapedDesign({
 
           <div className="flex flex-wrap md:flex-row gap-8 md:gap-14 items-start w-full md:w-auto">
             <div className="flex flex-col gap-3 min-w-[130px]">
-              <h4 className="uppercase font-unbounded text-xs tracking-wider text-[#111]/40 font-black">Jelajahi</h4>
+              <h4 className="uppercase font-unbounded text-xs tracking-wider text-white/40 font-black">Jelajahi</h4>
               <div className="flex flex-col gap-2.5 text-sm items-start">
-                <a className="text-[#111]/60 hover:text-[#3E43C7] font-bold transition-colors" href="#home">Beranda</a>
-                <a className="text-[#111]/60 hover:text-[#3E43C7] font-bold transition-colors" href="#proker">Program Kerja</a>
-                <a className="text-[#111]/60 hover:text-[#3E43C7] font-bold transition-colors" href="#tentang">Tentang Kami</a>
+                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#home">Beranda</a>
+                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#proker">Program Kerja</a>
+                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#tentang">Tentang Kami</a>
               </div>
             </div>
             <div className="flex flex-col gap-3 min-w-[140px]">
-              <h4 className="uppercase font-unbounded text-xs tracking-wider text-[#111]/40 font-black">Program Kerja</h4>
+              <h4 className="uppercase font-unbounded text-xs tracking-wider text-white/40 font-black">Program Kerja</h4>
               <div className="flex flex-col gap-2.5 text-sm items-start">
-                <a className="text-[#111]/60 hover:text-[#3E43C7] font-bold transition-colors" href="#proker">Invest Adbis</a>
-                <a className="text-[#111]/60 hover:text-[#3E43C7] font-bold transition-colors" href="#proker">Bina Masyarakat</a>
-                <a className="text-[#111]/60 hover:text-[#3E43C7] font-bold transition-colors" href="#proker">Market Day</a>
-                <a className="text-[#111]/60 hover:text-[#3E43C7] font-bold transition-colors" href="#proker">Sencrea</a>
+                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#proker">Invest Adbis</a>
+                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#proker">Bina Masyarakat</a>
+                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#proker">Market Day</a>
+                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#proker">Sencrea</a>
               </div>
             </div>
             <div className="flex flex-col gap-3 min-w-[130px]">
-              <h4 className="uppercase font-unbounded text-xs tracking-wider text-[#111]/40 font-black">Hubungi Kami</h4>
+              <h4 className="uppercase font-unbounded text-xs tracking-wider text-white/40 font-black">Hubungi Kami</h4>
               <div className="flex flex-col gap-2.5 text-sm items-start">
-                <a className="text-[#111]/60 hover:text-[#3E43C7] font-bold inline-flex items-center gap-1.5" href="mailto:hmps.adbis@univ.ac.id"><Mail className="w-3.5 h-3.5" /> Email Resmi</a>
-                <a className="text-[#111]/60 hover:text-[#3E43C7] font-bold inline-flex items-center gap-1.5" href="https://instagram.com" target="_blank" rel="noreferrer"><InstagramIcon className="w-3.5 h-3.5" /> Instagram</a>
-                <a className="text-[#111]/60 hover:text-[#3E43C7] font-bold inline-flex items-center gap-1.5" href="https://linkedin.com" target="_blank" rel="noreferrer"><LinkedInIcon className="w-3.5 h-3.5 fill-current" /> LinkedIn</a>
+                <a className="text-white/70 hover:text-[#FFF8C7] font-bold inline-flex items-center gap-1.5" href="mailto:hmps.adbis@univ.ac.id"><Mail className="w-3.5 h-3.5 text-white/60" /> Email Resmi</a>
+                <a className="text-white/70 hover:text-[#FFF8C7] font-bold inline-flex items-center gap-1.5" href="https://instagram.com" target="_blank" rel="noreferrer"><InstagramIcon className="w-3.5 h-3.5 text-white/60" /> Instagram</a>
+                <a className="text-white/70 hover:text-[#FFF8C7] font-bold inline-flex items-center gap-1.5" href="https://linkedin.com" target="_blank" rel="noreferrer"><LinkedInIcon className="w-3.5 h-3.5 fill-current text-white/60" /> LinkedIn</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs sm:text-sm text-white/80 font-body px-1">
+        <div className="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs sm:text-sm text-[#111]/60 font-body px-1">
           <p>© {currentYear} HMPS Administrasi Bisnis — Sentra Nawasena.</p>
           <div className="flex gap-3 items-center">
             <a href="https://instagram.com" target="_blank" rel="nofollow" className="w-8 h-8 rounded-full bg-white text-[#111] flex items-center justify-center hover:bg-[#FFF8C7] transition-colors border-2 border-[#111] shadow-[2px_2px_0px_#111]">
