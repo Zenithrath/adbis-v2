@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Plus_Jakarta_Sans, Syne } from "next/font/google";
+import { Fraunces, Plus_Jakarta_Sans, Syne, Unbounded } from "next/font/google";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -24,6 +24,13 @@ const syne = Syne({
   weight: ["400", "500", "600", "700", "800"],
 });
 
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  variable: "--font-unbounded",
+  display: "swap",
+  weight: ["800", "900"],
+});
+
 export const metadata: Metadata = {
   title: "HMPS Administrasi Bisnis — Sentra Nawasena 2026",
   description:
@@ -38,7 +45,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${fraunces.variable} ${plusJakarta.variable} ${syne.variable}`}
+      className={`${fraunces.variable} ${plusJakarta.variable} ${syne.variable} ${unbounded.variable}`}
     >
       <body className="font-body antialiased">
         {children}
