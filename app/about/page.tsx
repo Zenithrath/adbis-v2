@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "../hooks/useLenis";
 import { Component as SterlingGateNav } from "@/components/ui/sterling-gate-kinetic-navigation";
 import { FooterTapedDesign } from "@/components/ui/footer-taped-design";
-import { Sparkles, Target, Compass, Users, Shield, Zap, Award, MessageCircle, Clock, HeartHandshake, Activity, RefreshCw, Smile } from "lucide-react";
+import { Target, Users, Shield, Zap, Award, MessageCircle, Clock, HeartHandshake, Activity, RefreshCw, Smile } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -101,8 +101,8 @@ export default function AboutPage() {
       {/* Hero */}
       <section id="tentang" className="relative z-10 min-h-[72vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 pb-12">
         <div className="w-full max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#111] border-2 border-[#111] shadow-[3px_3px_0px_#111] text-xs font-black tracking-widest uppercase mb-6">
-            <Sparkles className="w-3.5 h-3.5" /> Tentang Kabinet
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white text-[#111] border-2 border-[#111] shadow-[3px_3px_0px_#111] text-xs font-black tracking-widest uppercase mb-6">
+            Tentang Kabinet
           </div>
           <h1 className="about-hero font-unbounded text-[clamp(2.8rem,8vw,5.5rem)] font-black leading-[0.85] tracking-[-2px] uppercase" style={{ textShadow: "3px 3px 0 #111, 6px 6px 0 rgba(0,0,0,0.15)" }}>
             <span className="text-[#FF8FA3]">SENTRA</span> <span className="text-[#C6C8FF]">NAWASENA</span>

@@ -330,20 +330,20 @@ export function Component() {
                   </a>
                 </li>
                 <li className="menu-list-item" data-shape="3">
-                  <a href="/about#visi" onClick={closeMenu} className="nav-link w-inline-block">
-                    <p className="nav-link-text">Visi Misi</p>
+                  <a href="/people" onClick={closeMenu} className="nav-link w-inline-block">
+                    <p className="nav-link-text">Our People & Proker</p>
                     <div className="nav-link-hover-bg"></div>
                   </a>
                 </li>
                 <li className="menu-list-item" data-shape="4">
-                  <a href="/#proker" onClick={closeMenu} className="nav-link w-inline-block">
-                    <p className="nav-link-text" data-menu-fade>Program Kerja</p>
+                  <a href="/career" onClick={closeMenu} className="nav-link w-inline-block">
+                    <p className="nav-link-text">Career Preparation</p>
                     <div className="nav-link-hover-bg"></div>
                   </a>
                 </li>
                 <li className="menu-list-item" data-shape="5">
-                  <a href="/about#values" onClick={closeMenu} className="nav-link w-inline-block">
-                    <p className="nav-link-text">Values & Culture</p>
+                  <a href="/contact" onClick={closeMenu} className="nav-link w-inline-block">
+                    <p className="nav-link-text">Contact</p>
                     <div className="nav-link-hover-bg"></div>
                   </a>
                 </li>
