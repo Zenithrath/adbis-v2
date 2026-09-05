@@ -565,7 +565,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#1e293b]/50 pt-4">
             <p>© 2026 HMPS Administrasi Bisnis — Kabinet Sentra Nawasena. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 sm:mt-0">
-              <Link href="#" className="hover:text-[#1e293b] transition-colors">Instagram</Link>
+              <Link href="#1" className="hover:text-[#1e293b] transition-colors">Instagram</Link>
               <Link href="#" className="hover:text-[#1e293b] transition-colors">LinkedIn</Link>
               <Link href="#" className="hover:text-[#1e293b] transition-colors">YouTube</Link>
               <Link href="#" className="hover:text-[#1e293b] transition-colors">TikTok</Link>
