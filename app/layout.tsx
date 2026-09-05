@@ -1,34 +1,27 @@
 import type { Metadata } from "next";
-import { Fraunces, Plus_Jakarta_Sans, Syne, Unbounded } from "next/font/google";
+import { Anybody, Inter, Press_Start_2P } from "next/font/google";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const anybody = Anybody({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-anybody",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
+  weight: ["800", "900"],
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta",
+  variable: "--font-inter",
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
 
-const syne = Syne({
+const pressStart = Press_Start_2P({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-pixel",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const unbounded = Unbounded({
-  subsets: ["latin"],
-  variable: "--font-unbounded",
-  display: "swap",
-  weight: ["800", "900"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -45,9 +38,10 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${fraunces.variable} ${plusJakarta.variable} ${syne.variable} ${unbounded.variable}`}
+      className={`${anybody.variable} ${inter.variable} ${pressStart.variable}`}
     >
       <body className="font-body antialiased">
+        <Navbar />
         {children}
       </body>
     </html>

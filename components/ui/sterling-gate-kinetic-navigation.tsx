@@ -1,357 +1,161 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { CustomEase } from "gsap/CustomEase";
+import { useState, useCallback } from "react";
+import Link from "next/link";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-// Register GSAP Plugins safely
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(CustomEase);
+interface NavItem {
+  label: string;
+  href: string;
 }
 
+const NAV_ITEMS: NavItem[] = [
+  { label: "Home", href: "/#home" },
+  { label: "About Us", href: "/#about" },
+  { label: "Program Kerja", href: "/#prokerja" },
+  { label: "Upcoming Events", href: "/#events" },
+  { label: "Kontak", href: "/#contact" },
+];
+
 export function Component() {
-  // We need a ref for the parent container to scope GSAP
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Initial Setup & Hover Effects
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    // Create custom easing
-    try {
-        if (!gsap.parseEase("main")) {
-            CustomEase.create("main", "0.65, 0.01, 0.05, 0.99");
-            gsap.defaults({ ease: "main", duration: 0.7 });
-        }
-    } catch (e) {
-        console.warn("CustomEase failed to load, falling back to default.", e);
-        gsap.defaults({ ease: "power2.out", duration: 0.7 });
-    }
-
-    const ctx = gsap.context(() => {
-      // 1. Arrow Animation (Removed from indicator, but keeping logic if arrow existed/restored elsewhere)
-      // Since arrow is removed from JSX, this selector won't find anything, which is fine (safe check).
-      const arrowLine = document.querySelector(".arrow-line");
-      if (arrowLine) {
-        const pathLength = (arrowLine as SVGPathElement).getTotalLength();
-        gsap.set(arrowLine, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
-        const arrowTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
-        arrowTl
-          .to(arrowLine, { strokeDashoffset: 0, duration: 1, ease: "power2.out" })
-          .to({}, { duration: 1.2 })
-          .to(arrowLine, { strokeDashoffset: -pathLength, duration: 0.6, ease: "power2.in" })
-          .set(arrowLine, { strokeDashoffset: pathLength });
-      }
-
-      // 2. Shape Hover
-      // Updated Selectors: .menu-list-item -> .menu-list-item, .abstract-shapes -> .ambient-background-shapes
-      const menuItems = containerRef.current!.querySelectorAll(".menu-list-item[data-shape]");
-      const shapesContainer = containerRef.current!.querySelector(".ambient-background-shapes");
-      
-      menuItems.forEach((item) => {
-        const shapeIndex = item.getAttribute("data-shape");
-        // Updated Selector: .shape -> .bg-shape
-        const shape = shapesContainer ? shapesContainer.querySelector(`.bg-shape-${shapeIndex}`) : null;
-        
-        if (!shape) return;
-
-        // Updated Selector: .shape-el -> .shape-element
-        const shapeEls = shape.querySelectorAll(".shape-element");
-
-        const onEnter = () => {
-             if (shapesContainer) {
-                 // Updated Selector: .shape -> .bg-shape
-                 shapesContainer.querySelectorAll(".bg-shape").forEach((s) => s.classList.remove("active"));
-             }
-             shape.classList.add("active");
-             
-             gsap.fromTo(shapeEls, 
-                { scale: 0.5, opacity: 0, rotation: -10 },
-                { scale: 1, opacity: 1, rotation: 0, duration: 0.6, stagger: 0.08, ease: "back.out(1.7)", overwrite: "auto" }
-             );
-        };
-        
-        const onLeave = () => {
-            gsap.to(shapeEls, {
-                scale: 0.8, opacity: 0, duration: 0.3, ease: "power2.in",
-                onComplete: () => shape.classList.remove("active"),
-                overwrite: "auto"
-            });
-        };
-
-        item.addEventListener("mouseenter", onEnter);
-        item.addEventListener("mouseleave", onLeave);
-        
-        (item as any)._cleanup = () => {
-            item.removeEventListener("mouseenter", onEnter);
-            item.removeEventListener("mouseleave", onLeave);
-        };
-      });
-      
-    }, containerRef);
-
-    return () => {
-        ctx.revert();
-        if (containerRef.current) {
-            const items = containerRef.current.querySelectorAll(".menu-list-item[data-shape]");
-            items.forEach((item: any) => item._cleanup && item._cleanup());
-        }
-    };
-  }, []);
-
-  // Menu Open/Close Animation Effect
-  useEffect(() => {
-      if (!containerRef.current) return;
-      
-      const ctx = gsap.context(() => {
-        // Updated Selectors: .nav -> .nav-overlay-wrapper, .menu -> .menu-content
-        const navWrap = containerRef.current!.querySelector(".nav-overlay-wrapper");
-        const menu = containerRef.current!.querySelector(".menu-content");
-        const overlay = containerRef.current!.querySelector(".overlay");
-        // Updated Selector: .bg-panel -> .backdrop-layer
-        const bgPanels = containerRef.current!.querySelectorAll(".backdrop-layer");
-        // Updated Selector: .menu-link -> .nav-link
-        const menuLinks = containerRef.current!.querySelectorAll(".nav-link");
-        const fadeTargets = containerRef.current!.querySelectorAll("[data-menu-fade]");
-        
-        // Updated Selector: .menu-button -> .nav-close-btn
-        const menuButton = containerRef.current!.querySelector(".nav-close-btn");
-        const menuButtonTexts = menuButton?.querySelectorAll("p");
-        // Updated Selector: .menu-button-icon -> .menu-button-icon (unchanged in CSS/JSX?) No, wait, CSS had .menu-button-icon
-        const menuButtonIcon = menuButton?.querySelector(".menu-button-icon");
-
-        const tl = gsap.timeline();
-        
-        if (isMenuOpen) {
-            // OPEN
-            if (navWrap) navWrap.setAttribute("data-nav", "open");
-            
-            tl.set(navWrap, { display: "block" })
-              .set(menu, { xPercent: 0 }, "<");
-            if (menuButtonTexts && menuButtonTexts.length) {
-              tl.fromTo(menuButtonTexts as unknown as gsap.TweenTarget, { yPercent: 0 }, { yPercent: -100, stagger: 0.2 }, "<");
-            }
-            if (menuButtonIcon) {
-              tl.fromTo(menuButtonIcon as gsap.TweenTarget, { rotate: 0 }, { rotate: 315 }, "<");
-            }
-              
-            tl.fromTo(overlay, { autoAlpha: 0 }, { autoAlpha: 1 }, "<")
-              .fromTo(bgPanels, { xPercent: 101 }, { xPercent: 0, stagger: 0.12, duration: 0.575 }, "<")
-              .fromTo(menuLinks, { yPercent: 140, rotate: 10 }, { yPercent: 0, rotate: 0, stagger: 0.05 }, "<+=0.35");
-              
-            if (fadeTargets.length) {
-                // Keep clearProps: "all" for blog entry fix
-                tl.fromTo(fadeTargets, { autoAlpha: 0, yPercent: 50 }, { autoAlpha: 1, yPercent: 0, stagger: 0.04, clearProps: "all" }, "<+=0.2");
-            }
-
-        } else {
-            // CLOSE
-            if (navWrap) navWrap.setAttribute("data-nav", "closed");
-
-            tl.to(overlay, { autoAlpha: 0 })
-              .to(menu, { xPercent: 120 }, "<");
-            if (menuButtonTexts && menuButtonTexts.length) {
-              tl.to(menuButtonTexts as unknown as gsap.TweenTarget, { yPercent: 0 }, "<");
-            }
-            if (menuButtonIcon) {
-              tl.to(menuButtonIcon as gsap.TweenTarget, { rotate: 0 }, "<");
-            }
-
-            tl.set(navWrap, { display: "none" });
-        }
-
-      }, containerRef);
-      
-      return () => ctx.revert();
-  }, [isMenuOpen]);
-
-  // keydown Escape handling
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-        if (e.key === "Escape" && isMenuOpen) {
-            setIsMenuOpen(false);
-        }
-    };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [isMenuOpen]);
-
-  const toggleMenu = () => setIsMenuOpen(prev => !prev);
-  const closeMenu = () => setIsMenuOpen(false);
+  const toggleMenu = useCallback(() => setIsOpen((p) => !p), []);
+  const closeMenu = useCallback(() => setIsOpen(false), []);
 
   return (
-    <div ref={containerRef}>
-        <div className="site-header-wrapper">
-          <header className="header">
-            <div className="container is--full">
-              <nav className="nav-row" style={{ justifyContent: "flex-end" }}>
-                <div className="nav-row__right">
-                  
-                  {/* Restored Menu Button */}
-                  <button role="button" className="nav-close-btn" onClick={toggleMenu} style={{ pointerEvents: 'auto' }}>
-                    <div className="menu-button-text">
-                      <p className="p-large">Menu</p>
-                      <p className="p-large">Close</p>
-                    </div>
-                    <div className="icon-wrap">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="100%"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        className="menu-button-icon"
-                      >
-                        <path
-                          d="M7.33333 16L7.33333 -3.2055e-07L8.66667 -3.78832e-07L8.66667 16L7.33333 16Z"
-                          fill="currentColor"
-                        ></path>
-                        <path
-                          d="M16 8.66667L-2.62269e-07 8.66667L-3.78832e-07 7.33333L16 7.33333L16 8.66667Z"
-                          fill="currentColor"
-                        ></path>
-                        <path
-                          d="M6 7.33333L7.33333 7.33333L7.33333 6C7.33333 6.73637 6.73638 7.33333 6 7.33333Z"
-                          fill="currentColor"
-                        ></path>
-                        <path
-                          d="M10 7.33333L8.66667 7.33333L8.66667 6C8.66667 6.73638 9.26362 7.33333 10 7.33333Z"
-                          fill="currentColor"
-                        ></path>
-                        <path
-                          d="M6 8.66667L7.33333 8.66667L7.33333 10C7.33333 9.26362 6.73638 8.66667 6 8.66667Z"
-                          fill="currentColor"
-                        ></path>
-                        <path
-                          d="M10 8.66667L8.66667 8.66667L8.66667 10C8.66667 9.26362 9.26362 8.66667 10 8.66667Z"
-                          fill="currentColor"
-                        ></path>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-              </nav>
-            </div>
-          </header>
+    <>
+      {/* ── Lerp animation (desktop hover effect) ── */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @media (min-width: 768px) {
+              .kinetic-nav {
+                --lerp-0: 1;
+                --lerp-1: calc(sin(30deg));
+                --lerp-2: calc(sin(20deg));
+                --lerp-3: calc(sin(10deg));
+                --lerp-4: 0;
+                --speed: 0.25s;
+              }
+              .kinetic-link {
+                translate: 0 calc(var(--lerp, 0) * 80%);
+                transition: translate var(--speed);
+              }
+              .kinetic-link::before {
+                content: "";
+                position: absolute;
+                height: 300%;
+                border-right: 2px solid #FFFBEB;
+                bottom: 0;
+                background: rgba(255, 242, 178, 0.15);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                z-index: -1;
+                left: 0;
+                right: 0;
+              }
+              .kinetic-link:hover,
+              .kinetic-link:focus-visible {
+                --lerp: var(--lerp-0);
+                z-index: 5;
+              }
+              .kinetic-link:has(+ :is(.kinetic-link:hover, .kinetic-link:focus-visible)),
+              .kinetic-link:hover + .kinetic-link,
+              .kinetic-link:focus-visible + .kinetic-link {
+                --lerp: var(--lerp-1);
+                z-index: 4;
+              }
+              .kinetic-link:has(+ .kinetic-link + :is(.kinetic-link:hover, .kinetic-link:focus-visible)),
+              .kinetic-link:hover + .kinetic-link + .kinetic-link,
+              .kinetic-link:focus-visible + .kinetic-link + .kinetic-link {
+                --lerp: var(--lerp-2);
+                z-index: 3;
+              }
+              .kinetic-link:has(+ .kinetic-link + .kinetic-link + :is(.kinetic-link:hover, .kinetic-link:focus-visible)),
+              .kinetic-link:hover + .kinetic-link + .kinetic-link + .kinetic-link,
+              .kinetic-link:focus-visible + .kinetic-link + .kinetic-link + .kinetic-link {
+                --lerp: var(--lerp-3);
+                z-index: 2;
+              }
+              .kinetic-link:has(+ .kinetic-link + .kinetic-link + .kinetic-link + :is(.kinetic-link:hover, .kinetic-link:focus-visible)),
+              .kinetic-link:hover + .kinetic-link + .kinetic-link + .kinetic-link + .kinetic-link,
+              .kinetic-link:focus-visible + .kinetic-link + .kinetic-link + .kinetic-link + .kinetic-link {
+                --lerp: var(--lerp-4);
+                z-index: 1;
+              }
+            }
+          `,
+        }}
+      />
+
+      {/* ── Navbar ── */}
+      <nav className="kinetic-nav sticky top-0 left-0 right-0 z-50 h-14 md:h-16 bg-[rgba(255,251,235,0.85)] backdrop-blur-xl border-b border-[#1e293b]/10 font-sans text-[11px] font-semibold uppercase tracking-widest text-[#1e293b]">
+        <div className="flex items-center justify-between h-full max-w-[1400px] mx-auto px-6 md:px-8">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 shrink-0"
+            onClick={closeMenu}
+          >
+            <div className="w-3 h-3 bg-[#FC75A7] rounded-sm rotate-45" />
+            <span className="text-sm font-black tracking-tight">HMPS ADBIS</span>
+          </Link>
+
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center h-full">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="kinetic-link relative flex items-center h-full px-5 text-[11px] font-semibold uppercase tracking-widest text-[#1e293b]/60 hover:text-[#FC75A7] transition-colors"
+              >
+                <span>{item.label}</span>
+                <ArrowRight
+                  className="ml-1.5 h-3.5 w-3.5 opacity-0 -rotate-45 scale-90 transition-all duration-200 group-hover:opacity-100 group-hover:rotate-0 group-hover:scale-100"
+                  aria-hidden="true"
+                />
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            type="button"
+            aria-label={isOpen ? "Tutup menu" : "Buka menu"}
+            aria-expanded={isOpen}
+            onClick={toggleMenu}
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-[#1e293b]/5 transition-colors"
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
 
-      <section className="fullscreen-menu-container">
-        <div data-nav="closed" className="nav-overlay-wrapper">
-          {/* Overlay must stay above or below depending on desired clickability. 
-              The original has it cover content. */}
-          <div className="overlay" onClick={closeMenu}></div>
-          <nav className="menu-content">
-            <div className="menu-bg">
-              <div className="backdrop-layer first"></div>
-              <div className="backdrop-layer second"></div>
-              <div className="backdrop-layer"></div>
-
-              {/* Abstract shapes container */}
-              <div className="ambient-background-shapes">
-                {/* Shape 1: Floating circles */}
-                <svg className="bg-shape bg-shape-1" viewBox="0 0 400 400" fill="none">
-                  <circle className="shape-element" cx="80" cy="120" r="40" fill="rgba(99,102,241,0.15)" />
-                  <circle className="shape-element" cx="300" cy="80" r="60" fill="rgba(139,92,246,0.12)" />
-                  <circle className="shape-element" cx="200" cy="300" r="80" fill="rgba(236,72,153,0.1)" />
-                  <circle className="shape-element" cx="350" cy="280" r="30" fill="rgba(99,102,241,0.15)" />
-                </svg>
-
-                {/* Shape 2: Wave pattern */}
-                <svg className="bg-shape bg-shape-2" viewBox="0 0 400 400" fill="none">
-                  <path
-                    className="shape-element"
-                    d="M0 200 Q100 100, 200 200 T 400 200"
-                    stroke="rgba(99,102,241,0.2)"
-                    strokeWidth="60"
-                    fill="none"
-                  />
-                  <path
-                    className="shape-element"
-                    d="M0 280 Q100 180, 200 280 T 400 280"
-                    stroke="rgba(139,92,246,0.15)"
-                    strokeWidth="40"
-                    fill="none"
-                  />
-                </svg>
-
-                {/* Shape 3: Grid dots */}
-                <svg className="bg-shape bg-shape-3" viewBox="0 0 400 400" fill="none">
-                  <circle className="shape-element" cx="50" cy="50" r="8" fill="rgba(99,102,241,0.3)" />
-                  <circle className="shape-element" cx="150" cy="50" r="8" fill="rgba(139,92,246,0.3)" />
-                  <circle className="shape-element" cx="250" cy="50" r="8" fill="rgba(236,72,153,0.3)" />
-                  <circle className="shape-element" cx="350" cy="50" r="8" fill="rgba(99,102,241,0.3)" />
-                  <circle className="shape-element" cx="100" cy="150" r="12" fill="rgba(139,92,246,0.25)" />
-                  <circle className="shape-element" cx="200" cy="150" r="12" fill="rgba(236,72,153,0.25)" />
-                  <circle className="shape-element" cx="300" cy="150" r="12" fill="rgba(99,102,241,0.25)" />
-                  <circle className="shape-element" cx="50" cy="250" r="10" fill="rgba(236,72,153,0.3)" />
-                  <circle className="shape-element" cx="150" cy="250" r="10" fill="rgba(99,102,241,0.3)" />
-                  <circle className="shape-element" cx="250" cy="250" r="10" fill="rgba(139,92,246,0.3)" />
-                  <circle className="shape-element" cx="350" cy="250" r="10" fill="rgba(236,72,153,0.3)" />
-                  <circle className="shape-element" cx="100" cy="350" r="6" fill="rgba(99,102,241,0.3)" />
-                  <circle className="shape-element" cx="200" cy="350" r="6" fill="rgba(139,92,246,0.3)" />
-                  <circle className="shape-element" cx="300" cy="350" r="6" fill="rgba(236,72,153,0.3)" />
-                </svg>
-
-                {/* Shape 4: Organic blobs */}
-                <svg className="bg-shape bg-shape-4" viewBox="0 0 400 400" fill="none">
-                  <path
-                    className="shape-element"
-                    d="M100 100 Q150 50, 200 100 Q250 150, 200 200 Q150 250, 100 200 Q50 150, 100 100"
-                    fill="rgba(99,102,241,0.12)"
-                  />
-                  <path
-                    className="shape-element"
-                    d="M250 200 Q300 150, 350 200 Q400 250, 350 300 Q400 250, 350 300 Q300 350, 250 300 Q200 250, 250 200"
-                    fill="rgba(236,72,153,0.1)"
-                  />
-                </svg>
-
-                {/* Shape 5: Diagonal lines */}
-                <svg className="bg-shape bg-shape-5" viewBox="0 0 400 400" fill="none">
-                  <line className="shape-element" x1="0" y1="100" x2="300" y2="400" stroke="rgba(99,102,241,0.15)" strokeWidth="30" />
-                  <line className="shape-element" x1="100" y1="0" x2="400" y2="300" stroke="rgba(139,92,246,0.12)" strokeWidth="25" />
-                  <line className="shape-element" x1="200" y1="0" x2="400" y2="200" stroke="rgba(236,72,153,0.1)" strokeWidth="20" />
-                </svg>
-              </div>
-            </div>
-
-            <div className="menu-content-wrapper">
-              <ul className="menu-list">
-                <li className="menu-list-item" data-shape="1">
-                  <a href="/" onClick={closeMenu} className="nav-link w-inline-block">
-                    <p className="nav-link-text">Beranda</p>
-                    <div className="nav-link-hover-bg"></div>
-                  </a>
-                </li>
-                <li className="menu-list-item" data-shape="2">
-                  <a href="/about" onClick={closeMenu} className="nav-link w-inline-block">
-                    <p className="nav-link-text">Tentang Kabinet</p>
-                    <div className="nav-link-hover-bg"></div>
-                  </a>
-                </li>
-                <li className="menu-list-item" data-shape="3">
-                  <a href="/people" onClick={closeMenu} className="nav-link w-inline-block">
-                    <p className="nav-link-text">Our People & Proker</p>
-                    <div className="nav-link-hover-bg"></div>
-                  </a>
-                </li>
-                <li className="menu-list-item" data-shape="4">
-                  <a href="/career" onClick={closeMenu} className="nav-link w-inline-block">
-                    <p className="nav-link-text">Career Preparation</p>
-                    <div className="nav-link-hover-bg"></div>
-                  </a>
-                </li>
-                <li className="menu-list-item" data-shape="5">
-                  <a href="/contact" onClick={closeMenu} className="nav-link w-inline-block">
-                    <p className="nav-link-text">Contact</p>
-                    <div className="nav-link-hover-bg"></div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </nav>
+        {/* Mobile drawer */}
+        <div
+          className={cn(
+            "md:hidden absolute top-full left-0 right-0 bg-[rgba(255,251,235,0.97)] backdrop-blur-xl border-b border-[#1e293b]/10 overflow-hidden transition-[max-height,opacity] duration-300 ease-[cubic-bezier(0.65,0.05,0,1)]",
+            isOpen
+              ? "max-h-[400px] opacity-100"
+              : "max-h-0 opacity-0 pointer-events-none"
+          )}
+        >
+          <div className="flex flex-col px-6 py-4 gap-1">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeMenu}
+                className="flex items-center justify-between py-3 text-[13px] font-bold uppercase tracking-wider text-[#1e293b]/70 hover:text-[#FC75A7] border-b border-[#1e293b]/5 last:border-0 transition-colors"
+              >
+                <span>{item.label}</span>
+                <ArrowRight className="h-4 w-4 opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
+              </Link>
+            ))}
+          </div>
         </div>
-      </section>
-    </div>
+      </nav>
+    </>
   );
 }

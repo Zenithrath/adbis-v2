@@ -1,30 +1,6 @@
-import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Mail } from "lucide-react";
-
-function InstagramIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  );
-}
-function LinkedInIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-    </svg>
-  );
-}
-function TwitterIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
+import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export interface FooterTapedProps {
   className?: string;
@@ -38,65 +14,165 @@ export function FooterTapedDesign({
   tagline = "Kabinet Sentra Nawasena 2026 — Merangkai Sinergi, Mewujudkan Aksi Nyata untuk Seluruh Mahasiswa Administrasi Bisnis.",
 }: FooterTapedProps) {
   const currentYear = new Date().getFullYear();
+
   return (
-    <footer className={cn("relative bg-[#FFF8C7] overflow-hidden", className)}>
-      <div className="bg-grid-lines-cream" />
-      <div className="pink-glow-cream" />
-      <div className="pixel-spot-overlay-cream opacity-60" />
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-10 sm:py-14">
-        {/* Main card — BIRU biar kartu biru background cream nyatu proker */}
-        <div className="relative bg-[#4346D0] rounded-[24px] border-[3px] border-[#111] shadow-[6px_6px_0px_#111] px-6 sm:px-10 py-10 flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12">
-          <div className="flex flex-col items-start gap-3 max-w-md">
-            <Link href="/" className="flex items-center gap-2.5 text-xl font-unbounded font-black tracking-tight text-white hover:opacity-80 transition-opacity">
-              <span className="w-8 h-8 rounded-full bg-white text-[#111] flex items-center justify-center text-[10px] font-extrabold border-2 border-[#111]">HM</span>
-              <span>{brandName}</span>
+    <footer
+      className={cn(
+        "relative w-full bg-[#FFFBEB] text-[#1e293b] pt-16 md:pt-24 pb-10 overflow-hidden",
+        className
+      )}
+    >
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16">
+        {/* ── TOP FOOTER ── */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-14 border-b border-[#1e293b]/15">
+          <div className="md:col-span-4 space-y-4">
+            <Link href="/" className="inline-flex items-center space-x-3">
+              <span className="w-4 h-4 bg-[#F9A8D4] rounded-sm rotate-45 inline-block" />
+              <span className="text-lg md:text-xl font-black tracking-tight uppercase">
+                {brandName}
+              </span>
             </Link>
-            <p className="text-white/70 font-body text-sm leading-relaxed">{tagline}</p>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black bg-[#FFF8C7] text-[#111] border-2 border-[#111] shadow-[3px_3px_0px_#111]">
-              ✦ Sentra Nawasena 2026
-            </span>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-[#F472B6]">
+              Kabinet Sentra Nawasena 2026
+            </p>
+            <p className="text-xs text-[#1e293b]/50 italic">
+              &ldquo;Merangkai sinergi wujudkan aksi&rdquo;
+            </p>
+            <p className="text-xs text-[#1e293b]/60 leading-relaxed max-w-sm pt-2">
+              {tagline}
+            </p>
           </div>
 
-          <div className="flex flex-wrap md:flex-row gap-8 md:gap-14 items-start w-full md:w-auto">
-            <div className="flex flex-col gap-3 min-w-[130px]">
-              <h4 className="uppercase font-unbounded text-xs tracking-wider text-white/40 font-black">Jelajahi</h4>
-              <div className="flex flex-col gap-2.5 text-sm items-start">
-                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#home">Beranda</a>
-                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#proker">Program Kerja</a>
-                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#tentang">Tentang Kami</a>
-              </div>
+          <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-xs">
+            <div className="space-y-3">
+              <h4 className="font-bold uppercase tracking-wider text-[#1e293b]">
+                | PROGRAM KERJA
+              </h4>
+              <ul className="space-y-2 text-[#1e293b]/60">
+                <li>
+                  <Link href="/#prokerja" className="hover:text-[#1e293b] transition-colors">
+                    • Invest Adbis
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#prokerja" className="hover:text-[#1e293b] transition-colors">
+                    • Bina Masyarakat
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#prokerja" className="hover:text-[#1e293b] transition-colors">
+                    • Market Day
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#prokerja" className="hover:text-[#1e293b] transition-colors">
+                    • Sencrea
+                  </Link>
+                </li>
+              </ul>
             </div>
-            <div className="flex flex-col gap-3 min-w-[140px]">
-              <h4 className="uppercase font-unbounded text-xs tracking-wider text-white/40 font-black">Program Kerja</h4>
-              <div className="flex flex-col gap-2.5 text-sm items-start">
-                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#proker">Invest Adbis</a>
-                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#proker">Bina Masyarakat</a>
-                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#proker">Market Day</a>
-                <a className="text-white/70 hover:text-[#FFF8C7] font-bold transition-colors" href="#proker">Sencrea</a>
-              </div>
+            <div className="space-y-3">
+              <h4 className="font-bold uppercase tracking-wider text-[#1e293b]">
+                | JELAJAHI
+              </h4>
+              <ul className="space-y-2 text-[#1e293b]/60">
+                <li>
+                  <Link href="/" className="hover:text-[#1e293b] transition-colors">
+                    • Beranda
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about" className="hover:text-[#1e293b] transition-colors">
+                    • Tentang Kabinet
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/career" className="hover:text-[#1e293b] transition-colors">
+                    • Karier Roadmap
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/people" className="hover:text-[#1e293b] transition-colors">
+                    • Pengurus & Proker
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="hover:text-[#1e293b] transition-colors">
+                    • Kontak & Adbis Hub
+                  </Link>
+                </li>
+              </ul>
             </div>
-            <div className="flex flex-col gap-3 min-w-[130px]">
-              <h4 className="uppercase font-unbounded text-xs tracking-wider text-white/40 font-black">Hubungi Kami</h4>
-              <div className="flex flex-col gap-2.5 text-sm items-start">
-                <a className="text-white/70 hover:text-[#FFF8C7] font-bold inline-flex items-center gap-1.5" href="mailto:hmps.adbis@univ.ac.id"><Mail className="w-3.5 h-3.5 text-white/60" /> Email Resmi</a>
-                <a className="text-white/70 hover:text-[#FFF8C7] font-bold inline-flex items-center gap-1.5" href="https://instagram.com" target="_blank" rel="noreferrer"><InstagramIcon className="w-3.5 h-3.5 text-white/60" /> Instagram</a>
-                <a className="text-white/70 hover:text-[#FFF8C7] font-bold inline-flex items-center gap-1.5" href="https://linkedin.com" target="_blank" rel="noreferrer"><LinkedInIcon className="w-3.5 h-3.5 fill-current text-white/60" /> LinkedIn</a>
+            <div className="space-y-3">
+              <h4 className="font-bold uppercase tracking-wider text-[#1e293b]">
+                | VISI & MISI
+              </h4>
+              <div className="space-y-2 text-[#1e293b]/60">
+                <p className="font-semibold text-[#1e293b]/80">Visi:</p>
+                <p className="text-[11px] leading-relaxed">
+                  Pusat pengembangan kompetensi yang unggul dan berdampak nyata.
+                </p>
+                <p className="font-semibold text-[#1e293b]/80 pt-1">
+                  Misi Ringkas:
+                </p>
+                <ul className="list-disc list-inside text-[11px] space-y-1 text-[#1e293b]/50">
+                  <li>Pelayanan & advokasi transparan</li>
+                  <li>Sentra kolaborasi & kreativitas</li>
+                  <li>Siklus organisasi profesional</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs sm:text-sm text-[#111]/60 font-body px-1">
-          <p>© {currentYear} HMPS Administrasi Bisnis — Sentra Nawasena.</p>
-          <div className="flex gap-3 items-center">
-            <a href="https://instagram.com" target="_blank" rel="nofollow" className="w-8 h-8 rounded-full bg-white text-[#111] flex items-center justify-center hover:bg-[#FFF8C7] transition-colors border-2 border-[#111] shadow-[2px_2px_0px_#111]">
-              <InstagramIcon className="w-4 h-4" />
+        {/* ── CTA BOX ── */}
+        <div className="bg-[#1e293b] text-[#FFFBEB] rounded-2xl p-8 md:p-12 my-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <span className="text-[10px] font-bold tracking-widest text-[#F9A8D4] uppercase block mb-1">
+              SUARAKAN ASPIRASIMU
+            </span>
+            <h3 className="text-xl md:text-3xl font-black uppercase tracking-tight">
+              MARI BERKOLABORASI DENGAN
+              <br />
+              HMPS ADMINISTRASI BISNIS
+            </h3>
+          </div>
+          <div className="max-w-md">
+            <p className="text-xs text-[#FFFBEB]/60 leading-relaxed">
+              Wadah sentral terintegrasi untuk pengembangan kompetensi,
+              inovasi, dan penggerak potensi mahasiswa mencapai peluang masa
+              depan gemilang.
+            </p>
+          </div>
+          <div>
+            <Link
+              href="/about"
+              className="px-6 py-3 bg-[#F9A8D4] text-[#1e293b] rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#F472B6] transition-all flex items-center space-x-2 group"
+            >
+              <span>Jelajahi Kabinet</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+
+        {/* ── BOTTOM ── */}
+        <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#1e293b]/50 pt-2">
+          <p>
+            © {currentYear} HMPS Administrasi Bisnis — Kabinet Sentra
+            Nawasena. All rights reserved.
+          </p>
+          <div className="flex space-x-6 mt-4 sm:mt-0">
+            <a href="#" className="hover:text-[#1e293b] transition-colors">
+              Instagram
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="nofollow" className="w-8 h-8 rounded-full bg-white text-[#111] flex items-center justify-center hover:bg-[#FFF8C7] transition-colors border-2 border-[#111] shadow-[2px_2px_0px_#111]">
-              <LinkedInIcon className="w-4 h-4 fill-current" />
+            <a href="#" className="hover:text-[#1e293b] transition-colors">
+              LinkedIn
             </a>
-            <a href="https://twitter.com" target="_blank" rel="nofollow" className="w-8 h-8 rounded-full bg-white text-[#111] flex items-center justify-center hover:bg-[#FFF8C7] transition-colors border-2 border-[#111] shadow-[2px_2px_0px_#111]">
-              <TwitterIcon className="w-4 h-4 fill-current" />
+            <a href="#" className="hover:text-[#1e293b] transition-colors">
+              YouTube
+            </a>
+            <a href="#" className="hover:text-[#1e293b] transition-colors">
+              TikTok
             </a>
           </div>
         </div>

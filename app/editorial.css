@@ -1,0 +1,54 @@
+/* ══════════════════════════════════════════════════════════
+   ── Editorial helpers (shared across sub-pages, aligned   ──
+      with the homepage design language)                    ──
+   ══════════════════════════════════════════════════════════ */
+
+/* Outlined display text (editorial accent, mirrors homepage ink-on-cream) */
+.text-stroke-ink {
+  -webkit-text-stroke: 2px #1e293b;
+  color: transparent;
+}
+.text-stroke-cream {
+  -webkit-text-stroke: 2px #fffbeb;
+  color: transparent;
+}
+
+@media (max-width: 640px) {
+  .text-stroke-ink,
+  .text-stroke-cream {
+    -webkit-text-stroke-width: 1.5px;
+  }
+}
+
+/* Blueprint grid backdrop (same motif as the homepage hero) */
+.editorial-grid-bg {
+  background-size: 44px 44px;
+  background-image:
+    linear-gradient(to right, rgba(30, 41, 59, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 41, 59, 0.08) 1px, transparent 1px);
+}
+
+/* Infinite marquee ticker */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+  will-change: transform;
+}
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
