@@ -284,8 +284,7 @@ export default function Home() {
           className="absolute inset-0 z-0 pointer-events-none"
           style={{
             backgroundSize: "40px 40px",
-            backgroundImage:
-              "linear-gradient(to right, rgba(30,41,59,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(30,41,59,0.15) 1px, transparent 1px)",
+            backgroundImage: "linear-gradient(to right, rgba(30,41,59,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(30,41,59,0.15) 1px, transparent 1px)",
             WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 32%, transparent 52%)",
             maskImage: "linear-gradient(to bottom, black 0%, black 32%, transparent 52%)",
           }}
@@ -317,16 +316,9 @@ export default function Home() {
               <div className="h-[1px] bg-[#1e293b]/20 w-full" />
             </div>
             <div className="flex flex-col items-start space-y-3 md:col-span-5 pl-4 md:pl-8">
-              <p className="text-[11px] text-[#1e293b]/70 font-semibold leading-snug max-w-sm tracking-normal">
-                KABINET SENTRA NAWASENA 2026
-              </p>
-              <p className="text-[10px] text-[#1e293b]/50 italic leading-snug max-w-sm tracking-normal">
-                &ldquo;Merangkai sinergi wujudkan aksi&rdquo;
-              </p>
-              <Link
-                href="/about"
-                className="px-5 py-2 border border-[#1e293b]/40 rounded-full text-[9px] font-bold uppercase tracking-widest text-[#1e293b] hover:border-[#F472B6] hover:text-[#F472B6] transition-all"
-              >
+              <p className="text-[11px] text-[#1e293b]/70 font-semibold leading-snug max-w-sm tracking-normal">KABINET SENTRA NAWASENA 2026</p>
+              <p className="text-[10px] text-[#1e293b]/50 italic leading-snug max-w-sm tracking-normal">&ldquo;Merangkai sinergi wujudkan aksi&rdquo;</p>
+              <Link href="/about" className="px-5 py-2 border border-[#1e293b]/40 rounded-full text-[9px] font-bold uppercase tracking-widest text-[#1e293b] hover:border-[#F472B6] hover:text-[#F472B6] transition-all">
                 JELAJAHI KABINET
               </Link>
             </div>
@@ -339,9 +331,7 @@ export default function Home() {
               <span>SENTRA NAWASENA</span>
               <span>PERIODE-2026</span>
             </div>
-            <h1 className="text-[9.5vw] font-black leading-none tracking-tighter uppercase text-[#1e293b] select-none text-center block">
-              Sentra nawasena
-            </h1>
+            <h1 className="text-[9.5vw] font-black leading-none tracking-tighter uppercase text-[#1e293b] select-none text-center block">Sentra nawasena</h1>
           </div>
         </main>
       </section>
@@ -349,11 +339,7 @@ export default function Home() {
       {/* ═══════════ TEAM IMAGE ═══════════ */}
       <section className="w-full min-h-screen pt-12 md:pt-20 bg-[#BFDBFE]">
         <div className="w-full h-screen">
-          <img
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop"
-            alt="Pengurus HMPS Administrasi Bisnis"
-            className="w-full h-full object-cover rounded-none block"
-          />
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop" alt="Pengurus HMPS Administrasi Bisnis" className="w-full h-full object-cover rounded-none block" />
         </div>
       </section>
 
@@ -365,25 +351,20 @@ export default function Home() {
             <div className="md:col-span-4 flex flex-col justify-between">
               <div>
                 <h2 className="text-6xl md:text-7xl font-black tracking-tight mb-2">2026</h2>
-                <p className="text-xs text-[#1e293b]/50 max-w-[200px] leading-relaxed uppercase font-semibold">
-                  KABINET SENTRA NAWASENA HMPS ADMINISTRASI BISNIS
-                </p>
+                <p className="text-xs text-[#1e293b]/50 max-w-[200px] leading-relaxed uppercase font-semibold">KABINET SENTRA NAWASENA HMPS ADMINISTRASI BISNIS</p>
               </div>
             </div>
             <div className="md:col-span-8 flex flex-col justify-between space-y-6">
               <div>
-                <span className="text-[10px] font-bold tracking-widest uppercase text-[#1e293b]/40 block mb-3">
-                  • TENTANG KABINET
-                </span>
-                <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-[1.1] max-w-2xl">
-                  PUSAT PENGGERAK INTI BERORIENTASI MASA DEPAN CERAH.
-                </h3>
+                <span className="text-[10px] font-bold tracking-widest uppercase text-[#1e293b]/40 block mb-3">• TENTANG KABINET</span>
+                <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-[1.1] max-w-2xl">PUSAT PENGGERAK INTI BERORIENTASI MASA DEPAN CERAH.</h3>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end pt-4">
                 <div />
                 <div className="space-y-6 pl-8 border-l border-[#1e293b]/15">
                   <p className="text-xs text-[#1e293b]/60 leading-relaxed">
-                    <strong className="text-[#1e293b]">&ldquo;Sentra Nawasena&rdquo;</strong> adalah Pusat Penggerak Inti yang berorientasi pada Masa Depan Yang Cerah, dengan komitmen menjadikan HMPS Administrasi Bisnis sebagai wadah sentral terintegrasi dalam pengembangan kompetensi dan inovasi, serta menggerakkan seluruh potensi yang ada untuk mencapai peluang masa depan yang gemilang.
+                    <strong className="text-[#1e293b]">&ldquo;Sentra Nawasena&rdquo;</strong> adalah Pusat Penggerak Inti yang berorientasi pada Masa Depan Yang Cerah, dengan komitmen menjadikan HMPS Administrasi Bisnis sebagai wadah
+                    sentral terintegrasi dalam pengembangan kompetensi dan inovasi, serta menggerakkan seluruh potensi yang ada untuk mencapai peluang masa depan yang gemilang.
                   </p>
                   <Link href="#prokerja" className="inline-block px-6 py-2.5 border border-[#1e293b] rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-[#1e293b] hover:text-[#FFFBEB] transition-all">
                     LIHAT PROGRAM KERJA
@@ -397,38 +378,34 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-t border-[#1e293b]/15">
             <div className="p-8 border-b sm:border-b-0 border-[#1e293b]/15 sm:border-r flex flex-col justify-between min-h-[240px]">
               <span className="text-xs font-bold text-[#F472B6] uppercase tracking-widest">VISI KABINET</span>
-              <p className="text-xs text-[#1e293b]/80 font-medium leading-relaxed mt-4">
-                Menjadikan HMPS Administrasi Bisnis sebagai wadah aspirasi dan pusat pengembangan kompetensi yang unggul dan berdampak nyata.
-              </p>
+              <p className="text-xs text-[#1e293b]/80 font-medium leading-relaxed mt-4">Menjadikan HMPS Administrasi Bisnis sebagai wadah aspirasi dan pusat pengembangan kompetensi yang unggul dan berdampak nyata.</p>
               <h4 className="font-black text-sm uppercase tracking-wider mt-6">
-                UNGGUL &<br />BERDAMPAK
+                UNGGUL &<br />
+                BERDAMPAK
               </h4>
             </div>
             <div className="p-8 border-b sm:border-b-0 border-[#1e293b]/15 md:border-r flex flex-col justify-between min-h-[240px]">
               <span className="text-xs font-bold text-[#1e293b]/40 uppercase tracking-widest">MISI 01</span>
-              <p className="text-[11px] text-[#1e293b]/60 leading-relaxed mt-4">
-                Menjamin pelayanan prima dan advokasi transparan untuk aspirasi seluruh mahasiswa.
-              </p>
+              <p className="text-[11px] text-[#1e293b]/60 leading-relaxed mt-4">Menjamin pelayanan prima dan advokasi transparan untuk aspirasi seluruh mahasiswa.</p>
               <h4 className="font-black text-sm uppercase tracking-wider mt-6 underline">
-                PELAYANAN<br />& ADVOKASI
+                PELAYANAN
+                <br />& ADVOKASI
               </h4>
             </div>
             <div className="p-8 border-b sm:border-b-0 border-[#1e293b]/15 sm:border-r flex flex-col justify-between min-h-[240px]">
               <span className="text-xs font-bold text-[#1e293b]/40 uppercase tracking-widest">MISI 02</span>
-              <p className="text-[11px] text-[#1e293b]/60 leading-relaxed mt-4">
-                Mewujudkan sentra kolaborasi dan kreativitas mahasiswa.
-              </p>
+              <p className="text-[11px] text-[#1e293b]/60 leading-relaxed mt-4">Mewujudkan sentra kolaborasi dan kreativitas mahasiswa.</p>
               <h4 className="font-black text-sm uppercase tracking-wider mt-6">
-                KOLABORASI &<br />KREATIVITAS
+                KOLABORASI &<br />
+                KREATIVITAS
               </h4>
             </div>
             <div className="p-8 flex flex-col justify-between min-h-[240px]">
               <span className="text-xs font-bold text-[#1e293b]/40 uppercase tracking-widest">MISI 03</span>
-              <p className="text-[11px] text-[#1e293b]/60 leading-relaxed mt-4">
-                Mewujudkan siklus organisasi yang profesional, transparan, dan berintegritas.
-              </p>
+              <p className="text-[11px] text-[#1e293b]/60 leading-relaxed mt-4">Mewujudkan siklus organisasi yang profesional, transparan, dan berintegritas.</p>
               <h4 className="font-black text-sm uppercase tracking-wider mt-6">
-                PROFESIONAL &<br />BERINTEGRITAS
+                PROFESIONAL &<br />
+                BERINTEGRITAS
               </h4>
             </div>
           </div>
@@ -449,16 +426,12 @@ export default function Home() {
               <div className="md:col-span-7 flex flex-col justify-between">
                 <span className="text-4xl md:text-6xl font-black mb-8">{p.num}</span>
                 <div className={`${p.cardBg} rounded-2xl h-64 md:h-80 relative flex items-center justify-center p-6`}>
-                  <span className={`text-3xl md:text-5xl font-black uppercase tracking-tight text-center ${p.cardBg.includes("text-") ? "" : "text-[#1e293b]"}`}>
-                    {p.title}
-                  </span>
+                  <span className={`text-3xl md:text-5xl font-black uppercase tracking-tight text-center ${p.cardBg.includes("text-") ? "" : "text-[#1e293b]"}`}>{p.title}</span>
                 </div>
               </div>
               <div className="md:col-span-5 flex flex-col justify-between space-y-6 md:pl-8">
                 <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight">{p.title}</h3>
-                <p className={`text-xs leading-relaxed ${p.textColor || "text-[#1e293b]/80"}`}>
-                  {p.desc}
-                </p>
+                <p className={`text-xs leading-relaxed ${p.textColor || "text-[#1e293b]/80"}`}>{p.desc}</p>
                 <ul className={`text-xs font-semibold space-y-1.5 ${p.textColor || "text-[#1e293b]/80"}`}>
                   {p.items.map((item, j) => (
                     <li key={j}>+ {item}</li>
@@ -485,48 +458,99 @@ export default function Home() {
                 <div className="w-4 h-4 bg-[#F9A8D4] rounded-sm rotate-45" />
                 <span className="text-xl font-black tracking-tight uppercase">HMPS ADMINISTRASI BISNIS</span>
               </div>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#F472B6]">
-                Kabinet Sentra Nawasena 2026
-              </p>
-              <p className="text-xs text-[#1e293b]/50 italic">
-                &ldquo;Merangkai sinergi wujudkan aksi&rdquo;
-              </p>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#F472B6]">Kabinet Sentra Nawasena 2026</p>
+              <p className="text-xs text-[#1e293b]/50 italic">&ldquo;Merangkai sinergi wujudkan aksi&rdquo;</p>
               <p className="text-xs text-[#1e293b]/60 leading-relaxed max-w-sm pt-2">
-                &ldquo;Sentra Nawasena&rdquo; adalah Pusat Penggerak Inti yang berorientasi pada Masa Depan Yang Cerah, dengan komitmen menjadikan HMPS Administrasi Bisnis sebagai wadah sentral terintegrasi dalam pengembangan kompetensi dan inovasi.
+                &ldquo;Sentra Nawasena&rdquo; adalah Pusat Penggerak Inti yang berorientasi pada Masa Depan Yang Cerah, dengan komitmen menjadikan HMPS Administrasi Bisnis sebagai wadah sentral terintegrasi dalam pengembangan kompetensi dan
+                inovasi.
               </p>
             </div>
             <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-xs">
               <div className="space-y-3">
                 <h4 className="font-bold uppercase tracking-wider text-[#1e293b]">| PROGRAM KERJA</h4>
                 <ul className="space-y-2 text-[#1e293b]/60">
-                  <li><Link href="#prokerja" className="hover:text-[#1e293b] transition-colors">• Invest Adbis</Link></li>
-                  <li><Link href="#prokerja" className="hover:text-[#1e293b] transition-colors">• Bina Masyarakat</Link></li>
-                  <li><Link href="#prokerja" className="hover:text-[#1e293b] transition-colors">• Market Day</Link></li>
-                  <li><Link href="#prokerja" className="hover:text-[#1e293b] transition-colors">• Sencrea</Link></li>
+                  <li>
+                    <Link href="#prokerja" className="hover:text-[#1e293b] transition-colors">
+                      • Invest Adbis
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#prokerja" className="hover:text-[#1e293b] transition-colors">
+                      • Bina Masyarakat
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#prokerja" className="hover:text-[#1e293b] transition-colors">
+                      • Market Day
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#prokerja" className="hover:text-[#1e293b] transition-colors">
+                      • Sencrea
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div className="space-y-3">
                 <h4 className="font-bold uppercase tracking-wider text-[#1e293b]">| UPCOMING EVENTS</h4>
                 <ul className="space-y-1.5 text-[#1e293b]/60">
-                  <li><Link href="#" className="hover:text-[#1e293b] transition-colors">• Invest Adbis</Link></li>
-                  <li><Link href="#" className="hover:text-[#1e293b] transition-colors">• Sencrea</Link></li>
-                  <li><Link href="#" className="hover:text-[#1e293b] transition-colors">• Bina Masyarakat</Link></li>
-                  <li><Link href="#" className="hover:text-[#1e293b] transition-colors">• Study Visit</Link></li>
-                  <li><Link href="#" className="hover:text-[#1e293b] transition-colors">• Adbis Skill Camp</Link></li>
-                  <li><Link href="#" className="hover:text-[#1e293b] transition-colors">• Adbis Berbagi Kasih Sayang</Link></li>
-                  <li><Link href="#" className="hover:text-[#1e293b] transition-colors">• Company Visit</Link></li>
-                  <li><Link href="#" className="hover:text-[#1e293b] transition-colors">• Adbis Leader Connect</Link></li>
-                  <li><Link href="#" className="hover:text-[#1e293b] transition-colors">• JABIZ</Link></li>
-                  <li><Link href="#" className="hover:text-[#1e293b] transition-colors">• Adbis Sport Monthly</Link></li>
+                  <li>
+                    <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                      • Invest Adbis
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                      • Sencrea
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                      • Bina Masyarakat
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                      • Study Visit
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                      • Adbis Skill Camp
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                      • Adbis Berbagi Kasih Sayang
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                      • Company Visit
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                      • Adbis Leader Connect
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                      • JABIZ
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                      • Adbis Sport Monthly
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div className="space-y-3">
                 <h4 className="font-bold uppercase tracking-wider text-[#1e293b]">| VISI & MISI</h4>
                 <div className="space-y-2 text-[#1e293b]/60">
                   <p className="font-semibold text-[#1e293b]/80">Visi:</p>
-                  <p className="text-[11px] leading-relaxed">
-                    Pusat pengembangan kompetensi yang unggul dan berdampak nyata.
-                  </p>
+                  <p className="text-[11px] leading-relaxed">Pusat pengembangan kompetensi yang unggul dan berdampak nyata.</p>
                   <p className="font-semibold text-[#1e293b]/80 pt-1">Misi Ringkas:</p>
                   <ul className="list-disc list-inside text-[11px] space-y-1 text-[#1e293b]/50">
                     <li>Pelayanan & advokasi transparan</li>
@@ -541,17 +565,15 @@ export default function Home() {
           {/* CTA BOX */}
           <div className="bg-[#1e293b] text-[#FFFBEB] rounded-2xl p-8 md:p-12 my-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <span className="text-[10px] font-bold tracking-widest text-[#F9A8D4] uppercase block mb-1">
-                SUARAKAN ASPIRASIMU
-              </span>
+              <span className="text-[10px] font-bold tracking-widest text-[#F9A8D4] uppercase block mb-1">SUARAKAN ASPIRASIMU</span>
               <h3 className="text-xl md:text-3xl font-black uppercase tracking-tight">
-                MARI BERKOLABORASI DENGAN<br />HMPS ADMINISTRASI BISNIS
+                MARI BERKOLABORASI DENGAN
+                <br />
+                HMPS ADMINISTRASI BISNIS
               </h3>
             </div>
             <div className="max-w-md">
-              <p className="text-xs text-[#FFFBEB]/60 leading-relaxed">
-                Wadah sentral terintegrasi untuk pengembangan kompetensi, inovasi, dan penggerak potensi mahasiswa mencapai peluang masa depan gemilang.
-              </p>
+              <p className="text-xs text-[#FFFBEB]/60 leading-relaxed">Wadah sentral terintegrasi untuk pengembangan kompetensi, inovasi, dan penggerak potensi mahasiswa mencapai peluang masa depan gemilang.</p>
             </div>
             <div>
               <Link href="/about" className="px-6 py-3 bg-[#F9A8D4] text-[#1e293b] rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#F472B6] transition-all flex items-center space-x-2">
@@ -565,10 +587,18 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#1e293b]/50 pt-4">
             <p>© 2026 HMPS Administrasi Bisnis — Kabinet Sentra Nawasena. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 sm:mt-0">
-              <Link href="#1" className="hover:text-[#1e293b] transition-colors">Instagram</Link>
-              <Link href="#" className="hover:text-[#1e293b] transition-colors">LinkedIn</Link>
-              <Link href="#" className="hover:text-[#1e293b] transition-colors">YouTube</Link>
-              <Link href="#" className="hover:text-[#1e293b] transition-colors">TikTok</Link>
+              <Link href="#1" className="hover:text-[#1e293b] transition-colors">
+                Instagram
+              </Link>
+              <Link href="#1" className="hover:text-[#1e293b] transition-colors">
+                LinkedIn
+              </Link>
+              <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                YouTube
+              </Link>
+              <Link href="#" className="hover:text-[#1e293b] transition-colors">
+                TikTok
+              </Link>
             </div>
           </div>
         </div>
