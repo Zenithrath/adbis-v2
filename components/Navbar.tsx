@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
-import { Plus, ArrowUpRight, Sun, Moon } from "lucide-react";
+import { Plus, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
@@ -20,29 +20,9 @@ const NAV_ITEMS: NavItem[] = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isDark, setIsDark] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }, []);
 
   const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => setIsOpen(false), []);
-
-  const handleThemeToggle = useCallback(() => {
-    const nextState = !isDark;
-    setIsDark(nextState);
-
-    const applyTheme = () => {
-      document.documentElement.classList.toggle("dark", nextState);
-    };
-
-    if (document.startViewTransition) {
-      document.startViewTransition(() => applyTheme());
-    } else {
-      applyTheme();
-    }
-  }, [isDark]);
 
   return (
     <>
@@ -54,23 +34,6 @@ export default function Navbar() {
         <div className="max-w-[1100px] w-full h-full mx-auto px-4 flex items-center justify-between relative bg-inherit">
           {/* Logo */}
           <Link href="/" onClick={closeMenu} aria-label="Logo" className="z-[102] flex items-center">
-            <svg viewBox="0 0 969 955" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-auto text-current">
-              <circle cx="161.191" cy="332.736" r="133.191" stroke="currentColor" strokeWidth="20" />
-              <circle cx="806.809" cy="332.736" r="133.191" stroke="currentColor" strokeWidth="20" />
-              <circle className="animate-[blink_6s_-2s_infinite] origin-center" cx="695.019" cy="600.278" r="31.4016" fill="currentColor" />
-              <circle className="animate-[blink_6s_-2s_infinite] origin-center" cx="272.981" cy="600.278" r="31.4016" fill="currentColor" />
-              <path
-                d="M564.388 724.628C564.388 756.538 526.035 792.455 483.372 792.455C440.709 792.455 402.356 756.538 402.356 724.628C402.356 692.717 440.709 676.897 483.372 676.897C526.035 676.897 564.388 692.717 564.388 724.628Z"
-                fill="currentColor"
-              />
-              <rect x="310.42" y="460.854" width="343.468" height="51.4986" fill="#FF1E1E" />
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M745.643 300.784C815.368 356.729 854.539 445.167 854.539 524.286H614.938V467.196C614.938 445.657 597.477 428.196 575.938 428.196H388.37C366.831 428.196 349.37 445.657 349.37 467.196V524.286L110.949 524.286C110.949 445.167 150.12 356.729 219.845 300.784C289.57 244.839 384.138 213.41 482.744 213.41C581.35 213.41 675.918 244.839 745.643 300.784Z"
-                fill="currentColor"
-              />
-            </svg>
           </Link>
 
           {/* Button Mobile Toggle */}
@@ -108,17 +71,6 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-
-      {/* Floating Theme Button */}
-      <button
-        type="button"
-        onClick={handleThemeToggle}
-        aria-pressed={isDark}
-        aria-label="Toggle Theme"
-        className="fixed bottom-4 right-4 z-[90] w-12 h-12 rounded-xl bg-white dark:bg-[#242424] text-neutral-800 dark:text-neutral-100 shadow-lg border border-neutral-200 dark:border-neutral-800 flex items-center justify-center cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-      >
-        {isDark ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
-      </button>
 
       {/* Style JSX Disesuaikan khusus 4 Item Navigasi */}
       <style jsx global>{`
