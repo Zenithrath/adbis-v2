@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -107,7 +107,15 @@ interface FAQListProps {
   selected: string;
 }
 
-const FAQList = ({ faqData, selected }: FAQListProps) => (
+const FAQList = ({ faqData, selected }: FAQListProps) => {
+  // Hanya satu item yang boleh terbuka dalam satu waktu
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  useEffect(() => {
+    setOpenIndex(0);
+  }, [selected]);
+
+  return (
   <div className="mx-auto mt-10 md:mt-12 max-w-3xl">
     <AnimatePresence mode="wait">
       {Object.entries(faqData).map(([category, questions]) => {
@@ -122,7 +130,14 @@ const FAQList = ({ faqData, selected }: FAQListProps) => (
               className="space-y-3 md:space-y-4"
             >
               {(questions as FaqEntry[]).map((faq, index) => (
-                <FAQItem key={index} {...faq} />
+                <FAQItem
+                  key={index}
+                  {...faq}
+                  open={openIndex === index}
+                  onToggle={() =>
+                    setOpenIndex(openIndex === index ? null : index)
+                  }
+                />
               ))}
             </motion.div>
           );
@@ -131,10 +146,16 @@ const FAQList = ({ faqData, selected }: FAQListProps) => (
       })}
     </AnimatePresence>
   </div>
-);
+  );
+};
 
-const FAQItem = ({ question, answer }: FaqEntry) => {
-  const [isOpen, setIsOpen] = useState(false);
+interface FAQItemProps extends FaqEntry {
+  open: boolean;
+  onToggle: () => void;
+}
+
+const FAQItem = ({ question, answer, open, onToggle }: FAQItemProps) => {
+  const isOpen = open;
 
   return (
     <motion.div
@@ -148,7 +169,7 @@ const FAQItem = ({ question, answer }: FaqEntry) => {
     >
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onToggle}
         aria-expanded={isOpen}
         className="flex w-full items-center justify-between gap-4 p-5 md:p-6 text-left cursor-pointer"
       >

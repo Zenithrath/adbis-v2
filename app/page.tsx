@@ -2,6 +2,7 @@
 
 import Hero from "@/components/home/Hero";
 import About from "@/components/home/About";
+import ValuesCulture from "@/components/home/ValuesCulture";
 import ProgramKerja from "@/components/home/ProgramKerja";
 import Explore from "@/components/home/Explore";
 import Faq from "@/components/home/Faq";
@@ -46,6 +47,7 @@ export default function Home() {
       <div className="relative z-10">
         <Hero />
         <About />
+        <ValuesCulture />
         <ProgramKerja />
         <Explore />
         <Faq />
