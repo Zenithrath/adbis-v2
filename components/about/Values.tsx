@@ -15,35 +15,35 @@ const values = [
     title: "Profesional",
     desc: "Menjalankan setiap amanah dengan standar tinggi, disiplin, dan tanggung jawab penuh.",
     icon: Award,
-    color: "#4346D0",
+    color: "#A78BFA",
   },
   {
     no: "02",
     title: "Kolaboratif",
     desc: "Menguatkan sinergi lintas angkatan dan stakeholder untuk dampak berlipat.",
     icon: Users,
-    color: "#E89B4F",
+    color: "#F9A8D4",
   },
   {
     no: "03",
     title: "Integritas",
     desc: "Transparan, jujur, dan konsisten antara kata dan aksi.",
     icon: Shield,
-    color: "#9B8FE8",
+    color: "#BFDBFE",
   },
   {
     no: "04",
     title: "Adaptif",
     desc: "Cepat tanggap terhadap tren teknologi dan dinamika industri.",
     icon: Zap,
-    color: "#F472B6",
+    color: "#FF7AAC",
   },
   {
     no: "05",
     title: "Berdampak",
     desc: "Setiap program diukur dari manfaat nyata bagi mahasiswa dan masyarakat.",
     icon: Target,
-    color: "#1e293b",
+    color: "#FFF2B2",
   },
 ];
 
@@ -51,23 +51,23 @@ export default function Values() {
   return (
     <section
       id="values"
-      className="scroll-mt-24 w-full bg-[#BFDBFE]/40 border-y border-[#1e293b]/10"
+      className="scroll-mt-24 w-full border-y border-white/10"
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 py-20 md:py-28">
         <Reveal>
-          <div className="flex items-end justify-between gap-6 mb-12 border-b border-[#1e293b]/10 pb-6">
+          <div className="flex items-end justify-between gap-6 mb-12 border-b border-white/10 pb-6">
             <div>
-              <span className="text-[10px] font-bold tracking-widest uppercase text-[#1e293b]/40 block mb-3">
+              <span className="text-[10px] font-bold tracking-widest uppercase text-white/40 block mb-3">
                 • (02) PRINSIP KAMI
               </span>
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
                 Nilai Utama{" "}
-                <span className="align-top text-lg font-semibold text-[#1e293b]/40">
+                <span className="align-top text-lg font-semibold text-white/40">
                   (5)
                 </span>
               </h2>
             </div>
-            <p className="hidden md:block max-w-xs text-right text-[11px] text-[#1e293b]/50 italic leading-relaxed">
+            <p className="hidden md:block max-w-xs text-right text-[11px] text-white/50 italic leading-relaxed">
               &ldquo;Lima nilai yang menjadi kompas setiap pengurus dalam
               berkarya&rdquo;
             </p>
@@ -79,28 +79,28 @@ export default function Values() {
             const Icon = v.icon;
             return (
               <Reveal key={v.title} delay={i * 0.07}>
-                <div className="group bg-white border border-[#1e293b]/10 rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_-20px_rgba(30,41,59,0.35)]">
+                <div className="group bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/15">
                   <div className="flex items-start justify-between mb-8">
                     <span
                       className="w-11 h-11 rounded-xl flex items-center justify-center"
                       style={{
-                        backgroundColor: `${v.color}1f`,
+                        backgroundColor: `${v.color}20`,
                         color: v.color,
                       }}
                     >
                       <Icon className="w-5 h-5" />
                     </span>
-                    <span className="text-lg font-black text-[#1e293b]/10 transition-colors group-hover:text-[#1e293b]/25">
+                    <span className="text-lg font-black text-white/10 transition-colors group-hover:text-white/25">
                       {v.no}
                     </span>
                   </div>
                   <h3 className="text-lg font-black uppercase tracking-tight leading-none mb-2">
                     {v.title}
                   </h3>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#1e293b]/35 mb-4 font-semibold">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-4">
                     {v.title} 2026
                   </p>
-                  <p className="text-xs leading-relaxed text-[#1e293b]/55 mt-auto">
+                  <p className="text-xs leading-relaxed text-white/50 mt-auto">
                     {v.desc}
                   </p>
                   <span

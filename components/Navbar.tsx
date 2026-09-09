@@ -2,6 +2,8 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Plus, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +22,7 @@ const NAV_ITEMS: NavItem[] = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const pathname = usePathname();
 
   const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => setIsOpen(false), []);
@@ -30,10 +33,30 @@ export default function Navbar() {
       <div className="h-[60px]" aria-hidden="true" />
 
       {/* Main Navbar Container */}
-      <nav className="fixed top-0 left-0 right-0 h-[60px] bg-white dark:bg-[#242424] text-neutral-800 dark:text-neutral-100 font-mono text-sm uppercase z-[100] border-b border-neutral-200 dark:border-neutral-800 transition-colors">
-        <div className="max-w-[1100px] w-full h-full mx-auto px-4 flex items-center justify-between relative bg-inherit">
+      <nav className="fixed top-0 left-0 right-0 h-[60px] bg-[#1A1B41]/80 backdrop-blur-xl text-[#FFFBEB] font-sans text-[13px] font-bold uppercase tracking-widest z-[100] border-b border-white/10">
+        <div className="max-w-[1400px] w-full h-full mx-auto px-4 md:px-8 flex items-center justify-between relative bg-inherit">
           {/* Logo */}
-          <Link href="/" onClick={closeMenu} aria-label="Logo" className="z-[102] flex items-center">
+          <Link
+            href="/"
+            onClick={closeMenu}
+            aria-label="HMPS Administrasi Bisnis"
+            className="z-[102] flex items-center gap-2.5 shrink-0"
+          >
+            <Image
+              src="/images/hmps-logo.png"
+              alt="Logo HMPS"
+              width={36}
+              height={36}
+              className="w-9 h-9 object-contain"
+            />
+            <span className="leading-none">
+              <span className="block text-sm font-black tracking-tight normal-case">
+                HMPS Adbis
+              </span>
+              <span className="block text-[9px] font-bold tracking-[0.22em] text-[#FFA6C8] uppercase mt-0.5">
+                Sentra Nawasena
+              </span>
+            </span>
           </Link>
 
           {/* Button Mobile Toggle */}
@@ -46,28 +69,43 @@ export default function Navbar() {
             className={cn(
               "stagger-container",
               "fixed md:static left-0 right-0 top-[60px] md:top-0 h-[calc(100vh-60px)] md:h-full",
-              "bg-white dark:bg-[#242424] md:bg-transparent w-full md:w-auto md:flex-1",
+              "bg-[#1A1B41]/95 backdrop-blur-xl md:bg-transparent md:backdrop-blur-none w-full md:w-auto md:flex-1",
               "flex flex-col md:grid md:grid-flow-col md:auto-cols-fr",
               "overflow-y-auto md:overflow-visible transition-transform duration-300 ease-in-out z-[99] md:z-1",
               isOpen ? "translate-y-0" : "-translate-y-[calc(100%+60px)] md:translate-y-0",
             )}
           >
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={closeMenu}
-                className={cn(
-                  "stagger-link",
-                  "group bg-white dark:bg-[#242424] px-6 md:px-4 h-[60px] min-h-[60px] flex items-center justify-between",
-                  "border-b border-neutral-200 dark:border-neutral-800 md:border-b-0",
-                  "text-current no-underline",
-                )}
-              >
-                <span>{item.label}</span>
-                <ArrowUpRight className="w-4 h-4 stroke-[2.5] opacity-0 group-hover:opacity-100 group-hover:-rotate-45 transition-all duration-200" />
-              </Link>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={closeMenu}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "stagger-link",
+                    "group bg-transparent px-6 md:px-4 h-[60px] min-h-[60px] flex items-center justify-between md:justify-center md:gap-2",
+                    "border-b border-white/10 md:border-b-0",
+                    "no-underline transition-colors",
+                    isActive
+                      ? "text-[#FF7AAC]"
+                      : "text-[#FFFBEB]/70 hover:text-[#FF7AAC] hover:bg-[#FF7AAC]/10",
+                  )}
+                >
+                  <span className="relative">
+                    {item.label}
+                    <span
+                      className={cn(
+                        "absolute -bottom-1.5 left-0 h-[2px] rounded-full bg-[#FF7AAC] transition-all duration-300",
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      )}
+                    />
+                  </span>
+                  <ArrowUpRight className="w-4 h-4 stroke-[2.5] opacity-0 group-hover:opacity-100 group-hover:-rotate-45 transition-all duration-200 text-[#FF7AAC]" />
+                </Link>
+              );
+            })}
           </div>
         </div>
       </nav>
@@ -96,13 +134,17 @@ export default function Navbar() {
             bottom: 0;
             left: -1px;
             right: -1px;
-            background: inherit;
-            border-right: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 122, 172, 0.22);
+            border-right: 1px solid rgba(255, 122, 172, 0.35);
+            border-radius: 0 0 12px 12px;
+            opacity: 0;
+            transition: opacity var(--speed) ease;
             z-index: -1;
           }
 
-          .dark .stagger-link::before {
-            border-right-color: rgba(255, 255, 255, 0.08);
+          .stagger-link:hover::before,
+          .stagger-link:focus-visible::before {
+            opacity: 1;
           }
 
           .stagger-link:last-of-type::before {

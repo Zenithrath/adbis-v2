@@ -35,13 +35,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {
     background-color: #2a1f6e;
     color: #FFF2B2;
-    overflow-x: hidden;
+    overflow-x: clip;
     position: relative;
   }
 
@@ -174,6 +174,15 @@
 .animate-orb-left { animation: orb-float-left 8s ease-in-out infinite; }
 .animate-orb-right { animation: orb-float-right 10s ease-in-out infinite; }
 
+/* ── Hide scrollbar ────────────────────────────────────── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* ── Shimmer sweep for titles ────────────────────────────── */
 @keyframes shimmer {
   0% { background-position: -200% center; }
@@ -197,6 +206,18 @@
   box-shadow:
     0 8px 32px rgba(26,27,65,0.25),
     inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+/* ── Video popup ─────────────────────────────────────── */
+@keyframes video-pop-in {
+  from { opacity: 0; transform: scale(0.94) translateY(14px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.video-pop {
+  animation: video-pop-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .video-pop { animation: none; }
 }
 
 /* ── Program card stack ─── */

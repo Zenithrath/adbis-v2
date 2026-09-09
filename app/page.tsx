@@ -3,6 +3,8 @@
 import Hero from "@/components/home/Hero";
 import About from "@/components/home/About";
 import ProgramKerja from "@/components/home/ProgramKerja";
+import Explore from "@/components/home/Explore";
+import Faq from "@/components/home/Faq";
 import Footer from "@/components/home/Footer";
 
 export default function Home() {
@@ -45,6 +47,8 @@ export default function Home() {
         <Hero />
         <About />
         <ProgramKerja />
+        <Explore />
+        <Faq />
         <Footer />
       </div>
 

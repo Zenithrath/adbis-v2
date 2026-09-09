@@ -8,7 +8,7 @@ export default function Marquee({
   speed?: string;
 }) {
   return (
-    <div className="marquee-wrap marquee-mask bg-[#1e293b] text-[#FFFBEB] py-3.5 overflow-hidden">
+    <div className="marquee-wrap marquee-mask border-y border-white/10 text-[#FFFBEB] py-3.5 overflow-hidden">
       <div className="marquee-track" style={{ animationDuration: speed }}>
         <div className="flex items-center shrink-0">
           {items.map((item, i) => (

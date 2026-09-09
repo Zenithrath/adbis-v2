@@ -18,7 +18,7 @@ const marqueeItems = [
 
 export default function AboutPage() {
   return (
-    <main className="relative w-full bg-[#FFFBEB] text-[#1e293b] overflow-x-clip">
+    <main className="relative w-full text-[#FFFBEB] overflow-x-clip">
       <AboutHero />
       <Marquee items={marqueeItems} />
       <VisiMisi />
