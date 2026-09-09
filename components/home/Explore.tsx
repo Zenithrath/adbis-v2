@@ -5,6 +5,7 @@ import { Play, X, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/ui/reveal";
 
 // TODO: ganti dengan ID video Company Profile dari YouTube (bagian setelah v=)
 const YOUTUBE_VIDEO_ID = "VIDEO_ID_COMPANY_PROFILE";
@@ -64,9 +65,10 @@ export default function Explore() {
   }, [videoOpen]);
 
   return (
-    <section className="w-full text-[#FFFBEB] py-20 md:py-28 border-t border-white/10">
+    <section className="cv-auto w-full text-[#FFFBEB] py-20 md:py-28 border-t border-white/10">
       <div className="max-w-[1400px] mx-auto px-8 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
         {/* Kiri: thumbnail YouTube */}
+        <Reveal>
         <button
           type="button"
           onClick={() => setVideoOpen(true)}
@@ -103,8 +105,10 @@ export default function Explore() {
             </span>
           </span>
         </button>
+        </Reveal>
 
-        {/* Kanan: heading + carousel CTA */}
+        {/* Kanan: heading + CTA */}
+        <Reveal delay={0.1}>
         <div>
           <p className="text-[#E3C565] font-semibold text-lg">Kenali</p>
           <h2 className="text-3xl md:text-4xl font-black tracking-tight uppercase leading-[0.95] mt-2">
@@ -135,6 +139,7 @@ export default function Explore() {
             ))}
           </div>
         </div>
+        </Reveal>
       </div>
 
       {/* Popup video */}

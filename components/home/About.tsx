@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Reveal } from "@/components/ui/reveal";
 
 export default function About() {
   return (
@@ -11,7 +12,7 @@ export default function About() {
       <div className="max-w-[1400px] mx-auto">
         {/* Top: Tentang + Deskripsi */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
-          <div className="md:col-span-6 flex flex-col justify-between space-y-6">
+          <Reveal className="md:col-span-6 flex flex-col justify-between space-y-6">
             <div>
               <span className="text-[10px] font-bold tracking-widest uppercase text-[#FF7AAC] block mb-3">
                 • TENTANG KABINET
@@ -23,8 +24,8 @@ export default function About() {
                 PUSAT PENGGERAK INTI — MASA DEPAN YANG CERAH
               </p>
             </div>
-          </div>
-          <div className="md:col-span-6">
+          </Reveal>
+          <Reveal className="md:col-span-6" delay={0.1}>
             <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl p-6 md:p-8 space-y-6">
               <p className="text-xs text-white/70 leading-relaxed">
                 <strong className="text-white">
@@ -43,12 +44,12 @@ export default function About() {
                 LIHAT PROGRAM KERJA
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
 
         {/* Visi Misi Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-t border-white/15">
-          <div className="p-8 border-b sm:border-b-0 border-white/15 sm:border-r flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm">
+          <Reveal className="p-8 border-b sm:border-b-0 border-white/15 sm:border-r flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm" y={20}>
             <span className="text-xs font-bold text-[#FF7AAC] uppercase tracking-widest">
               VISI KABINET
             </span>
@@ -60,8 +61,8 @@ export default function About() {
               UNGGUL &<br />
               BERDAMPAK
             </h4>
-          </div>
-          <div className="p-8 border-b sm:border-b-0 border-white/15 md:border-r flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm">
+          </Reveal>
+          <Reveal className="p-8 border-b sm:border-b-0 border-white/15 md:border-r flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm" delay={0.08} y={20}>
             <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
               MISI 01
             </span>
@@ -73,8 +74,8 @@ export default function About() {
               PELAYANAN
               <br />& ADVOKASI
             </h4>
-          </div>
-          <div className="p-8 border-b sm:border-b-0 border-white/15 sm:border-r flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm">
+          </Reveal>
+          <Reveal className="p-8 border-b sm:border-b-0 border-white/15 sm:border-r flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm" delay={0.16} y={20}>
             <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
               MISI 02
             </span>
@@ -85,8 +86,8 @@ export default function About() {
               KOLABORASI &<br />
               KREATIVITAS
             </h4>
-          </div>
-          <div className="p-8 flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm">
+          </Reveal>
+          <Reveal className="p-8 flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm" delay={0.24} y={20}>
             <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
               MISI 03
             </span>
@@ -98,7 +99,7 @@ export default function About() {
               PROFESIONAL &<br />
               BERINTEGRITAS
             </h4>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

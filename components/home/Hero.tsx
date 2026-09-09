@@ -2,6 +2,7 @@
 
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { Reveal } from "@/components/ui/reveal";
 
 export default function Hero() {
   return (
@@ -12,7 +13,8 @@ export default function Hero() {
         id="home"
       >
         {/* Content */}
-        <div className="relative z-10 text-center max-w-4xl mx-auto space-y-5 md:space-y-7">
+        <Reveal className="relative z-10 text-center max-w-4xl mx-auto" y={24}>
+        <div className="space-y-5 md:space-y-7">
           <h1
             className="font-black uppercase leading-[1.1] tracking-tight select-none"
             style={{ fontSize: "clamp(1.8rem, 4.5vw, 3.8rem)" }}
@@ -61,11 +63,13 @@ export default function Hero() {
             </Link>
           </div>
         </div>
+        </Reveal>
       </section>
 
       {/* ═══════════ TEAM IMAGE ═══════════ */}
       <section className="relative w-full pb-8 md:pb-10 px-6 sm:px-10 md:px-16 lg:px-20">
-        <div className="max-w-[1200px] mx-auto relative">
+        <Reveal className="max-w-[1200px] mx-auto relative" y={36}>
+        <div className="relative">
           {/* Glow behind image */}
           <div
             aria-hidden="true"
@@ -95,6 +99,8 @@ export default function Hero() {
             <img
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop"
               alt="Pengurus HMPS Administrasi Bisnis"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover block"
             />
 
@@ -123,6 +129,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
+        </Reveal>
       </section>
     </>
   );

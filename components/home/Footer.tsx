@@ -3,6 +3,7 @@
 import { Mail, Music } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Reveal } from "@/components/ui/reveal";
 
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -113,7 +114,7 @@ const SOCIALS = [
 export default function Footer() {
   return (
     <footer
-      className="relative w-full overflow-hidden border-t border-white/10 bg-white/[0.05] backdrop-blur-2xl text-[#FFFBEB]"
+      className="cv-auto relative w-full overflow-hidden border-t border-white/10 bg-white/[0.05] backdrop-blur-2xl text-[#FFFBEB]"
       id="contact"
     >
       <div
@@ -123,7 +124,8 @@ export default function Footer() {
       <div className="relative max-w-[1400px] mx-auto px-8 md:px-16 pt-16 md:pt-20 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           {/* Brand */}
-          <div className="lg:col-span-4">
+          <Reveal className="lg:col-span-4">
+          <div>
             <div className="flex items-center gap-4">
               <Image
                 src="/images/hmps-logo.png"
@@ -162,9 +164,11 @@ export default function Footer() {
               ))}
             </div>
           </div>
+          </Reveal>
 
           {/* Link columns */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+          <Reveal className="lg:col-span-8" delay={0.1}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {COLUMNS.map((col) => (
               <div key={col.title}>
                 <h4 className="text-lg md:text-xl font-bold mb-5">{col.title}</h4>
@@ -183,6 +187,7 @@ export default function Footer() {
               </div>
             ))}
           </div>
+          </Reveal>
         </div>
 
         {/* Divider */}

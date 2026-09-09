@@ -1,6 +1,7 @@
 "use client";
 
 import { FAQ, type FaqCategories, type FaqData } from "@/components/ui/faq-tabs";
+import { Reveal } from "@/components/ui/reveal";
 
 const categories: FaqCategories = {
   umum: "Umum",
@@ -83,16 +84,18 @@ const faqData: FaqData = {
 export default function Faq() {
   return (
     <section
-      className="w-full scroll-mt-[60px] text-[#FFFBEB] py-20 md:py-28 border-t border-white/10"
+      className="cv-auto w-full scroll-mt-[60px] text-[#FFFBEB] py-20 md:py-28 border-t border-white/10"
       id="faq"
     >
       <div className="max-w-[1400px] mx-auto px-4 md:px-16">
+        <Reveal>
         <FAQ
           title="Sering Ditanya"
           subtitle="Pusat Bantuan"
           categories={categories}
           faqData={faqData}
         />
+        </Reveal>
       </div>
     </section>
   );

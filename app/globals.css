@@ -208,6 +208,33 @@
     inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
+/* ── Hemat render untuk section panjang (tanpa sticky di dalamnya) ── */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/* ── Matikan semua animasi ambient bila user minta reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-orb-left,
+  .animate-orb-right,
+  .animate-float-slow,
+  .animate-float-slow-reverse,
+  .animate-pulse-glow,
+  .animate-float-badge,
+  .animate-float-badge-alt,
+  .animate-star-twinkle,
+  .animate-spin-slow,
+  .animate-blink,
+  .animate-fade-up,
+  .shimmer-text {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* ── Video popup ─────────────────────────────────────── */
 @keyframes video-pop-in {
   from { opacity: 0; transform: scale(0.94) translateY(14px); }
