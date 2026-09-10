@@ -1,182 +1,194 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { Menu } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Plus, ArrowUpRight } from "lucide-react";
+import MobileMenu from "@/components/layout/MobileMenu";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
+  id: string;
   label: string;
   href: string;
 }
 
-// Hanya 4 Item Navigasi
 const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Program Kerja", href: "/#prokerja" },
-  { label: "Kontak", href: "/contact" },
+  { id: "home", label: "Home", href: "/" },
+  { id: "prokerja", label: "Program Kerja", href: "/#prokerja" },
+  { id: "hub", label: "Hub", href: "/hub" },
+  { id: "faq", label: "FAQ", href: "/#faq" },
+  { id: "contact", label: "Kontak", href: "/contact" },
 ];
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const pathname = usePathname();
+const CTA = NAV_ITEMS[NAV_ITEMS.length - 1];
+const HOME_SECTION_IDS = ["home", "prokerja", "faq"];
 
-  const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
-  const closeMenu = useCallback(() => setIsOpen(false), []);
+const HYSTERESIS = 48;
+
+function useActiveSection(ids: string[]): string {
+  const [active, setActive] = useState<string>(ids[0] ?? "home");
+  const idxRef = useRef(0);
+
+  useEffect(() => {
+    if (ids.length === 0) return;
+    let raf = 0;
+    const update = () => {
+      const scrolled = window.scrollY + 96;
+      let idx = idxRef.current;
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4
+      ) {
+        idx = ids.length - 1;
+      } else {
+        const tops = ids.map(
+          (id) =>
+            (document.getElementById(id)?.getBoundingClientRect().top ?? 0) +
+            window.scrollY
+        );
+        if (scrolled > tops[idx] + HYSTERESIS) {
+          while (idx + 1 < ids.length && scrolled > tops[idx + 1] + HYSTERESIS)
+            idx++;
+        } else if (scrolled < tops[idx] - HYSTERESIS) {
+          while (idx > 0 && scrolled < tops[idx] - HYSTERESIS) idx--;
+        }
+      }
+      if (idx !== idxRef.current) {
+        idxRef.current = idx;
+        setActive(ids[idx]);
+      }
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [ids]);
+
+  return active;
+}
+
+export default function Navbar() {
+  const reduce = useSafeReducedMotion();
+  const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const isHome = pathname === "/";
+  const spyActive = useActiveSection(isHome ? HOME_SECTION_IDS : []);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28 });
+
+  const isItemActive = (item: NavItem) => {
+    if (item.id === "contact") return pathname === "/contact";
+    if (!isHome) return pathname === item.href;
+    return spyActive === item.id;
+  };
 
   return (
     <>
-      {/* Spacer Penahan Konten */}
+      {/* Spacer Penahan Konten (tinggi disamakan header agar pin proker pas) */}
       <div className="h-[60px]" aria-hidden="true" />
 
-      {/* Main Navbar Container */}
-      <nav className="fixed top-0 left-0 right-0 h-[60px] bg-[#1A1B41]/80 backdrop-blur-xl text-[#FFFBEB] font-sans text-[13px] font-bold uppercase tracking-widest z-[100] border-b border-white/10">
-        <div className="max-w-[1400px] w-full h-full mx-auto px-4 md:px-8 flex items-center justify-between relative bg-inherit">
-          {/* Logo */}
+      <header className="fixed inset-x-0 top-0 z-[100] border-b border-white/15 bg-[#1A1B41]/60 shadow-[0_8px_32px_rgba(10,8,40,0.45)] backdrop-blur-xl">
+        <div className="mx-auto flex h-[60px] w-full max-w-[1400px] items-center justify-between px-4 md:px-8">
           <Link
             href="/"
-            onClick={closeMenu}
-            aria-label="HMPS Administrasi Bisnis"
-            className="z-[102] flex items-center gap-2.5 shrink-0"
+            aria-label="HMPS Administrasi Bisnis — kembali ke atas"
+            className="group flex items-center gap-2.5"
           >
             <Image
               src="/images/hmps-logo.png"
               alt="Logo HMPS"
               width={36}
               height={36}
-              className="w-9 h-9 object-contain"
+              className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-105"
             />
             <span className="leading-none">
-              <span className="block text-sm font-black tracking-tight normal-case">
+              <span className="block text-sm font-black tracking-tight normal-case text-[#FFFBEB]">
                 HMPS Adbis
               </span>
-              <span className="block text-[9px] font-bold tracking-[0.22em] text-[#FFA6C8] uppercase mt-0.5">
+              <span className="mt-0.5 block text-[9px] font-bold uppercase tracking-[0.22em] text-[#FFA6C8]">
                 Sentra Nawasena
               </span>
             </span>
           </Link>
 
-          {/* Button Mobile Toggle */}
-          <button type="button" onClick={toggleMenu} aria-expanded={isOpen} aria-label="Toggle Menu" className="md:hidden z-[102] w-12 h-full flex items-center justify-center cursor-pointer text-current focus:outline-none">
-            <Plus className={cn("w-6 h-6 stroke-[2.5] transition-transform duration-300 ease-in-out", isOpen ? "rotate-45" : "rotate-0")} />
-          </button>
-
-          {/* Nav Items (4 Links) */}
-          <div
-            className={cn(
-              "stagger-container",
-              "fixed md:static left-0 right-0 top-[60px] md:top-0 h-[calc(100vh-60px)] md:h-full",
-              "bg-[#1A1B41]/95 backdrop-blur-xl md:bg-transparent md:backdrop-blur-none w-full md:w-auto md:flex-1",
-              "flex flex-col md:grid md:grid-flow-col md:auto-cols-fr",
-              "overflow-y-auto md:overflow-visible transition-transform duration-300 ease-in-out z-[99] md:z-1",
-              isOpen ? "translate-y-0" : "-translate-y-[calc(100%+60px)] md:translate-y-0",
-            )}
-          >
-            {NAV_ITEMS.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={closeMenu}
-                  aria-current={isActive ? "page" : undefined}
-                  className={cn(
-                    "stagger-link",
-                    "group bg-transparent px-6 md:px-4 h-[60px] min-h-[60px] flex items-center justify-between md:justify-center md:gap-2",
-                    "border-b border-white/10 md:border-b-0",
-                    "no-underline transition-colors",
-                    isActive
-                      ? "text-[#FF7AAC]"
-                      : "text-[#FFFBEB]/70 hover:text-[#FF7AAC] hover:bg-[#FF7AAC]/10",
-                  )}
-                >
-                  <span className="relative">
-                    {item.label}
-                    <span
+          <nav aria-label="Primary" className="hidden lg:block">
+            <ul className="flex items-center gap-7">
+              {NAV_ITEMS.filter((item) => item.id !== "contact").map((item) => {
+                const isActive = isItemActive(item);
+                return (
+                  <li key={item.id} className="relative">
+                    <Link
+                      href={item.href}
+                      aria-current={isActive ? "true" : undefined}
                       className={cn(
-                        "absolute -bottom-1.5 left-0 h-[2px] rounded-full bg-[#FF7AAC] transition-all duration-300",
-                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                        "relative py-2 text-[13px] font-bold uppercase tracking-widest transition-colors duration-200",
+                        isActive
+                          ? "text-[#FFFBEB]"
+                          : "text-[#FFFBEB]/55 hover:text-[#FFFBEB]"
                       )}
-                    />
-                  </span>
-                  <ArrowUpRight className="w-4 h-4 stroke-[2.5] opacity-0 group-hover:opacity-100 group-hover:-rotate-45 transition-all duration-200 text-[#FF7AAC]" />
-                </Link>
-              );
-            })}
+                    >
+                      {item.label}
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "absolute inset-x-0 -bottom-0.5 h-0.5 origin-left rounded-full bg-[#FF7AAC] transition-transform duration-300",
+                          isActive ? "scale-x-100" : "scale-x-0"
+                        )}
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href={CTA.href}
+              className="hidden h-10 items-center justify-center border border-[#FF7AAC]/60 px-5 text-[12px] font-bold uppercase tracking-widest text-[#FF7AAC] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FF7AAC] hover:text-[#1A1B41] lg:inline-flex"
+            >
+              {CTA.label}
+            </Link>
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              aria-label="Buka menu"
+              className="flex h-10 w-10 items-center justify-center border border-white/20 text-[#FFFBEB] transition-colors hover:border-[#FF7AAC] hover:text-[#FF7AAC] lg:hidden"
+            >
+              <Menu aria-hidden="true" className="h-5 w-5" />
+            </button>
           </div>
         </div>
-      </nav>
 
-      {/* Style JSX Disesuaikan khusus 4 Item Navigasi */}
-      <style jsx global>{`
-        @media (min-width: 768px) {
-          .stagger-container {
-            --lerp-0: 1;
-            --lerp-1: calc(sin(30deg));
-            --lerp-2: calc(sin(15deg));
-            --lerp-3: 0;
-            --speed: 0.25s;
-          }
+        {reduce ? null : (
+          <motion.span
+            aria-hidden="true"
+            className="absolute bottom-0 left-0 h-[2px] w-full origin-left bg-[#FF7AAC]"
+            style={{ scaleX: progress }}
+          />
+        )}
+      </header>
 
-          .stagger-link {
-            position: relative;
-            transform: translateY(calc(var(--lerp, 0) * 80%));
-            transition: transform var(--speed) ease;
-          }
-
-          .stagger-link::before {
-            content: "";
-            position: absolute;
-            height: 300%;
-            bottom: 0;
-            left: -1px;
-            right: -1px;
-            background: rgba(255, 122, 172, 0.22);
-            border-right: 1px solid rgba(255, 122, 172, 0.35);
-            border-radius: 0 0 12px 12px;
-            opacity: 0;
-            transition: opacity var(--speed) ease;
-            z-index: -1;
-          }
-
-          .stagger-link:hover::before,
-          .stagger-link:focus-visible::before {
-            opacity: 1;
-          }
-
-          .stagger-link:last-of-type::before {
-            border-right: none;
-          }
-
-          /* Aturan Hover Staggered khusus 4 Elemen */
-          .stagger-link:hover,
-          .stagger-link:focus-visible {
-            --lerp: var(--lerp-0);
-            z-index: 4;
-          }
-
-          .stagger-link:has(+ .stagger-link:hover),
-          .stagger-link:hover + .stagger-link {
-            --lerp: var(--lerp-1);
-            z-index: 3;
-          }
-
-          .stagger-link:has(+ .stagger-link + .stagger-link:hover),
-          .stagger-link:hover + .stagger-link + .stagger-link {
-            --lerp: var(--lerp-2);
-            z-index: 2;
-          }
-
-          .stagger-link:has(+ .stagger-link + .stagger-link + .stagger-link:hover),
-          .stagger-link:hover + .stagger-link + .stagger-link + .stagger-link {
-            --lerp: var(--lerp-3);
-            z-index: 1;
-          }
-        }
-      `}</style>
+      <MobileMenu
+        open={menuOpen}
+        items={NAV_ITEMS.filter((item) => item.id !== "contact")}
+        cta={CTA}
+        onClose={() => setMenuOpen(false)}
+      />
     </>
   );
 }

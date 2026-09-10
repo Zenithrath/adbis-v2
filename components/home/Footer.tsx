@@ -10,8 +10,8 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
     title: "Tentang Kami",
     links: [
       { label: "Struktur Organisasi", href: "/people" },
-      { label: "Visi Misi", href: "/about" },
-      { label: "Tentang Kabinet", href: "/about" },
+      { label: "Visi Misi", href: "/#values" },
+      { label: "Tentang Kabinet", href: "/#about" },
       { label: "Galeri", href: "/#prokerja" },
       { label: "Kontak Kami", href: "/contact" },
     ],
@@ -38,10 +38,10 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Layanan Publik",
     links: [
+      { label: "Adbis Hub", href: "/hub" },
       { label: "Kirim Aspirasi", href: "/contact" },
       { label: "FAQ", href: "/#faq" },
       { label: "Media Partner", href: "/contact" },
-      { label: "Kalender", href: "/career" },
       { label: "Kontak", href: "/contact" },
     ],
   },
@@ -114,7 +114,7 @@ const SOCIALS = [
 export default function Footer() {
   return (
     <footer
-      className="cv-auto relative w-full overflow-hidden border-t border-white/10 bg-white/[0.05] backdrop-blur-2xl text-[#FFFBEB]"
+      className="cv-auto relative w-full overflow-hidden border-t border-white/10 bg-black/25 backdrop-blur-2xl text-[#FFFBEB]"
       id="contact"
     >
       <div

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
@@ -32,6 +33,23 @@ export function Reveal({
   once = true,
 }: RevealProps) {
   const reduce = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Render statis yang IDENTIK di server & client saat hydration.
+  // (framer-motion menserialisasi style awal berbeda di SSR vs browser,
+  //  yang memicu hydration mismatch di React 19.)
+  // Setelah mount, motion.div mengambil alih dan menganimasikan normal.
+  if (!mounted) {
+    return (
+      <div className={className} style={{ opacity: 0 }}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <motion.div

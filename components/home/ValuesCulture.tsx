@@ -71,7 +71,7 @@ export default function ValuesCulture() {
                 keseharian pengurus Kabinet Sentra Nawasena.
               </p>
               <Link
-                href="/about"
+                href="/#about"
                 className="group inline-flex items-center gap-2 mt-4 text-[11px] font-bold uppercase tracking-widest text-[#FFA6C8] hover:text-white transition-colors"
               >
                 Selengkapnya tentang kabinet

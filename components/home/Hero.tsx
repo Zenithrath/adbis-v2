@@ -49,7 +49,7 @@ export default function Hero() {
 
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 pt-1 md:pt-2">
             <Link
-              href="/about"
+              href="/#about"
               className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-3.5 bg-[#FFF2B2] text-[#1A1B41] rounded-full font-black text-[11px] uppercase tracking-widest shadow-[0_8px_32px_rgba(255,242,178,0.25)] hover:bg-white hover:scale-[1.025] active:scale-[0.98] transition-all group"
             >
               Learn More

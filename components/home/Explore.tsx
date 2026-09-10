@@ -35,7 +35,7 @@ const CARDS: {
   {
     title: "Adbis Hub",
     desc: "Index layanan satu atap: aspirasi, karier, rekrutmen.",
-    href: "/contact",
+    href: "/hub",
     bg: "bg-[#5A56C8]",
   },
   {

@@ -82,7 +82,7 @@ export function FooterTapedDesign({
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" className="hover:text-white transition-colors">
+                  <Link href="/#about" className="hover:text-white transition-colors">
                     • Tentang Kabinet
                   </Link>
                 </li>
@@ -146,7 +146,7 @@ export function FooterTapedDesign({
           </div>
           <div>
             <Link
-              href="/about"
+              href="/#about"
               className="px-6 py-3 bg-[#FF7AAC] text-[#1A1B41] rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#FFA6C8] transition-all flex items-center space-x-2 group"
             >
               <span>Jelajahi Kabinet</span>

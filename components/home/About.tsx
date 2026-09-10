@@ -48,8 +48,8 @@ export default function About() {
         </div>
 
         {/* Visi Misi Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-t border-white/15">
-          <Reveal className="p-8 border-b sm:border-b-0 border-white/15 sm:border-r flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm" y={20}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-0 lg:border-t lg:border-white/15">
+          <Reveal className="p-6 md:p-8 border border-white/15 rounded-2xl lg:rounded-none lg:border-0 lg:border-l lg:border-white/15 lg:first:border-l-0 flex flex-col justify-between min-h-[210px] lg:min-h-[240px] bg-white/5 backdrop-blur-sm hover:border-[#FF7AAC]/40 transition-colors" y={20}>
             <span className="text-xs font-bold text-[#FF7AAC] uppercase tracking-widest">
               VISI KABINET
             </span>
@@ -62,7 +62,7 @@ export default function About() {
               BERDAMPAK
             </h4>
           </Reveal>
-          <Reveal className="p-8 border-b sm:border-b-0 border-white/15 md:border-r flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm" delay={0.08} y={20}>
+          <Reveal className="p-6 md:p-8 border border-white/15 rounded-2xl lg:rounded-none lg:border-0 lg:border-l lg:border-white/15 flex flex-col justify-between min-h-[210px] lg:min-h-[240px] bg-white/5 backdrop-blur-sm hover:border-[#FF7AAC]/40 transition-colors" delay={0.08} y={20}>
             <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
               MISI 01
             </span>
@@ -75,7 +75,7 @@ export default function About() {
               <br />& ADVOKASI
             </h4>
           </Reveal>
-          <Reveal className="p-8 border-b sm:border-b-0 border-white/15 sm:border-r flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm" delay={0.16} y={20}>
+          <Reveal className="p-6 md:p-8 border border-white/15 rounded-2xl lg:rounded-none lg:border-0 lg:border-l lg:border-white/15 flex flex-col justify-between min-h-[210px] lg:min-h-[240px] bg-white/5 backdrop-blur-sm hover:border-[#FF7AAC]/40 transition-colors" delay={0.16} y={20}>
             <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
               MISI 02
             </span>
@@ -87,7 +87,7 @@ export default function About() {
               KREATIVITAS
             </h4>
           </Reveal>
-          <Reveal className="p-8 flex flex-col justify-between min-h-[240px] bg-white/5 backdrop-blur-sm" delay={0.24} y={20}>
+          <Reveal className="p-6 md:p-8 border border-white/15 rounded-2xl lg:rounded-none lg:border-0 lg:border-l lg:border-white/15 flex flex-col justify-between min-h-[210px] lg:min-h-[240px] bg-white/5 backdrop-blur-sm hover:border-[#FF7AAC]/40 transition-colors" delay={0.24} y={20}>
             <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
               MISI 03
             </span>

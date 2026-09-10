@@ -91,21 +91,21 @@ export const Component = ({
 
       const tl = gsap.timeline();
 
-      // 1. IN (Expo Out) — mekar cepat supaya selesai walau user masih scroll
+      // 1. IN (Expo Out) — mekar terlihat jelas lalu ditahan
       tl.fromTo(
         selector,
         { scale: 0 },
         {
           scale: 1,
-          duration: 0.55,
-          stagger: { amount: 0.25, from: "random" },
+          duration: 0.7,
+          stagger: { amount: 0.35, from: "random" },
           ease: "expo.out",
         }
       )
         // 2. IDLE (Sine Breath) — ditahan terlihat selamanya, tanpa fase hilang
         .to(selector, {
-          scale: 1.05,
-          duration: 1.6,
+          scale: 1.06,
+          duration: 1.8,
           yoyo: true,
           repeat: -1,
           ease: "sine.inOut",
@@ -215,14 +215,14 @@ export const Component = ({
       className={cn("relative h-[220vh] w-full sm:h-[240vh] md:h-[280vh]", className)}
     >
       {/* Pin 1 layar penuh di bawah navbar (60px). Keluar otomatis saat list mentok. */}
-      <div className="sticky top-[60px] flex h-[calc(100vh-60px)] h-[calc(100svh-60px)] flex-col items-center justify-center gap-5 overflow-hidden px-6 py-4 md:flex-row md:gap-10 md:px-16 md:py-0 lg:px-24">
-        {/* KANAN di mobile (visual dulu), KIRI di desktop */}
-        <div className="relative order-2 flex w-full shrink-0 items-center justify-center md:order-2 md:w-1/2">
+      <div className="sticky top-[60px] flex h-[calc(100vh-60px)] h-[calc(100svh-60px)] flex-col items-center justify-center gap-4 overflow-hidden px-6 py-4 sm:gap-5 lg:flex-row lg:gap-10 lg:px-24 lg:py-0">
+        {/* Visual di bawah list pada HP/tablet, di kanan pada desktop */}
+        <div className="relative order-2 flex w-full shrink-0 items-center justify-center lg:order-2 lg:w-1/2">
           <div className="absolute h-[80%] w-[80%] rounded-full bg-[#FF7AAC]/10 blur-[100px] transition-opacity duration-1000" />
 
           <svg
             viewBox="0 0 500 500"
-            className="z-10 aspect-square h-auto w-[min(58vw,240px)] sm:w-[min(44vw,300px)] md:w-full md:max-w-[480px]"
+            className="z-10 aspect-square h-auto w-[min(54vw,220px)] sm:w-[min(36vw,280px)] lg:w-full lg:max-w-[480px]"
             role="img"
             aria-label={items[activeIndex]?.name ?? "Program kerja"}
           >
@@ -283,10 +283,10 @@ export const Component = ({
         </div>
 
         {/* LIST: viewport tetap, track digeser oleh page scroll */}
-        <div className="z-20 order-1 w-full shrink-0 md:order-1 md:w-1/2">
+        <div className="z-20 order-1 w-full shrink-0 lg:order-1 lg:w-1/2">
           <div
             ref={viewportRef}
-            className="relative h-[30vh] overflow-hidden sm:h-[32vh] md:h-[52vh] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_82%,transparent)]"
+            className="relative h-[28vh] overflow-hidden sm:h-[30vh] lg:h-[52vh] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_82%,transparent)]"
           >
             <ul
               ref={trackRef}
@@ -297,7 +297,7 @@ export const Component = ({
                 return (
                   <li
                     key={item.num}
-                    className="flex h-[30vh] shrink-0 items-center overflow-hidden sm:h-[32vh] md:h-[52vh]"
+                    className="flex h-[28vh] shrink-0 items-center overflow-hidden sm:h-[30vh] lg:h-[52vh]"
                   >
                     <button
                       type="button"
@@ -305,10 +305,10 @@ export const Component = ({
                       aria-current={isActive ? "true" : undefined}
                       className="group block w-fit cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7AAC] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                     >
-                      <span className="flex items-start gap-4 md:gap-6">
+                      <span className="flex items-start gap-4 lg:gap-6">
                         <span
                           className={cn(
-                            "mt-1 text-xl font-bold transition-all duration-500 sm:text-2xl md:mt-2 md:text-3xl",
+                            "mt-1 text-lg font-bold transition-all duration-500 sm:text-2xl lg:mt-2 lg:text-3xl",
                             isActive
                               ? "scale-110 text-[#FF7AAC]"
                               : "text-white/40 group-hover:text-white/70"
@@ -320,9 +320,9 @@ export const Component = ({
                         <span className="block">
                           <span
                             className={cn(
-                              "block text-4xl font-black uppercase leading-[0.9] tracking-tighter transition-all duration-700 sm:text-5xl md:text-6xl",
+                              "block text-3xl font-black uppercase leading-[0.9] tracking-tighter transition-all duration-700 sm:text-5xl lg:text-6xl",
                               isActive
-                                ? "translate-x-2 text-white opacity-100 md:translate-x-4"
+                                ? "translate-x-2 text-white opacity-100 lg:translate-x-4"
                                 : "text-white/30 opacity-60 group-hover:text-white/50"
                             )}
                           >
@@ -332,9 +332,9 @@ export const Component = ({
                           </span>
                           <span
                             className={cn(
-                              "mt-2 block max-w-xs text-[11px] leading-relaxed text-white/50 transition-all duration-500 md:mt-3 md:text-xs",
+                              "mt-2 block max-w-xs text-[11px] leading-relaxed text-white/50 transition-all duration-500 lg:mt-3 lg:text-xs",
                               isActive
-                                ? "translate-x-2 opacity-100 md:translate-x-4"
+                                ? "translate-x-2 opacity-100 lg:translate-x-4"
                                 : "opacity-0"
                             )}
                           >
@@ -350,7 +350,7 @@ export const Component = ({
           </div>
 
           {/* Progress: penanda posisi + cara keluar (klik dot / scroll terus) */}
-          <div className="mx-auto mt-3 flex w-full max-w-xl items-center gap-3 md:mx-0 md:mt-5">
+          <div className="mx-auto mt-2 flex w-full max-w-xl items-center gap-3 sm:mt-3 lg:mx-0 lg:mt-5">
             <span className="font-mono text-[11px] font-bold tabular-nums text-[#FF7AAC]">
               0{activeIndex + 1}
             </span>
