@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Anybody, Inter, Press_Start_2P } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
+import "./editorial.css";
 
 const anybody = Anybody({
   subsets: ["latin"],

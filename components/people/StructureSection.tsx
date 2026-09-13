@@ -66,8 +66,8 @@ function LevelTag({
         accent
           ? "bg-[#F9A8D4]/20 border-[#F472B6]/30 text-[#F472B6]"
           : muted
-            ? "bg-[#FFFBEB] border-[#1e293b]/20 text-[#1e293b]/55"
-            : "bg-white border-[#1e293b]/15 text-[#1e293b]/70"
+            ? "bg-white/10 border-white/20 text-white/60"
+            : "bg-white/10 border-white/15 text-white/70"
       )}
     >
       <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60" />
@@ -81,11 +81,11 @@ function Connector() {
     <div className="flex flex-col items-center py-2">
       <span
         aria-hidden
-        className="w-px h-9 bg-[#1e293b]/15 border-l border-dashed border-[#1e293b]/25"
+        className="w-px h-9 bg-white/15 border-l border-dashed border-white/25"
       />
       <span
         aria-hidden
-        className="w-2.5 h-2.5 rotate-45 bg-[#1e293b] mt-1"
+        className="w-2.5 h-2.5 rotate-45 bg-white/40 mt-1"
       />
     </div>
   );
@@ -104,19 +104,19 @@ export default function StructureSection({
   onSelectMember: (m: Member) => void;
 }) {
   return (
-    <section id="struktur" className="scroll-mt-24 w-full">
+    <section id="struktur" className="scroll-mt-24 w-full border-b border-white/10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 py-20 md:py-28">
         <Reveal>
-          <div className="flex items-end justify-between gap-6 mb-10 border-b border-[#1e293b]/10 pb-6">
+          <div className="flex items-end justify-between gap-6 mb-10 border-b border-white/10 pb-6">
             <div>
-              <span className="text-[10px] font-bold tracking-widest uppercase text-[#1e293b]/40 block mb-3">
+              <span className="text-[10px] font-bold tracking-widest uppercase text-white/40 block mb-3">
                 • (01) BAGAN KABINET
               </span>
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none text-white">
                 Struktur Organisasi
               </h2>
             </div>
-            <p className="hidden md:block max-w-xs text-right text-[11px] text-[#1e293b]/50 italic leading-relaxed">
+            <p className="hidden md:block max-w-xs text-right text-[11px] text-white/50 italic leading-relaxed">
               Klik kartu pengurus untuk membuka profil lengkap &amp; fokus
               tugasnya.
             </p>
