@@ -1,15 +1,19 @@
 "use client";
 
 import { Reveal } from "@/components/ui/reveal";
+import Stars from "@/components/ui/Stars";
+import { Sparkle } from "@/components/ui/Decorations";
 
 export default function ContactHero() {
   return (
-    <section className="relative w-full border-b border-white/10">
+    <section className="relative w-full border-b border-white/10 overflow-hidden">
+      <Stars className="absolute top-8 right-4 md:right-16 w-10 md:w-14 animate-float-slow" />
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 pt-8 md:pt-14 pb-16 md:pb-20">
         <div className="flex flex-wrap items-center justify-between gap-2 pb-5 border-b border-white/10 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-white/50">
           <span className="flex items-center gap-2">
             <span className="text-[#F472B6]">✱</span> ADBIS HUB — SATU ATAP
             UNTUK SEMUA
+            <Sparkle className="w-4 h-4 shrink-0" color="#FC75A7" />
           </span>
           <span className="hidden sm:block">KONTAK & LAYANAN</span>
         </div>

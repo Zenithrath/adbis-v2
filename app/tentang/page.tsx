@@ -1,15 +1,13 @@
 "use client";
 
-import Hero from "@/components/home/Hero";
-import Explore from "@/components/home/Explore";
-import ProgramKerja from "@/components/home/ProgramKerja";
-import Faq from "@/components/home/Faq";
-import Footer from "@/components/home/Footer";
+import About from "@/components/home/About";
+import ValuesCulture from "@/components/home/ValuesCulture";
+import { FooterTapedDesign } from "@/components/ui/footer-taped-design";
 
-export default function Home() {
+export default function TentangPage() {
   return (
     <div className="relative w-full flex flex-col font-sans">
-      {/* Grid background */}
+      {/* Grid background — sama dengan halaman lain */}
       <div
         aria-hidden="true"
         className="fixed inset-0 pointer-events-none z-0 opacity-[0.12]"
@@ -22,7 +20,7 @@ export default function Home() {
         }}
       />
 
-      {/* Glow orbs */}
+      {/* Glow orbs — sama dengan halaman lain */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div
           className="orb orb-blue animate-orb-left"
@@ -42,21 +40,11 @@ export default function Home() {
         />
       </div>
 
-      <div className="relative z-10">
-        <Hero />
-        <ProgramKerja />
-        <Explore />
-        <Faq />
-        <Footer />
-      </div>
-
-      {/* Floating CTA Form Aspirasi */}
-      <a
-        href="#"
-        className="fixed bottom-6 right-6 z-[90] px-6 py-3.5 rounded-full bg-[#FF7AAC] text-[#1A1B41] font-black text-[11px] uppercase tracking-widest shadow-[0_8px_24px_rgba(255,122,172,0.35)] hover:bg-[#FFA6C8] hover:shadow-[0_8px_32px_rgba(255,122,172,0.5)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300"
-      >
-        Kirim Aspirasi
-      </a>
+      <main className="relative z-10 w-full overflow-x-clip">
+        <About />
+        <ValuesCulture />
+        <FooterTapedDesign />
+      </main>
     </div>
   );
 }

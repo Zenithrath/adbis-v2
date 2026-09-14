@@ -2,6 +2,8 @@
 
 import { Reveal } from "@/components/ui/reveal";
 import DeptStepper from "@/components/people/DeptStepper";
+import Stars from "@/components/ui/Stars";
+import { Sparkle } from "@/components/ui/Decorations";
 
 export default function PeopleHero({
   activeDeptId,
@@ -11,11 +13,14 @@ export default function PeopleHero({
   onSelectDept: (id: string) => void;
 }) {
   return (
-    <section className="relative w-full border-b border-white/10">
+    <section className="relative w-full border-b border-white/10 overflow-hidden">
+      <Stars className="absolute top-8 right-4 md:right-16 w-10 md:w-14 animate-float-slow" />
+      <Stars className="absolute bottom-10 left-4 md:left-16 w-20 md:w-28 opacity-30 animate-float-slow-reverse" />
       <div className="relative max-w-[1400px] mx-auto px-6 md:px-16 pt-8 md:pt-14 pb-12 md:pb-16">
         <Reveal>
           <div className="text-center">
             <span className="inline-flex items-center gap-2 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.25em] text-[#F9A8D4]">
+              <Sparkle className="w-4 h-4 shrink-0" color="#FC75A7" />
               Struktur Organisasi
             </span>
           </div>

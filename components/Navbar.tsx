@@ -18,6 +18,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { id: "home", label: "Home", href: "/" },
+  { id: "tentang", label: "Tentang", href: "/tentang" },
   { id: "people", label: "Struktur", href: "/people" },
   { id: "hub", label: "Hub", href: "/hub" },
   { id: "contact", label: "Kontak", href: "/contact" },

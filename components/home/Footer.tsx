@@ -4,6 +4,7 @@ import { Mail, Music } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
+import { Sparkle } from "@/components/ui/Decorations";
 
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -11,7 +12,7 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "Struktur Organisasi", href: "/people" },
       { label: "Visi Misi", href: "/#values" },
-      { label: "Tentang Kabinet", href: "/#about" },
+      { label: "Tentang Kabinet", href: "/tentang" },
       { label: "Galeri", href: "/#prokerja" },
       { label: "Kontak Kami", href: "/contact" },
     ],
@@ -135,8 +136,9 @@ export default function Footer() {
                 className="w-14 h-14 md:w-16 md:h-16 object-contain"
               />
               <div>
-                <p className="text-2xl md:text-[1.7rem] font-black tracking-tight leading-none">
+                <p className="text-2xl md:text-[1.7rem] font-black tracking-tight leading-none flex items-center gap-2">
                   HMPS Adbis
+                  <Sparkle className="w-5 h-5 md:w-6 md:h-6 shrink-0" color="#FC75A7" />
                 </p>
                 <p className="font-serif italic text-base md:text-lg text-[#FFA6C8] mt-1.5">
                   &ldquo;Merangkai Sinergi Wujudkan Aksi&rdquo;

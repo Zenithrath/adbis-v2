@@ -19,7 +19,7 @@ const defaultItems: MenuItem[] = [
     clipId: "clip-original",
     image:
       "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop",
-    desc: "Program kerja unggulan berbasis pengembangan investasi dan literasi finansial.",
+    desc: "Sekolah pasar modal dan simulasi trading saham bareng BEI — bekal melek finansial sejak dini sekaligus tameng dari jebakan investasi bodong.",
   },
   {
     num: "02",
@@ -27,7 +27,7 @@ const defaultItems: MenuItem[] = [
     clipId: "clip-hexagons",
     image:
       "https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=800&auto=format&fit=crop",
-    desc: "Wujud pengabdian masyarakat nyata untuk memberikan dampak sosial dan pemberdayaan UMKM.",
+    desc: "Terjun ke desa binaan melatih pencatatan keuangan dan pemasaran digital UMKM — ilmu bisnis yang langsung dirasakan masyarakat.",
   },
   {
     num: "03",
@@ -35,7 +35,7 @@ const defaultItems: MenuItem[] = [
     clipId: "clip-pixels",
     image:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop",
-    desc: "Ajang pameran dan bazaar kewirausahaan mahasiswa Administrasi Bisnis.",
+    desc: "Festival expo kewirausahaan dengan belasan booth kuliner, fashion, dan produk kreatif — ajang validasi pasar produk mahasiswa.",
   },
   {
     num: "04",
@@ -43,7 +43,7 @@ const defaultItems: MenuItem[] = [
     clipId: "clip-squares",
     image:
       "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop",
-    desc: "Sentra Kreativitas Mahasiswa sebagai wadah eksplorasi bakat seni dan budaya.",
+    desc: "Panggung seni musik, tari, dan desain komunikasi visual — ruang ekspresi dan apresiasi talenta seni mahasiswa Adbis.",
   },
 ];
 
@@ -61,58 +61,63 @@ export const Component = ({
   const progressBarRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<SVGImageElement>(null);
   const mainGroupRef = useRef<SVGGElement>(null);
-  const masterTl = useRef<gsap.core.Timeline | null>(null);
+  const masterTl = useRef<gsap.core.Timeline | gsap.core.Tween | null>(null);
+  const swapTl = useRef<gsap.core.Timeline | null>(null);
+  const firstRunRef = useRef(true);
   const activeRef = useRef(0);
 
   const createLoop = useCallback(
     (index: number) => {
       const item = items[index];
       if (!item) return;
-      const selector = `#${item.clipId} .path`;
+      const g = mainGroupRef.current;
+      const img = imageRef.current;
 
       if (masterTl.current) masterTl.current.kill();
+      if (swapTl.current) swapTl.current.kill();
+      if (img) gsap.killTweensOf(img);
 
-      if (imageRef.current) imageRef.current.setAttribute("href", item.image);
-      if (mainGroupRef.current)
-        mainGroupRef.current.setAttribute("clip-path", `url(#${item.clipId})`);
+      const doSwap = () => {
+        if (img) img.setAttribute("href", item.image);
+        if (g) g.setAttribute("clip-path", `url(#${item.clipId})`);
 
-      // Reduced motion: tampilkan statis, tanpa loop animasi
-      if (
-        typeof window !== "undefined" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ) {
-        gsap.set(selector, { scale: 1, transformOrigin: "50% 50%" });
-        masterTl.current = null;
-        return;
-      }
-
-      // Baseline terlihat dulu — kalau ticker tersendat, gambar tetap tampil.
-      gsap.set(selector, { scale: 1, transformOrigin: "50% 50%" });
-
-      const tl = gsap.timeline();
-
-      // 1. IN (Expo Out) — mekar terlihat jelas lalu ditahan
-      tl.fromTo(
-        selector,
-        { scale: 0 },
-        {
-          scale: 1,
-          duration: 0.7,
-          stagger: { amount: 0.35, from: "random" },
-          ease: "expo.out",
+        // IDLE: slow zoom (Ken Burns) pada <image>
+        if (img) {
+          gsap.set(img, { scale: 1, transformOrigin: "50% 50%" });
+          masterTl.current = gsap.to(img, {
+            scale: 1.12,
+            duration: 5,
+            yoyo: true,
+            repeat: -1,
+            ease: "sine.inOut",
+          });
         }
-      )
-        // 2. IDLE (Sine Breath) — ditahan terlihat selamanya, tanpa fase hilang
-        .to(selector, {
-          scale: 1.06,
-          duration: 1.8,
-          yoyo: true,
-          repeat: -1,
-          ease: "sine.inOut",
-          stagger: { amount: 0.3, from: "center" },
-        });
+      };
 
-      masterTl.current = tl;
+      // Tiap ganti item: fade+mengecil dulu, tukar gambar+clip di tengah,
+      // lalu fade+membesar. Mount pertama langsung tampil.
+      if (!firstRunRef.current && g) {
+        gsap.set(g, { transformOrigin: "50% 50%" });
+        swapTl.current = gsap
+          .timeline()
+          .to(g, {
+            opacity: 0,
+            scale: 0.92,
+            duration: 0.22,
+            ease: "power2.in",
+            onComplete: doSwap,
+          })
+          .to(g, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.45,
+            ease: "back.out(1.4)",
+          });
+      } else {
+        if (g) gsap.set(g, { opacity: 1, scale: 1 });
+        doSwap();
+      }
+      firstRunRef.current = false;
     },
     [items]
   );
@@ -128,6 +133,7 @@ export const Component = ({
     return () => {
       ctx.revert();
       if (masterTl.current) masterTl.current.kill();
+      if (swapTl.current) swapTl.current.kill();
     };
   }, []);
 

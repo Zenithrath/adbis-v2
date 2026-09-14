@@ -2,20 +2,24 @@
 
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
+import Stars from "@/components/ui/Stars";
+import { Sparkle } from "@/components/ui/Decorations";
 
 export default function About() {
   return (
     <section
-      className="w-full text-[#FFFBEB] py-20 px-8 md:px-16 border-t border-white/10"
+      className="relative w-full text-[#FFFBEB] py-20 px-8 md:px-16 border-t border-white/10 overflow-hidden"
       id="about"
     >
+      <Stars className="absolute top-10 right-6 md:right-14 w-10 md:w-14 animate-float-slow" />
       <div className="max-w-[1400px] mx-auto">
         {/* Top: Tentang + Deskripsi */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
           <Reveal className="md:col-span-6 flex flex-col justify-between space-y-6">
             <div>
-              <span className="text-[10px] font-bold tracking-widest uppercase text-[#FF7AAC] block mb-3">
-                • TENTANG KABINET
+              <span className="text-[10px] font-bold tracking-widest uppercase text-[#FF7AAC] mb-3 flex items-center gap-2">
+                <Sparkle className="w-4 h-4 shrink-0" color="#FC75A7" />
+                TENTANG KABINET
               </span>
               <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-[1.1] max-w-2xl">
                 PUSAT PENGGERAK INTI BERORIENTASI MASA DEPAN CERAH.
@@ -47,59 +51,71 @@ export default function About() {
           </Reveal>
         </div>
 
-        {/* Visi Misi Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-0 lg:border-t lg:border-white/15">
-          <Reveal className="p-6 md:p-8 border border-white/15 rounded-2xl lg:rounded-none lg:border-0 lg:border-l lg:border-white/15 lg:first:border-l-0 flex flex-col justify-between min-h-[210px] lg:min-h-[240px] bg-white/5 backdrop-blur-sm hover:border-[#FF7AAC]/40 transition-colors" y={20}>
-            <span className="text-xs font-bold text-[#FF7AAC] uppercase tracking-widest">
-              VISI KABINET
+        {/* Visi — section sendiri */}
+        <Reveal>
+          <div className="relative overflow-hidden rounded-3xl border border-[#FF7AAC]/30 bg-gradient-to-br from-[#FF7AAC]/15 via-white/[0.05] to-transparent p-8 md:p-12 mt-4">
+            <span
+              aria-hidden="true"
+              className="absolute -top-4 right-4 md:right-8 font-black uppercase leading-none text-white/[0.06] select-none pointer-events-none"
+              style={{ fontSize: "clamp(5rem, 14vw, 11rem)" }}
+            >
+              VISI
             </span>
-            <p className="text-xs text-white/70 font-medium leading-relaxed mt-4">
+            <span className="text-[10px] font-bold tracking-widest uppercase text-[#FF7AAC] block mb-4">
+              • Visi Kabinet
+            </span>
+            <p className="relative text-xl md:text-3xl font-bold leading-relaxed text-white max-w-3xl">
               Menjadikan HMPS Administrasi Bisnis sebagai wadah aspirasi dan
-              pusat pengembangan kompetensi yang unggul dan berdampak nyata.
+              pusat pengembangan kompetensi yang{" "}
+              <span className="text-[#F9A8D4]">unggul dan berdampak nyata</span>.
             </p>
-            <h4 className="font-black text-sm uppercase tracking-wider mt-6">
-              UNGGUL &<br />
-              BERDAMPAK
-            </h4>
-          </Reveal>
-          <Reveal className="p-6 md:p-8 border border-white/15 rounded-2xl lg:rounded-none lg:border-0 lg:border-l lg:border-white/15 flex flex-col justify-between min-h-[210px] lg:min-h-[240px] bg-white/5 backdrop-blur-sm hover:border-[#FF7AAC]/40 transition-colors" delay={0.08} y={20}>
-            <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
-              MISI 01
+          </div>
+        </Reveal>
+
+        {/* Misi — kartu masing-masing dengan hover */}
+        <div className="mt-12 md:mt-16">
+          <Reveal>
+            <span className="text-[10px] font-bold tracking-widest uppercase text-white/40 block mb-3">
+              • Misi Kabinet
             </span>
-            <p className="text-[11px] text-white/60 leading-relaxed mt-4">
-              Menjamin pelayanan prima dan advokasi transparan untuk aspirasi
-              seluruh mahasiswa.
-            </p>
-            <h4 className="font-black text-sm uppercase tracking-wider mt-6 underline">
-              PELAYANAN
-              <br />& ADVOKASI
-            </h4>
+            <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight text-white mb-8">
+              Tiga Pilar Pergerakan
+            </h3>
           </Reveal>
-          <Reveal className="p-6 md:p-8 border border-white/15 rounded-2xl lg:rounded-none lg:border-0 lg:border-l lg:border-white/15 flex flex-col justify-between min-h-[210px] lg:min-h-[240px] bg-white/5 backdrop-blur-sm hover:border-[#FF7AAC]/40 transition-colors" delay={0.16} y={20}>
-            <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
-              MISI 02
-            </span>
-            <p className="text-[11px] text-white/60 leading-relaxed mt-4">
-              Mewujudkan sentra kolaborasi dan kreativitas mahasiswa.
-            </p>
-            <h4 className="font-black text-sm uppercase tracking-wider mt-6">
-              KOLABORASI &<br />
-              KREATIVITAS
-            </h4>
-          </Reveal>
-          <Reveal className="p-6 md:p-8 border border-white/15 rounded-2xl lg:rounded-none lg:border-0 lg:border-l lg:border-white/15 flex flex-col justify-between min-h-[210px] lg:min-h-[240px] bg-white/5 backdrop-blur-sm hover:border-[#FF7AAC]/40 transition-colors" delay={0.24} y={20}>
-            <span className="text-xs font-bold text-white/50 uppercase tracking-widest">
-              MISI 03
-            </span>
-            <p className="text-[11px] text-white/60 leading-relaxed mt-4">
-              Mewujudkan siklus organisasi yang profesional, transparan, dan
-              berintegritas.
-            </p>
-            <h4 className="font-black text-sm uppercase tracking-wider mt-6">
-              PROFESIONAL &<br />
-              BERINTEGRITAS
-            </h4>
-          </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+            {[
+              {
+                no: "01",
+                title: "Pelayanan & Advokasi",
+                desc: "Menjamin pelayanan prima dan advokasi transparan untuk aspirasi seluruh mahasiswa.",
+              },
+              {
+                no: "02",
+                title: "Kolaborasi & Kreativitas",
+                desc: "Mewujudkan sentra kolaborasi dan kreativitas mahasiswa.",
+              },
+              {
+                no: "03",
+                title: "Profesional & Berintegritas",
+                desc: "Mewujudkan siklus organisasi yang profesional, transparan, dan berintegritas.",
+              },
+            ].map((m, i) => (
+              <Reveal key={m.no} delay={i * 0.08} y={20} className="h-full">
+                <div className="group h-full rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-7 md:p-8 flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-[#FF7AAC]/60 hover:bg-white/[0.07] hover:shadow-[0_20px_50px_-20px_rgba(244,114,182,0.45)] cursor-default">
+                  <span className="text-4xl md:text-5xl font-black leading-none text-white/15 transition-colors duration-300 group-hover:text-[#FF7AAC]">
+                    {m.no}
+                  </span>
+                  <h4 className="font-black text-lg md:text-xl uppercase tracking-tight text-white mt-5 mb-3">
+                    {m.title}
+                  </h4>
+                  <p className="text-sm text-white/60 leading-relaxed">
+                    {m.desc}
+                  </p>
+                  <span className="mt-auto pt-6 block h-1 w-10 rounded-full bg-white/15 transition-all duration-300 group-hover:w-full group-hover:bg-[#FF7AAC]" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

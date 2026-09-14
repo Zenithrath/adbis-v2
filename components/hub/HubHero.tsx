@@ -1,15 +1,28 @@
 "use client";
 
 import { ArrowDown, Sparkles } from "lucide-react";
+import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
+import Stars from "@/components/ui/Stars";
+import { Sparkle } from "@/components/ui/Decorations";
 
 export default function HubHero() {
   return (
     <section className="relative w-full overflow-hidden">
+      <Image
+        src="/images/Vector 2.svg"
+        alt=""
+        aria-hidden="true"
+        width={866}
+        height={859}
+        className="absolute -top-16 -left-20 md:-left-14 w-40 md:w-60 h-auto opacity-25 animate-float-slow-reverse pointer-events-none select-none"
+      />
+      <Stars className="absolute top-10 right-6 md:right-16 w-10 md:w-14 animate-float-slow" />
       <div className="max-w-[1400px] mx-auto px-8 md:px-16 pt-14 md:pt-20 pb-12 md:pb-16 text-center">
         <Reveal>
           <span className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.24em] uppercase text-[#FFA6C8]">
             <span className="text-[#FF7AAC]">✱</span> Adbis Hub — Satu Atap
+            <Sparkle className="w-4 h-4 shrink-0" color="#FC75A7" />
           </span>
           <h1 className="mt-5 text-5xl md:text-8xl font-black uppercase tracking-tight leading-[0.9]">
             Satu Atap

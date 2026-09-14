@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/reveal";
+import { Sparkle } from "@/components/ui/Decorations";
 
 // TODO: ganti dengan ID video Company Profile dari YouTube (bagian setelah v=)
 const YOUTUBE_VIDEO_ID = "VIDEO_ID_COMPANY_PROFILE";
@@ -110,7 +111,10 @@ export default function Explore() {
         {/* Kanan: heading + CTA */}
         <Reveal delay={0.1}>
         <div>
-          <p className="text-[#E3C565] font-semibold text-lg">Kenali</p>
+          <p className="text-[#E3C565] font-semibold text-lg flex items-center gap-2">
+            <Sparkle className="w-5 h-5 shrink-0" color="#FC75A7" />
+            Kenali
+          </p>
           <h2 className="text-3xl md:text-4xl font-black tracking-tight uppercase leading-[0.95] mt-2">
             Eksplorasi Lebih Dalam Tentang HMPS Adbis
           </h2>

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
+import Stars from "@/components/ui/Stars";
+import { Plus } from "@/components/ui/Decorations";
 
 const VALUES = [
   {
@@ -49,9 +51,10 @@ const CULTURES = [
 export default function ValuesCulture() {
   return (
     <section
-      className="cv-auto w-full text-[#FFFBEB] py-20 md:py-28 border-t border-white/10"
+      className="cv-auto relative w-full text-[#FFFBEB] py-20 md:py-28 border-t border-white/10 overflow-hidden"
       id="values"
     >
+      <Stars className="absolute bottom-12 left-6 md:left-14 w-10 md:w-14 animate-float-slow-reverse" />
       <div className="max-w-[1400px] mx-auto px-8 md:px-16">
         <Reveal>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
@@ -59,6 +62,7 @@ export default function ValuesCulture() {
               <span className="section-pill mb-5">
                 <span className="section-pill-dot" />
                 Nilai & Budaya
+                <Plus className="w-3.5 h-3.5 shrink-0" color="#FC75A7" />
               </span>
               <h2 className="text-5xl md:text-8xl font-black tracking-tight uppercase leading-[0.9]">
                 Values
@@ -71,7 +75,7 @@ export default function ValuesCulture() {
                 keseharian pengurus Kabinet Sentra Nawasena.
               </p>
               <Link
-                href="/#about"
+                href="/tentang"
                 className="group inline-flex items-center gap-2 mt-4 text-[11px] font-bold uppercase tracking-widest text-[#FFA6C8] hover:text-white transition-colors"
               >
                 Selengkapnya tentang kabinet

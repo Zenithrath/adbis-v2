@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Sparkle } from "@/components/ui/Decorations";
 
 export interface FaqEntry {
   question: string;
@@ -55,8 +56,10 @@ const FAQHeader = ({ title, subtitle }: { title: string; subtitle: string }) => 
     <span className="mb-4 bg-gradient-to-r from-[#FF7AAC] to-[#FFA6C8] bg-clip-text text-sm font-bold uppercase tracking-[0.2em] text-transparent">
       {subtitle}
     </span>
-    <h2 className="mb-8 text-5xl md:text-7xl font-black uppercase tracking-tight">
+    <h2 className="mb-8 text-5xl md:text-7xl font-black uppercase tracking-tight flex items-center justify-center gap-4 md:gap-6">
+      <Sparkle className="w-7 h-7 md:w-10 md:h-10 shrink-0" color="#FC75A7" />
       {title}
+      <Sparkle className="w-7 h-7 md:w-10 md:h-10 shrink-0" color="#FFF4C6" />
     </h2>
     <span
       aria-hidden="true"
