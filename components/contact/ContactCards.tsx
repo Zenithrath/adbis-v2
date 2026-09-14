@@ -11,15 +11,15 @@ const contacts = [
     icon: Camera,
     href: "https://instagram.com/hmpsabisbrawijaya",
     bg: "bg-[#F9A8D4]",
-    text: "text-[#1e293b]",
+    text: "text-[#1A1B41]",
   },
   {
     label: "TikTok",
     value: "@hmpsabisub",
     icon: Send,
     href: "https://tiktok.com/@hmpsabisub",
-    bg: "bg-[#1e293b]",
-    text: "text-[#FFFBEB]",
+    bg: "bg-white/10",
+    text: "text-white",
   },
   {
     label: "Email Resmi HMPS",
@@ -27,7 +27,7 @@ const contacts = [
     icon: Mail,
     href: "mailto:sentranawasena@gmail.com",
     bg: "bg-[#BFDBFE]",
-    text: "text-[#1e293b]",
+    text: "text-[#1A1B41]",
     copyable: true,
   },
 ];
@@ -46,14 +46,14 @@ export default function ContactCards() {
   };
 
   return (
-    <section className="w-full bg-[#F9A8D4]/25 border-y border-[#1e293b]/10">
+    <section className="w-full border-b border-white/10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 py-20 md:py-24">
         <Reveal>
-          <div className="mb-12 border-b border-[#1e293b]/10 pb-6">
-            <span className="text-[10px] font-bold tracking-widest uppercase text-[#1e293b]/40 block mb-3">
+          <div className="mb-12 border-b border-white/10 pb-6">
+            <span className="text-[10px] font-bold tracking-widest uppercase text-white/40 block mb-3">
               • (02) KONTAK RESMI
             </span>
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none text-white">
               Sapaan Kami
             </h2>
           </div>
@@ -70,8 +70,8 @@ export default function ContactCards() {
                 aria-label="Salin alamat email"
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-[9px] font-bold uppercase tracking-widest transition-all cursor-pointer ${
                   copied
-                    ? "bg-[#1e293b] border-[#1e293b] text-[#FFFBEB]"
-                    : "border-[#1e293b]/25 text-[#1e293b]/60 hover:bg-[#1e293b] hover:text-[#FFFBEB] hover:border-[#1e293b]"
+                    ? "bg-[#F472B6] border-[#F472B6] text-[#1A1B41]"
+                    : "border-white/25 text-white/60 hover:bg-white hover:text-[#1A1B41] hover:border-white"
                 }`}
               >
                 {copied ? (
@@ -83,7 +83,7 @@ export default function ContactCards() {
                 )}
               </button>
             ) : (
-              <span className="w-8 h-8 rounded-full border border-[#1e293b]/20 flex items-center justify-center text-[#1e293b]/40 transition-all duration-300 group-hover:bg-[#1e293b] group-hover:border-[#1e293b] group-hover:text-[#FFFBEB]">
+              <span className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/40 transition-all duration-300 group-hover:bg-white group-hover:border-white group-hover:text-[#1A1B41]">
                 <ExternalLink className="w-3.5 h-3.5" />
               </span>
             );
@@ -98,17 +98,17 @@ export default function ContactCards() {
                   </span>
                   {corner}
                 </div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#1e293b]/40 mb-1.5">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1.5">
                   {c.label}
                 </p>
-                <p className="text-lg md:text-xl font-black tracking-tight break-all">
+                <p className="text-lg md:text-xl font-black tracking-tight text-white break-all">
                   {c.value}
                 </p>
               </>
             );
 
             const cardClass =
-              "group block bg-white border border-[#1e293b]/10 rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_-20px_rgba(30,41,59,0.35)]";
+              "group block bg-white/[0.04] border border-white/10 rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.6)]";
 
             return (
               <Reveal key={c.label} delay={i * 0.08}>

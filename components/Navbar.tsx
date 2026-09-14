@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Menu } from "lucide-react";
 import Image from "next/image";
@@ -18,81 +18,21 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { id: "home", label: "Home", href: "/" },
-  { id: "prokerja", label: "Program Kerja", href: "/#prokerja" },
+  { id: "people", label: "Struktur", href: "/people" },
   { id: "hub", label: "Hub", href: "/hub" },
-  { id: "faq", label: "FAQ", href: "/#faq" },
   { id: "contact", label: "Kontak", href: "/contact" },
 ];
 
 const CTA = NAV_ITEMS[NAV_ITEMS.length - 1];
-const HOME_SECTION_IDS = ["home", "prokerja", "faq"];
-
-const HYSTERESIS = 48;
-
-function useActiveSection(ids: string[]): string {
-  const [active, setActive] = useState<string>(ids[0] ?? "home");
-  const idxRef = useRef(0);
-
-  useEffect(() => {
-    if (ids.length === 0) return;
-    let raf = 0;
-    const update = () => {
-      const scrolled = window.scrollY + 96;
-      let idx = idxRef.current;
-      if (
-        window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 4
-      ) {
-        idx = ids.length - 1;
-      } else {
-        const tops = ids.map(
-          (id) =>
-            (document.getElementById(id)?.getBoundingClientRect().top ?? 0) +
-            window.scrollY
-        );
-        if (scrolled > tops[idx] + HYSTERESIS) {
-          while (idx + 1 < ids.length && scrolled > tops[idx + 1] + HYSTERESIS)
-            idx++;
-        } else if (scrolled < tops[idx] - HYSTERESIS) {
-          while (idx > 0 && scrolled < tops[idx] - HYSTERESIS) idx--;
-        }
-      }
-      if (idx !== idxRef.current) {
-        idxRef.current = idx;
-        setActive(ids[idx]);
-      }
-    };
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      cancelAnimationFrame(raf);
-    };
-  }, [ids]);
-
-  return active;
-}
 
 export default function Navbar() {
   const reduce = useSafeReducedMotion();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isHome = pathname === "/";
-  const spyActive = useActiveSection(isHome ? HOME_SECTION_IDS : []);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28 });
 
-  const isItemActive = (item: NavItem) => {
-    if (item.id === "contact") return pathname === "/contact";
-    if (!isHome) return pathname === item.href;
-    return spyActive === item.id;
-  };
+  const isItemActive = (item: NavItem) => pathname === item.href;
 
   return (
     <>
@@ -107,7 +47,7 @@ export default function Navbar() {
             className="group flex items-center gap-2.5"
           >
             <Image
-              src="/images/hmps-logo.png"
+              src="/images/hmps-logo.webp"
               alt="Logo HMPS"
               width={36}
               height={36}

@@ -1,28 +1,27 @@
 import type { Metadata } from "next";
-import { Anybody, Inter, Press_Start_2P } from "next/font/google";
+import { Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import "./editorial.css";
 
-const anybody = Anybody({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-anybody",
+  variable: "--font-poppins",
   display: "swap",
-  weight: ["800", "900"],
+  weight: ["200", "400", "700", "900"],
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+const angelina = localFont({
+  src: "../public/fonts/angelina.ttf",
+  variable: "--font-angelina",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
-const pressStart = Press_Start_2P({
-  subsets: ["latin"],
-  variable: "--font-pixel",
+const introRust = localFont({
+  src: "../public/fonts/intro-rust-base.otf",
+  variable: "--font-intro-rust",
   display: "swap",
-  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -39,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${anybody.variable} ${inter.variable} ${pressStart.variable}`}
+      className={`${poppins.variable} ${angelina.variable} ${introRust.variable}`}
     >
       <body className="font-body antialiased">
         <Navbar />

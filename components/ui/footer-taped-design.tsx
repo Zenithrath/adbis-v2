@@ -87,11 +87,6 @@ export function FooterTapedDesign({
                   </Link>
                 </li>
                 <li>
-                  <Link href="/career" className="hover:text-white transition-colors">
-                    • Karier Roadmap
-                  </Link>
-                </li>
-                <li>
                   <Link href="/people" className="hover:text-white transition-colors">
                     • Pengurus & Proker
                   </Link>

@@ -28,11 +28,11 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Event",
     links: [
-      { label: "Study Visit", href: "/career" },
-      { label: "Company Visit", href: "/career" },
-      { label: "Adbis Skill Camp", href: "/career" },
-      { label: "JABIZ", href: "/career" },
-      { label: "Adbis Sport Monthly", href: "/career" },
+      { label: "Study Visit", href: "/hub" },
+      { label: "Company Visit", href: "/hub" },
+      { label: "Adbis Skill Camp", href: "/hub" },
+      { label: "JABIZ", href: "/hub" },
+      { label: "Adbis Sport Monthly", href: "/hub" },
     ],
   },
   {
@@ -128,7 +128,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-4">
               <Image
-                src="/images/hmps-logo.png"
+                src="/images/hmps-logo.webp"
                 alt="Logo HMPS Administrasi Bisnis"
                 width={64}
                 height={64}

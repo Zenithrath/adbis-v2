@@ -21,14 +21,13 @@
   --color-white: #FFFFFF;
   --color-ink: #1A1B41;
 
-  --font-family-display: "Anybody", "Inter", sans-serif;
-  --font-family-body: "Inter", "Segoe UI", sans-serif;
-  --font-family-pixel: "Press Start 2P", cursive;
-  --font-family-accent: "Inter", "Segoe UI", sans-serif;
+  --font-family-display: "Intro Rust", "Poppins", sans-serif;
+  --font-family-body: "Poppins", "Segoe UI", sans-serif;
+  --font-family-accent: "Angelina", cursive;
 }
 
 :root {
-  --font-sans: "Inter", sans-serif;
+  --font-sans: "Poppins", sans-serif;
 }
 
 /* ── Base ────────────────────────────────────────────────── */
@@ -43,6 +42,7 @@
     color: #FFF2B2;
     overflow-x: clip;
     position: relative;
+    font-weight: 200;
   }
 
   /* clean vertical gradient */
@@ -75,19 +75,27 @@
 /* ── Typography utilities ────────────────────────────────── */
 @layer utilities {
   .font-anybody {
-    font-family: "Anybody", sans-serif;
+    font-family: "Intro Rust", "Poppins", sans-serif;
   }
 
-  .font-pixel {
-    font-family: "Press Start 2P", cursive;
+  .font-serif {
+    font-family: "Intro Rust", "Poppins", sans-serif;
+  }
+
+  .font-accent {
+    font-family: "Angelina", cursive;
+  }
+
+  .font-angelina {
+    font-family: "Angelina", cursive;
   }
 
   .font-body {
-    font-family: "Inter", sans-serif;
+    font-family: "Poppins", sans-serif;
   }
 
   .font-inter {
-    font-family: "Inter", sans-serif;
+    font-family: "Poppins", sans-serif;
   }
 }
 
@@ -427,7 +435,7 @@ html { scrollbar-width: none; }
   padding: 0.45em 0.45em 0.45em 1.1em;
   cursor: pointer;
   pointer-events: auto;
-  font-family: "Inter", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
   overflow: hidden;
   transition: background 0.3s, transform 0.2s, border-color 0.3s;
@@ -564,7 +572,7 @@ html { scrollbar-width: none; }
 .nav-link-text {
   position: relative;
   z-index: 1;
-  font-family: "Anybody", sans-serif;
+  font-family: "Intro Rust", "Poppins", sans-serif;
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 900;
   line-height: 1;

@@ -6,6 +6,7 @@ export interface Member {
   departmentName: string;
   major: string;
   image: string;
+  cutout?: string;
   bio: string;
   tasks: string[];
   isLeadership?: boolean;
@@ -122,7 +123,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "perhubungan",
       departmentName: "Departemen Perhubungan",
       major: "Administrasi Bisnis 2023",
-      image: "/images/PERHUBUNGAN/kadep-perhubungan.svg",
+      image: "/images/PERHUBUNGAN/kadep-perhubungan.webp",
       bio: "Memiliki kepakaran dalam public relations dan negosiasi eksternal untuk memperluas jangkauan kerja sama himpunan.",
       tasks: ["Manajerial program kerja eksternal", "Supervisi relasi stakeholder & korporasi"]
     },
@@ -133,7 +134,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "perhubungan",
       departmentName: "Departemen Perhubungan",
       major: "Administrasi Bisnis 2024",
-      image: "/images/PERHUBUNGAN/wakadep-perhubungan.svg",
+      image: "/images/PERHUBUNGAN/wakadep-perhubungan.webp",
       bio: "Fokus pada koordinasi teknis acara audiensi eksternal dan kolaborasi antar Lembaga Mahasiswa.",
       tasks: ["Eksekusi operasional kegiatan luar kampus", "Koordinator administrasi hubungan relasi"]
     },
@@ -145,7 +146,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "perhubungan",
         departmentName: "Departemen Perhubungan",
         major: "Administrasi Bisnis 2024",
-        image: "/images/PERHUBUNGAN/staff1.svg",
+        image: "/images/PERHUBUNGAN/staff1.webp",
         bio: "Penanggung jawab utama program kunjungan industri Company Visit.",
         tasks: ["Liaison Officer (LO) instansi eksternal", "Penyusunan proposal relasi"]
       },
@@ -156,7 +157,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "perhubungan",
         departmentName: "Departemen Perhubungan",
         major: "Administrasi Bisnis 2025",
-        image: "/images/PERHUBUNGAN/staff2.svg",
+        image: "/images/PERHUBUNGAN/staff2.webp",
         bio: "Aktif mengelola kanal podcast & talkshow komunikasi perhubungan.",
         tasks: ["Kreatif konten talkshow #AdTalks", "Humas lapangan"]
       },
@@ -167,7 +168,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "perhubungan",
         departmentName: "Departemen Perhubungan",
         major: "Administrasi Bisnis 2025",
-        image: "/images/PERHUBUNGAN/staff3.svg",
+        image: "/images/PERHUBUNGAN/staff3.webp",
         bio: "Staff Perhubungan",
         tasks: []
       },
@@ -178,7 +179,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "perhubungan",
         departmentName: "Departemen Perhubungan",
         major: "Administrasi Bisnis 2025",
-        image: "/images/PERHUBUNGAN/staff4.svg",
+        image: "/images/PERHUBUNGAN/staff4.webp",
         bio: "Staff Perhubungan",
         tasks: []
       },
@@ -189,7 +190,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "perhubungan",
         departmentName: "Departemen Perhubungan",
         major: "Administrasi Bisnis 2025",
-        image: "/images/PERHUBUNGAN/staff5.svg",
+        image: "/images/PERHUBUNGAN/staff5.webp",
         bio: "Staff Perhubungan",
         tasks: []
       },
@@ -200,7 +201,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "perhubungan",
         departmentName: "Departemen Perhubungan",
         major: "Administrasi Bisnis 2025",
-        image: "/images/PERHUBUNGAN/staff6.svg",
+        image: "/images/PERHUBUNGAN/staff6.webp",
         bio: "Staff Perhubungan",
         tasks: []
       }
@@ -268,7 +269,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "sosmas",
       departmentName: "Departemen Sosial dan Masyarakat",
       major: "Administrasi Bisnis 2023",
-      image: "/images/SOSMA/kadep-sosma.svg",
+      image: "/images/SOSMA/kadep-sosma.webp",
       bio: "Pelopor pengabdian berbasis keberlanjutan yang memadukan ilmu bisnis dengan pemberdayaan komunitas lokal.",
       tasks: ["Pengarah strategis program pengabdian", "Kemitraan dengan NGO & Yayasan Sosial"]
     },
@@ -279,7 +280,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "sosmas",
       departmentName: "Departemen Sosial dan Masyarakat",
       major: "Administrasi Bisnis 2024",
-      image: "/images/SOSMA/wakadep-sosma.svg",
+      image: "/images/SOSMA/wakadep-sosma.webp",
       bio: "Fokus pada penggalangan dana kreatif dan mobilisasi relawan mahasiswa.",
       tasks: ["Koordinator relawan aksi lapangan", "Manajemen alokasi dana donasi"]
     },
@@ -291,7 +292,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "sosmas",
         departmentName: "Departemen Sosial dan Masyarakat",
         major: "Administrasi Bisnis 2024",
-        image: "/images/SOSMA/staff1.svg",
+        image: "/images/SOSMA/staff1.webp",
         bio: "Pengelola agenda rutin Jumat Berkah dan santunan panti asuhan.",
         tasks: ["Penyiapan logistik bakti sosial", "Dokumentasi keharmonisan masyarakat"]
       },
@@ -302,7 +303,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "sosmas",
         departmentName: "Departemen Sosial dan Masyarakat",
         major: "Administrasi Bisnis 2024",
-        image: "/images/SOSMA/staff2.svg",
+        image: "/images/SOSMA/staff2.webp",
         bio: "Staff Sosmas",
         tasks: []
       },
@@ -313,7 +314,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "sosmas",
         departmentName: "Departemen Sosial dan Masyarakat",
         major: "Administrasi Bisnis 2024",
-        image: "/images/SOSMA/staff3.svg",
+        image: "/images/SOSMA/staff3.webp",
         bio: "Staff Sosmas",
         tasks: []
       },
@@ -324,7 +325,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "sosmas",
         departmentName: "Departemen Sosial dan Masyarakat",
         major: "Administrasi Bisnis 2024",
-        image: "/images/SOSMA/staff4.svg",
+        image: "/images/SOSMA/staff4.webp",
         bio: "Staff Sosmas",
         tasks: []
       },
@@ -335,7 +336,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "sosmas",
         departmentName: "Departemen Sosial dan Masyarakat",
         major: "Administrasi Bisnis 2024",
-        image: "/images/SOSMA/staff5.svg",
+        image: "/images/SOSMA/staff5.webp",
         bio: "Staff Sosmas",
         tasks: []
       },
@@ -346,7 +347,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "sosmas",
         departmentName: "Departemen Sosial dan Masyarakat",
         major: "Administrasi Bisnis 2024",
-        image: "/images/SOSMA/staff6.svg",
+        image: "/images/SOSMA/staff6.webp",
         bio: "Staff Sosmas",
         tasks: []
       }
@@ -414,7 +415,8 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "adkesma",
       departmentName: "Departemen Advokasi & Kesejahteraan Mahasiswa",
       major: "Administrasi Bisnis 2023",
-      image: "/images/ADVOKESMA/kadep_advo.svg",
+      image: "/images/ADVOKESMA/kadep_advo.webp",
+      cutout: "/images/ADVOKESMA/kadep_advo_cutout.webp",
       bio: "Fokus pada pendampingan hak akademik dan perumusan advokasi kebijakan finansial mahasiswa.",
       tasks: ["Audiensi resmi dengan pimpinan fakultas", "Pengawasan helpdesk advokasi"]
     },
@@ -425,7 +427,8 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "adkesma",
       departmentName: "Departemen Advokasi & Kesejahteraan Mahasiswa",
       major: "Administrasi Bisnis 2024",
-      image: "/images/ADVOKESMA/wakadep_advo.svg",
+      image: "/images/ADVOKESMA/wakadep_advo.webp",
+      cutout: "/images/ADVOKESMA/wakadep_advo_cutout.webp",
       bio: "Pengelola program penyambutan mahasiswa baru dan pendataan keringanan UKT.",
       tasks: ["Manajemen data banding UKT", "Koordinator acara AFREGA"]
     },
@@ -437,7 +440,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "adkesma",
         departmentName: "Departemen Advokasi & Kesejahteraan Mahasiswa",
         major: "Administrasi Bisnis 2024",
-        image: "/images/ADVOKESMA/staff-1.svg",
+        image: "/images/ADVOKESMA/staff-1.webp",
         bio: "Operator helpdesk online Adcare dan penyusun infografis ABDATE.",
         tasks: ["Respon cepat aduan mahasiswa", "Publikasi info beasiswa"]
       },
@@ -448,7 +451,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "adkesma",
         departmentName: "Departemen Advokasi & Kesejahteraan Mahasiswa",
         major: "Administrasi Bisnis 2024",
-        image: "/images/ADVOKESMA/staff-2.svg",
+        image: "/images/ADVOKESMA/staff-2.webp",
         bio: "Staff Adkesma",
         tasks: []
       },
@@ -459,7 +462,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "adkesma",
         departmentName: "Departemen Advokasi & Kesejahteraan Mahasiswa",
         major: "Administrasi Bisnis 2024",
-        image: "/images/ADVOKESMA/staff-3.svg",
+        image: "/images/ADVOKESMA/staff-3.webp",
         bio: "Staff Adkesma",
         tasks: []
       },
@@ -470,7 +473,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "adkesma",
         departmentName: "Departemen Advokasi & Kesejahteraan Mahasiswa",
         major: "Administrasi Bisnis 2024",
-        image: "/images/ADVOKESMA/staff-4.svg",
+        image: "/images/ADVOKESMA/staff-4.webp",
         bio: "Staff Adkesma",
         tasks: []
       },
@@ -481,7 +484,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "adkesma",
         departmentName: "Departemen Advokasi & Kesejahteraan Mahasiswa",
         major: "Administrasi Bisnis 2024",
-        image: "/images/ADVOKESMA/staff-5.svg",
+        image: "/images/ADVOKESMA/staff-5.webp",
         bio: "Staff Adkesma",
         tasks: []
       }
@@ -557,7 +560,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "bumh",
       departmentName: "DEPARTEMEN BUMH",
       major: "Administrasi Bisnis 2023",
-      image: "/images/BUMH/kadep-bumh.svg",
+      image: "/images/BUMH/kadep-bumh.webp",
       bio: "Entrepreneur muda dengan spesialisasi pengembangan produk dan strategi penetrasi pasar.",
       tasks: ["Pengelolaan bisnis komersial BUMH", "Kemitraan vendor & supplier"]
     },
@@ -568,7 +571,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "bumh",
       departmentName: "DEPARTEMEN BUMH",
       major: "Administrasi Bisnis 2024",
-      image: "/images/BUMH/wakadep-bumh.svg",
+      image: "/images/BUMH/wakadep-bumh.webp",
       bio: "Ahli manajemen persediaan barang, pengawasan PDH, serta keuangan tenant expo.",
       tasks: ["Operasional penjualan merchandise", "Supervisi kepanitiaan Market Day"]
     },
@@ -580,7 +583,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "bumh",
         departmentName: "DEPARTEMEN BUMH",
         major: "Administrasi Bisnis 2024",
-        image: "/images/BUMH/staff1.svg",
+        image: "/images/BUMH/staff1.webp",
         bio: "Pengelola toko online resmi dan administrasi pemesanan PDH Himpunan.",
         tasks: ["Quality control produk", "Promosi catalog marketplace"]
       },
@@ -591,7 +594,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "bumh",
         departmentName: "DEPARTEMEN BUMH",
         major: "Administrasi Bisnis 2024",
-        image: "/images/BUMH/staff2.svg",
+        image: "/images/BUMH/staff2.webp",
         bio: "Staff BUMH",
         tasks: []
       },
@@ -602,7 +605,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "bumh",
         departmentName: "DEPARTEMEN BUMH",
         major: "Administrasi Bisnis 2024",
-        image: "/images/BUMH/staff3.svg",
+        image: "/images/BUMH/staff3.webp",
         bio: "Staff BUMH",
         tasks: []
       },
@@ -613,7 +616,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "bumh",
         departmentName: "DEPARTEMEN BUMH",
         major: "Administrasi Bisnis 2024",
-        image: "/images/BUMH/staff4.svg",
+        image: "/images/BUMH/staff4.webp",
         bio: "Staff BUMH",
         tasks: []
       },
@@ -624,7 +627,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "bumh",
         departmentName: "DEPARTEMEN BUMH",
         major: "Administrasi Bisnis 2024",
-        image: "/images/BUMH/staff5.svg",
+        image: "/images/BUMH/staff5.webp",
         bio: "Staff BUMH",
         tasks: []
       }
@@ -684,7 +687,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "mikad",
       departmentName: "DEPARTEMEN MINAT & BAKAT",
       major: "Administrasi Bisnis 2023",
-      image: "/images/MINBAK/kadep-minbak.svg",
+      image: "/images/MINBAK/kadep-minbak.webp",
       bio: "Pegiat olahraga dan seni pertunjukan yang fokus membina atlet serta seniman kontingen jurusan.",
       tasks: ["Manajerial kontingen perlombaan", "Penyelenggara turnamen ASC"]
     },
@@ -695,7 +698,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "mikad",
       departmentName: "DEPARTEMEN MINAT & BAKAT",
       major: "Administrasi Bisnis 2024",
-      image: "/images/MINBAK/wakadep-minbak.svg",
+      image: "/images/MINBAK/wakadep-minbak.webp",
       bio: "Koreografer dan konseptor kreatif panggung karya seni Sencrea.",
       tasks: ["Pengarahan teknis pertunjukan seni", "Latihan rutin cabang olahraga"]
     },
@@ -707,7 +710,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "mikad",
         departmentName: "DEPARTEMEN MINAT & BAKAT",
         major: "Administrasi Bisnis 2024",
-        image: "/images/MINBAK/staff1.svg",
+        image: "/images/MINBAK/staff1.webp",
         bio: "Koordinator divisi pertandingan futsal dan e-sports ASC.",
         tasks: ["Wasit & penanggung jawab lapangan", "Manajemen perlengkapan"]
       },
@@ -718,7 +721,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "mikad",
         departmentName: "DEPARTEMEN MINAT & BAKAT",
         major: "Administrasi Bisnis 2024",
-        image: "/images/MINBAK/staff2.svg",
+        image: "/images/MINBAK/staff2.webp",
         bio: "Staff Minbak",
         tasks: []
       },
@@ -729,7 +732,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "mikad",
         departmentName: "DEPARTEMEN MINAT & BAKAT",
         major: "Administrasi Bisnis 2024",
-        image: "/images/MINBAK/staff3.svg",
+        image: "/images/MINBAK/staff3.webp",
         bio: "Staff Minbak",
         tasks: []
       },
@@ -740,7 +743,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "mikad",
         departmentName: "DEPARTEMEN MINAT & BAKAT",
         major: "Administrasi Bisnis 2024",
-        image: "/images/MINBAK/staff4.svg",
+        image: "/images/MINBAK/staff4.webp",
         bio: "Staff Minbak",
         tasks: []
       },
@@ -751,7 +754,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "mikad",
         departmentName: "DEPARTEMEN MINAT & BAKAT",
         major: "Administrasi Bisnis 2024",
-        image: "/images/MINBAK/staff5.svg",
+        image: "/images/MINBAK/staff5.webp",
         bio: "Staff Minbak",
         tasks: []
       },
@@ -762,7 +765,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "mikad",
         departmentName: "DEPARTEMEN MINAT & BAKAT",
         major: "Administrasi Bisnis 2024",
-        image: "/images/MINBAK/staff6.svg",
+        image: "/images/MINBAK/staff6.webp",
         bio: "Staff Minbak",
         tasks: []
       },
@@ -773,7 +776,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "mikad",
         departmentName: "DEPARTEMEN MINAT & BAKAT",
         major: "Administrasi Bisnis 2024",
-        image: "/images/MINBAK/staff7.svg",
+        image: "/images/MINBAK/staff7.webp",
         bio: "Staff Minbak",
         tasks: []
       }
@@ -817,7 +820,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "psdm",
       departmentName: "DEPARTEMEN PSDM",
       major: "Administrasi Bisnis 2023",
-      image: "/images/PSDM/kadep-psdm.svg",
+      image: "/images/PSDM/kadep-psdm.webp",
       bio: "Fasilitator pengembangan karakter kepemimpinan muda berwawasan global.",
       tasks: ["Desain kurikulum kaderisasi himpunan", "Evaluasi indeks performa pengurus"]
     },
@@ -828,7 +831,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "psdm",
       departmentName: "DEPARTEMEN PSDM",
       major: "Administrasi Bisnis 2023",
-      image: "/images/PSDM/wakadep-psdm.svg",
+      image: "/images/PSDM/wakadep-psdm.webp",
       bio: "Fokus pada harmonisasi kesehatan mental organisasi dan bonding antar departemen.",
       tasks: ["Internal bonding & malam keakraban", "Supervisi program Kelas Intensif"]
     },
@@ -840,7 +843,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "psdm",
         departmentName: "DEPARTEMEN PSDM",
         major: "Administrasi Bisnis 2024",
-        image: "/images/PSDM/staff1.svg",
+        image: "/images/PSDM/staff1.webp",
         bio: "Moderatir kelas workshop dan penanggung jawab absensi kaderisasi.",
         tasks: ["Manajemen pemateri bootcamp", "Evaluasi feedback peserta"]
       },
@@ -851,7 +854,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "psdm",
         departmentName: "DEPARTEMEN PSDM",
         major: "Administrasi Bisnis 2024",
-        image: "/images/PSDM/staff2.svg",
+        image: "/images/PSDM/staff2.webp",
         bio: "Staff PSDM",
         tasks: []
       },
@@ -862,7 +865,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "psdm",
         departmentName: "DEPARTEMEN PSDM",
         major: "Administrasi Bisnis 2024",
-        image: "/images/PSDM/staff3.svg",
+        image: "/images/PSDM/staff3.webp",
         bio: "Staff PSDM",
         tasks: []
       },
@@ -873,7 +876,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "psdm",
         departmentName: "DEPARTEMEN PSDM",
         major: "Administrasi Bisnis 2024",
-        image: "/images/PSDM/staff4.svg",
+        image: "/images/PSDM/staff4.webp",
         bio: "Staff PSDM",
         tasks: []
       },
@@ -884,7 +887,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "psdm",
         departmentName: "DEPARTEMEN PSDM",
         major: "Administrasi Bisnis 2024",
-        image: "/images/PSDM/staff5.svg",
+        image: "/images/PSDM/staff5.webp",
         bio: "Staff PSDM",
         tasks: []
       },
@@ -895,7 +898,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "psdm",
         departmentName: "DEPARTEMEN PSDM",
         major: "Administrasi Bisnis 2024",
-        image: "/images/PSDM/staff6.svg",
+        image: "/images/PSDM/staff6.webp",
         bio: "Staff PSDM",
         tasks: []
       },
@@ -906,7 +909,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "psdm",
         departmentName: "DEPARTEMEN PSDM",
         major: "Administrasi Bisnis 2024",
-        image: "/images/PSDM/staff7.svg",
+        image: "/images/PSDM/staff7.webp",
         bio: "Staff PSDM",
         tasks: []
       }
@@ -966,7 +969,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "medinfo",
       departmentName: "DEPARTEMEN MEDIA & INFORMASI",
       major: "Administrasi Bisnis 2024",
-      image: "/images/MEDINFO/kadep-medinfo.svg",
+      image: "/images/MEDINFO/kadep-medinfo.webp",
       bio: "Creative Director yang berdedikasi menjaga konsistensi branding visual Y2K dan identitasHMPS Adbis.",
       tasks: ["Pengarah konsep estetika visual website & sosmed", "Supervisi redaksi tim media"]
     },
@@ -977,7 +980,7 @@ export const DEPARTMENTS: Department[] = [
       departmentId: "medinfo",
       departmentName: "DEPARTEMEN MEDIA & INFORMASI",
       major: "Administrasi Bisnis 2024",
-      image: "/images/MEDINFO/wakadep-medinfo.svg",
+      image: "/images/MEDINFO/wakadep-medinfo.webp",
       bio: "Pakar strategi konten digital dan jadwal posting terpadu kanal informasi.",
       tasks: ["Content planner & copywriting", "Koordinator Media Partnership"]
     },
@@ -989,7 +992,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "medinfo",
         departmentName: "DEPARTEMEN MEDIA & INFORMASI",
         major: "Administrasi Bisnis 2025",
-        image: "/images/MEDINFO/staff1.svg",
+        image: "/images/MEDINFO/staff1.webp",
         bio: "Fotografer & videografer utama seluruh rangkaian kegiatan himpunan.",
         tasks: ["Liputan dokumentasi lapangan", "Editing reel & video pendek"]
       },
@@ -1000,7 +1003,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "medinfo",
         departmentName: "DEPARTEMEN MEDIA & INFORMASI",
         major: "Administrasi Bisnis 2025",
-        image: "/images/MEDINFO/staff2.svg",
+        image: "/images/MEDINFO/staff2.webp",
         bio: "Staff Medinfo",
         tasks: []
       },
@@ -1011,7 +1014,7 @@ export const DEPARTMENTS: Department[] = [
         departmentId: "medinfo",
         departmentName: "DEPARTEMEN MEDIA & INFORMASI",
         major: "Administrasi Bisnis 2025",
-        image: "/images/MEDINFO/staff3.svg",
+        image: "/images/MEDINFO/staff3.webp",
         bio: "Staff Medinfo",
         tasks: []
       }

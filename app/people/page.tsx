@@ -1,16 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { type Member } from "@/data/organization";
+import { DEPARTMENTS, type Member } from "@/data/organization";
 import PeopleHero from "@/components/people/PeopleHero";
-import PeopleMarquee from "@/components/people/PeopleMarquee";
-import StructureSection from "@/components/people/StructureSection";
+import DeptAbout from "@/components/people/DeptAbout";
 import DeptDetail from "@/components/people/DeptDetail";
+import BpiSpotlight from "@/components/people/BpiSpotlight";
+import ProkerShowcase from "@/components/people/ProkerShowcase";
 import MemberModal from "@/components/people/MemberModal";
 import { FooterTapedDesign } from "@/components/ui/footer-taped-design";
 
 export default function PeoplePage() {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
+  const [activeDeptId, setActiveDeptId] = useState(DEPARTMENTS[0].id);
+
+  const activeDept =
+    DEPARTMENTS.find((d) => d.id === activeDeptId) || DEPARTMENTS[0];
 
   useEffect(() => {
     document.body.style.overflow = selectedMember ? "hidden" : "";
@@ -55,10 +60,11 @@ export default function PeoplePage() {
       </div>
 
       <main className="relative z-10 w-full text-[#1e293b] overflow-x-clip">
-        <PeopleHero />
-        <PeopleMarquee />
-        <StructureSection onSelectMember={setSelectedMember} />
-        <DeptDetail onSelectMember={setSelectedMember} />
+        <PeopleHero activeDeptId={activeDeptId} onSelectDept={setActiveDeptId} />
+        <DeptAbout dept={activeDept} />
+        <DeptDetail dept={activeDept} onSelectMember={setSelectedMember} />
+        <BpiSpotlight onSelectMember={setSelectedMember} />
+        <ProkerShowcase key={activeDept.id} dept={activeDept} />
         <MemberModal
           member={selectedMember}
           onClose={() => setSelectedMember(null)}

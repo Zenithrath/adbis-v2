@@ -87,8 +87,8 @@ export default function Culture() {
                 Struktur & Proker
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link href="/career" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all">
-                Roadmap Karier
+              <Link href="/hub" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all">
+                Adbis Hub
               </Link>
             </div>
           </div>
