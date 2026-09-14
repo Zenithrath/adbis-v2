@@ -93,21 +93,21 @@ export default function ValuesCulture() {
           {VALUES.map((v, i) => {
             return (
               <Reveal key={v.title} delay={(i % 5) * 0.07} y={20}>
-                <div className="group bg-white/[0.04] backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/[0.08] hover:border-white/20">
+                <div className="group bg-white/[0.07] backdrop-blur-sm border border-white/15 rounded-2xl p-6 flex flex-col h-full transition-all duration-300 [@media(hover:hover)]:hover:-translate-y-1.5 [@media(hover:hover)]:hover:bg-white/[0.1] [@media(hover:hover)]:hover:border-white/25">
                   <span
-                    className="text-4xl font-black tabular-nums leading-none mb-6 transition-colors"
-                    style={{ color: `${v.color}55` }}
+                    className="text-4xl font-black tabular-nums leading-none mb-6"
+                    style={{ color: v.color }}
                   >
                     {v.no}
                   </span>
                   <h3 className="text-lg font-black uppercase tracking-tight leading-none mb-2">
                     {v.title}
                   </h3>
-                  <p className="text-xs leading-relaxed text-white/50 mt-auto">
+                  <p className="text-xs leading-relaxed text-white/70 mt-auto">
                     {v.desc}
                   </p>
                   <span
-                    className="mt-5 h-0.5 w-8 rounded-full transition-all duration-300 group-hover:w-full"
+                    className="mt-5 h-0.5 w-8 rounded-full transition-all duration-300 [@media(hover:hover)]:group-hover:w-full"
                     style={{ backgroundColor: v.color }}
                   />
                 </div>
@@ -131,14 +131,14 @@ export default function ValuesCulture() {
             return (
               <Reveal key={c.title} delay={Math.min(i * 0.05, 0.2)} y={16}>
                 <div className="flex items-center gap-5 md:gap-8 py-5 md:py-6 border-b border-white/10">
-                  <span className="font-mono text-xs font-bold tabular-nums text-white/25">
+                  <span className="font-mono text-xs font-bold tabular-nums text-white/45">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="flex-1 min-w-0">
                     <h4 className="font-extrabold uppercase tracking-tight text-sm md:text-lg leading-tight">
                       {c.title}
                     </h4>
-                    <p className="text-xs md:text-sm text-white/50 mt-1">{c.desc}</p>
+                    <p className="text-xs md:text-sm text-white/65 mt-1">{c.desc}</p>
                   </div>
                 </div>
               </Reveal>

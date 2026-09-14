@@ -75,7 +75,7 @@ export default function DeptDetail({
                   key={staff.id}
                   type="button"
                   onClick={() => onSelectMember(staff)}
-                  className="group relative text-left bg-white border-2 border-[#1e293b]/10 rounded-2xl overflow-hidden transition-all duration-300 hover:border-[#1e293b] hover:shadow-[4px_4px_0px_#1e293b] hover:-translate-y-1 cursor-pointer"
+                  className="group relative text-left bg-white border-2 border-[#1e293b]/10 rounded-2xl overflow-hidden transition-all duration-300 [@media(hover:hover)]:hover:border-[#1e293b] [@media(hover:hover)]:hover:shadow-[4px_4px_0px_#1e293b] [@media(hover:hover)]:hover:-translate-y-1 cursor-pointer"
                 >
                   <div className="w-full relative bg-[#f1f5f9]">
                     <img

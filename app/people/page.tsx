@@ -49,11 +49,11 @@ export default function PeoplePage() {
           style={{ width: 850, height: 850, top: "30%", right: "-18%" }}
         />
         <div
-          className="orb orb-blue animate-orb-left"
+          className="orb orb-blue animate-orb-left hidden md:block"
           style={{ width: 800, height: 800, top: "60%", left: "-12%", animationDelay: "2s" }}
         />
         <div
-          className="orb orb-purple animate-orb-right"
+          className="orb orb-purple animate-orb-right hidden md:block"
           style={{ width: 750, height: 750, top: "85%", right: "-15%", animationDelay: "3s" }}
         />
       </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Component as ConnoisseurStack } from "@/components/ui/connoisseur-stack-interactor";
 import ProkerBentoGrid from "@/components/ui/bento";
@@ -39,6 +40,16 @@ const BENTO_ITEMS = [
 
 export default function ProgramKerja() {
   const router = useRouter();
+  // Stack GSAP desktop berat (pin + SVG 220vh) — jangan mount di HP/tablet
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   return (
     <section className="w-full scroll-mt-[60px] text-[#FFFBEB] pt-20 border-t border-white/10" id="prokerja">
@@ -48,23 +59,27 @@ export default function ProgramKerja() {
         </h2>
       </Reveal>
 
-      {/* Desktop: pinned GSAP stack */}
-      <div className="hidden lg:block">
-        <ConnoisseurStack />
-      </div>
+      {/* Desktop: pinned GSAP stack (tidak di-mount di HP) */}
+      {isDesktop && (
+        <div className="hidden lg:block">
+          <ConnoisseurStack />
+        </div>
+      )}
 
       {/* Mobile/Tablet: bento grid responsif */}
-      <div className="lg:hidden max-w-[1400px] mx-auto px-5 md:px-16 pb-20">
-        <Reveal>
-          <ProkerBentoGrid items={BENTO_ITEMS} />
-        </Reveal>
-        <Reveal delay={0.1} className="mt-8 flex justify-center">
-          <InteractiveHoverButton
-            text="Struktur & Proker"
-            onClick={() => router.push("/people")}
-          />
-        </Reveal>
-      </div>
+      {!isDesktop && (
+        <div className="lg:hidden max-w-[1400px] mx-auto px-5 md:px-16 pb-20">
+          <Reveal>
+            <ProkerBentoGrid items={BENTO_ITEMS} />
+          </Reveal>
+          <Reveal delay={0.1} className="mt-8 flex justify-center">
+            <InteractiveHoverButton
+              text="Struktur & Proker"
+              onClick={() => router.push("/people")}
+            />
+          </Reveal>
+        </div>
+      )}
     </section>
   );
 }

@@ -32,8 +32,8 @@ export default function About() {
             </div>
           </Reveal>
           <Reveal className="md:col-span-6" delay={0.1}>
-            <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl p-6 md:p-8 space-y-6">
-              <p className="text-xs text-white/70 leading-relaxed">
+            <div className="bg-white/[0.07] backdrop-blur-xl border border-white/15 rounded-2xl p-6 md:p-8 space-y-6">
+              <p className="text-xs text-white/85 leading-relaxed">
                 <strong className="text-white">
                   &ldquo;Sentra Nawasena&rdquo;
                 </strong>{" "}
@@ -77,7 +77,7 @@ export default function About() {
         {/* Misi — kartu masing-masing dengan hover */}
         <div className="mt-12 md:mt-16">
           <Reveal>
-            <span className="text-[10px] font-bold tracking-widest uppercase text-white/40 block mb-3">
+            <span className="text-[10px] font-bold tracking-widest uppercase text-white/60 block mb-3">
               • Misi Kabinet
             </span>
             <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight text-white mb-8">
@@ -103,17 +103,17 @@ export default function About() {
               },
             ].map((m, i) => (
               <Reveal key={m.no} delay={i * 0.08} y={20} className="h-full">
-                <div className="group h-full rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-7 md:p-8 flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-[#FF7AAC]/60 hover:bg-white/[0.07] hover:shadow-[0_20px_50px_-20px_rgba(244,114,182,0.45)] cursor-default">
-                  <span className="text-4xl md:text-5xl font-black leading-none text-white/15 transition-colors duration-300 group-hover:text-[#FF7AAC]">
+                <div className="group h-full rounded-2xl border border-white/15 bg-white/[0.07] backdrop-blur-sm p-7 md:p-8 flex flex-col transition-all duration-300 [@media(hover:hover)]:hover:-translate-y-2 [@media(hover:hover)]:hover:border-[#FF7AAC]/60 [@media(hover:hover)]:hover:bg-white/[0.1] [@media(hover:hover)]:hover:shadow-[0_20px_50px_-20px_rgba(244,114,182,0.45)] cursor-default">
+                  <span className="text-4xl md:text-5xl font-black leading-none text-white/25 transition-colors duration-300 [@media(hover:hover)]:group-hover:text-[#FF7AAC]">
                     {m.no}
                   </span>
                   <h4 className="font-black text-lg md:text-xl uppercase tracking-tight text-white mt-5 mb-3">
                     {m.title}
                   </h4>
-                  <p className="text-sm text-white/60 leading-relaxed">
+                  <p className="text-sm text-white/75 leading-relaxed">
                     {m.desc}
                   </p>
-                  <span className="mt-auto pt-6 block h-1 w-10 rounded-full bg-white/15 transition-all duration-300 group-hover:w-full group-hover:bg-[#FF7AAC]" />
+                  <span className="mt-auto pt-6 block h-1 w-10 rounded-full bg-white/25 transition-all duration-300 [@media(hover:hover)]:group-hover:w-full [@media(hover:hover)]:group-hover:bg-[#FF7AAC]" />
                 </div>
               </Reveal>
             ))}

@@ -161,6 +161,13 @@
   pointer-events: none;
   will-change: transform, opacity;
 }
+/* HP: blur lebih ringan + animasi orb dimatikan agar tidak berat */
+@media (max-width: 768px) {
+  .orb {
+    filter: blur(24px);
+    animation: none;
+  }
+}
 .orb-blue {
   background: radial-gradient(circle at 30% 30%, rgba(100,80,230,0.9) 0%, rgba(80,65,210,0.45) 45%, transparent 70%);
 }
