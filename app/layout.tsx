@@ -54,6 +54,9 @@ export const metadata: Metadata = {
     apple: "/apple-icon.png",
   },
   themeColor: "#1A1B41",
+  verification: {
+    google: "X9Kn49BwWFDzL8hF7DVlors5Q6w6sGr79jUZCBUsSLY",
+  },
   openGraph: {
     type: "website",
     locale: "id_ID",
