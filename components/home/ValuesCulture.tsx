@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import Stars from "@/components/ui/Stars";
-import { Plus } from "@/components/ui/Decorations";
+import { Plus, Sparkle, DotGrid } from "@/components/ui/Decorations";
 
 const VALUES = [
   {
@@ -55,7 +55,8 @@ export default function ValuesCulture() {
       id="values"
     >
       <Stars className="absolute bottom-12 left-6 md:left-14 w-10 md:w-14 animate-float-slow-reverse" />
-      <div className="max-w-[1400px] mx-auto px-8 md:px-16">
+      <DotGrid rows={4} cols={6} className="absolute top-10 right-4 md:right-10 w-24 md:w-32 opacity-30 animate-float-slow" color="#FFF4C6" />
+      <div className="max-w-[1400px] mx-auto px-5 md:px-16">
         <Reveal>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
             <div>
@@ -66,7 +67,9 @@ export default function ValuesCulture() {
               </span>
               <h2 className="text-5xl md:text-8xl font-black tracking-tight uppercase leading-[0.9]">
                 Values
-                <br />& Culture
+                <br />
+                & Culture
+                <Sparkle className="inline-block w-6 h-6 md:w-9 md:h-9 ml-4 -mt-3 align-middle" color="#FC75A7" />
               </h2>
             </div>
             <div className="max-w-sm">

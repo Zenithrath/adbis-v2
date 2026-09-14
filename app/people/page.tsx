@@ -5,7 +5,6 @@ import { DEPARTMENTS, type Member } from "@/data/organization";
 import PeopleHero from "@/components/people/PeopleHero";
 import DeptAbout from "@/components/people/DeptAbout";
 import DeptDetail from "@/components/people/DeptDetail";
-import BpiSpotlight from "@/components/people/BpiSpotlight";
 import ProkerShowcase from "@/components/people/ProkerShowcase";
 import MemberModal from "@/components/people/MemberModal";
 import { FooterTapedDesign } from "@/components/ui/footer-taped-design";
@@ -63,7 +62,6 @@ export default function PeoplePage() {
         <PeopleHero activeDeptId={activeDeptId} onSelectDept={setActiveDeptId} />
         <DeptAbout dept={activeDept} />
         <DeptDetail dept={activeDept} onSelectMember={setSelectedMember} />
-        <BpiSpotlight onSelectMember={setSelectedMember} />
         <ProkerShowcase key={activeDept.id} dept={activeDept} />
         <MemberModal
           member={selectedMember}

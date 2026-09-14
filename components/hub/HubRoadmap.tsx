@@ -137,7 +137,7 @@ export default function HubRoadmap() {
 
   return (
     <section id="roadmap" className="scroll-mt-[60px] w-full relative">
-      <div className="max-w-[1400px] mx-auto px-8 md:px-16 py-16 md:py-24 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-16 py-16 md:py-24 relative z-10">
         <Reveal>
           <div className="flex items-end justify-between gap-6 mb-16 md:mb-24">
             <div>

@@ -2,6 +2,7 @@
 
 import { FAQ, type FaqCategories, type FaqData } from "@/components/ui/faq-tabs";
 import { Reveal } from "@/components/ui/reveal";
+import { DotGrid } from "@/components/ui/Decorations";
 
 const categories: FaqCategories = {
   umum: "Umum",
@@ -84,9 +85,11 @@ const faqData: FaqData = {
 export default function Faq() {
   return (
     <section
-      className="cv-auto w-full scroll-mt-[60px] text-[#FFFBEB] py-20 md:py-28 border-t border-white/10"
+      className="cv-auto relative w-full scroll-mt-[60px] text-[#FFFBEB] py-20 md:py-28 border-t border-white/10 overflow-hidden"
       id="faq"
     >
+      <DotGrid className="absolute top-12 left-4 md:left-10 w-28 md:w-40 opacity-30 animate-float-slow-reverse" color="#FFF4C6" />
+      <DotGrid rows={4} cols={6} className="absolute bottom-12 right-4 md:right-10 w-24 md:w-32 opacity-30 animate-float-slow" color="#FC75A7" />
       <div className="max-w-[1400px] mx-auto px-4 md:px-16">
         <Reveal>
         <FAQ

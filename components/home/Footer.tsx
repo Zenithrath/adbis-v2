@@ -4,7 +4,7 @@ import { Mail, Music } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
-import { Sparkle } from "@/components/ui/Decorations";
+import { Sparkle, Diamond, DotGrid } from "@/components/ui/Decorations";
 
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -122,7 +122,8 @@ export default function Footer() {
         aria-hidden="true"
         className="pointer-events-none absolute -top-32 left-1/2 h-64 w-[720px] max-w-[120vw] -translate-x-1/2 rounded-full bg-[#FF7AAC]/10 blur-[100px]"
       />
-      <div className="relative max-w-[1400px] mx-auto px-8 md:px-16 pt-16 md:pt-20 pb-10">
+      <DotGrid rows={4} cols={6} className="absolute bottom-10 right-4 md:right-10 w-24 md:w-32 opacity-25 animate-float-slow" color="#FFF4C6" />
+      <div className="relative max-w-[1400px] mx-auto px-5 md:px-16 pt-16 md:pt-20 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           {/* Brand */}
           <Reveal className="lg:col-span-4">
@@ -140,8 +141,9 @@ export default function Footer() {
                   HMPS Adbis
                   <Sparkle className="w-5 h-5 md:w-6 md:h-6 shrink-0" color="#FC75A7" />
                 </p>
-                <p className="font-serif italic text-base md:text-lg text-[#FFA6C8] mt-1.5">
+                <p className="font-serif italic text-base md:text-lg text-[#FFA6C8] mt-1.5 flex items-center gap-2">
                   &ldquo;Merangkai Sinergi Wujudkan Aksi&rdquo;
+                  <Diamond className="w-3.5 h-3.5 shrink-0" color="#FFF4C6" />
                 </p>
               </div>
             </div>

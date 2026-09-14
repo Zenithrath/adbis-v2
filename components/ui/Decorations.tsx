@@ -116,4 +116,42 @@ function Plus({
   );
 }
 
-export { Sparkle, Diamond, Ring, Dots, Plus };
+/** DotGrid — pola polkadot (halftone) untuk backdrop sudut section */
+function DotGrid({
+  className,
+  color = "#FFF4C6",
+  rows = 5,
+  cols = 8,
+}: {
+  className?: string;
+  color?: string;
+  rows?: number;
+  cols?: number;
+}) {
+  const dots = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      dots.push(
+        <circle
+          key={`${r}-${c}`}
+          cx={8 + c * 14}
+          cy={8 + r * 14}
+          r="3.2"
+          fill={color}
+        />
+      );
+    }
+  }
+  return (
+    <svg
+      viewBox={`0 0 ${8 * 2 + (cols - 1) * 14} ${8 * 2 + (rows - 1) * 14}`}
+      fill="none"
+      className={cn("pointer-events-none select-none", className)}
+      aria-hidden="true"
+    >
+      {dots}
+    </svg>
+  );
+}
+
+export { Sparkle, Diamond, Ring, Dots, Plus, DotGrid };

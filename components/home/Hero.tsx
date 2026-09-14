@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Reveal } from "@/components/ui/reveal";
 import Stars from "@/components/ui/Stars";
-import { Sparkle } from "@/components/ui/Decorations";
+import { Sparkle, Plus, DotGrid } from "@/components/ui/Decorations";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { DEPARTMENTS, EXECUTIVE_BOARD } from "@/data/organization";
 
 const ROTATING: { solid: string; outline: string }[] = [
@@ -21,6 +21,7 @@ const totalMembers =
 const totalProker = DEPARTMENTS.reduce((acc, d) => acc + d.programs.length, 0);
 
 export default function Hero() {
+  const router = useRouter();
   const [phraseIdx, setPhraseIdx] = useState(0);
 
   useEffect(() => {
@@ -50,19 +51,23 @@ export default function Hero() {
           className="absolute -top-10 -right-16 md:-right-10 w-40 md:w-64 h-auto opacity-20 animate-float-slow pointer-events-none select-none"
         />
         <Stars className="absolute top-16 left-4 md:left-16 w-24 md:w-36 opacity-40 animate-float-slow-reverse" />
+        <DotGrid className="absolute bottom-8 left-4 md:left-12 w-28 md:w-40 opacity-30 animate-float-slow" color="#FFF4C6" />
         {/* Content */}
         <Reveal className="relative z-10 text-center max-w-4xl mx-auto" y={24}>
         <div className="space-y-5 md:space-y-7">
           <h1
             className="font-black uppercase leading-[1.1] tracking-tight select-none"
-            style={{ fontSize: "clamp(1.8rem, 4.5vw, 3.8rem)" }}
+            style={{ fontSize: "clamp(1.6rem, 4.5vw, 3.8rem)" }}
           >
             <span className="block text-[#FFFBEB]/90">
               Selamat Datang
               <Sparkle className="inline-block w-5 h-5 md:w-7 md:h-7 ml-3 -mt-3 align-middle" color="#FC75A7" />
             </span>
+            <span className="block text-[#FFFBEB]/90">
+              <Plus className="inline-block w-4 h-4 md:w-5 md:h-5 mr-3 -mt-1 align-middle" color="#FC75A7" />
+              Di
+            </span>
             <span className="block mt-2 min-h-[1.1em]">
-              <span className="text-[#FFFBEB]/90">Di </span>
               <MotionConfig reducedMotion="never">
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -102,19 +107,14 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 pt-1 md:pt-2">
-            <Link
-              href="/tentang"
-              className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-3.5 bg-[#FFF2B2] text-[#1A1B41] rounded-full font-black text-[11px] uppercase tracking-widest shadow-[0_8px_32px_rgba(255,242,178,0.25)] hover:bg-white hover:scale-[1.025] active:scale-[0.98] transition-all group"
-            >
-              Learn More
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-3.5 rounded-full border border-[#FFFBEB]/30 text-[#FFFBEB]/80 font-bold text-[11px] uppercase tracking-widest hover:border-[#FFF2B2]/60 hover:text-[#FFF2B2] transition-all"
-            >
-              Hubungi Kami!
-            </Link>
+            <InteractiveHoverButton
+              text="Learn More"
+              onClick={() => router.push("/tentang")}
+            />
+            <InteractiveHoverButton
+              text="Hubungi Kami!"
+              onClick={() => router.push("/contact")}
+            />
           </div>
 
           {/* Strip stat kabinet */}
@@ -152,12 +152,26 @@ export default function Hero() {
             <div aria-hidden="true" className="absolute -inset-16 rounded-[60px] bg-[#FF7AAC]/15 blur-[100px] pointer-events-none" />
 
             <div className="relative rounded-[20px] md:rounded-[28px] overflow-hidden h-[34svh] sm:h-[55vh] md:h-[60vh]">
-              {/* Logos bar */}
+              {/* Logos bar — logo asli HMPS + Sentra, teks UB & Vokasi */}
               <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-center pt-3 md:pt-5">
                 <div className="flex items-center gap-2 md:gap-3 px-4 md:px-5 py-1.5 md:py-2 rounded-full bg-[#1e293b]/50 backdrop-blur-md border border-white/10">
-                  {["UB", "FIA", "ADBIS", "✦"].map((logo, i) => (
-                    <span key={i} className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white/10 flex items-center justify-center text-[8px] font-black text-white/70">
-                      {logo}
+                  {["UB", "VOKASI"].map((label) => (
+                    <span key={label} className="h-7 md:h-8 px-2.5 rounded-full bg-white/10 flex items-center justify-center text-[8px] font-black tracking-wider text-white/70">
+                      {label}
+                    </span>
+                  ))}
+                  {[
+                    { src: "/images/hmps-logo.webp", alt: "Logo HMPS Adbis" },
+                    { src: "/images/sentra-logo.webp", alt: "Logo Sentra Nawasena" },
+                  ].map((logo) => (
+                    <span key={logo.src} className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
+                      <Image
+                        src={logo.src}
+                        alt={logo.alt}
+                        width={32}
+                        height={32}
+                        className="w-5 h-5 md:w-6 md:h-6 object-contain"
+                      />
                     </span>
                   ))}
                 </div>
@@ -179,7 +193,7 @@ export default function Hero() {
               <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center pb-4 md:pb-8">
                 <div className="flex items-center gap-3 md:gap-4 mb-1.5 md:mb-2">
                   <span className="h-px w-8 md:w-12 bg-[#FFFBEB]/30" />
-                  <h3 className="text-sm md:text-xl font-black uppercase tracking-widest text-[#FFFBEB] whitespace-nowrap">KABINET SENTRA NAWASENA</h3>
+                  <h3 className="text-sm md:text-xl font-black uppercase tracking-widest text-[#FFFBEB]">KABINET SENTRA NAWASENA</h3>
                   <span className="h-px w-8 md:w-12 bg-[#FFFBEB]/30" />
                 </div>
                 <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-[#FFFBEB]/50">HMPS Administrasi Bisnis · 2026</p>

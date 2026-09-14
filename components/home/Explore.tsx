@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/reveal";
-import { Sparkle } from "@/components/ui/Decorations";
+import { Sparkle, Plus, DotGrid } from "@/components/ui/Decorations";
 
 // TODO: ganti dengan ID video Company Profile dari YouTube (bagian setelah v=)
 const YOUTUBE_VIDEO_ID = "VIDEO_ID_COMPANY_PROFILE";
@@ -66,8 +66,9 @@ export default function Explore() {
   }, [videoOpen]);
 
   return (
-    <section className="cv-auto w-full text-[#FFFBEB] py-20 md:py-28 border-t border-white/10">
-      <div className="max-w-[1400px] mx-auto px-8 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+    <section className="cv-auto relative w-full text-[#FFFBEB] py-20 md:py-28 border-t border-white/10 overflow-hidden">
+      <DotGrid className="absolute top-10 right-4 md:right-10 w-28 md:w-40 opacity-30 animate-float-slow" color="#FFF4C6" />
+      <div className="max-w-[1400px] mx-auto px-5 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
         {/* Kiri: thumbnail YouTube */}
         <Reveal>
         <button
@@ -117,6 +118,7 @@ export default function Explore() {
           </p>
           <h2 className="text-3xl md:text-4xl font-black tracking-tight uppercase leading-[0.95] mt-2">
             Eksplorasi Lebih Dalam Tentang HMPS Adbis
+            <Plus className="inline-block w-5 h-5 md:w-6 md:h-6 ml-3 -mt-2 align-middle" color="#FC75A7" />
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 mt-8">

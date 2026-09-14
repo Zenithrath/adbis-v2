@@ -2,12 +2,13 @@
 
 import { Reveal } from "@/components/ui/reveal";
 import Stars from "@/components/ui/Stars";
-import { Sparkle } from "@/components/ui/Decorations";
+import { Sparkle, Plus, DotGrid } from "@/components/ui/Decorations";
 
 export default function ContactHero() {
   return (
     <section className="relative w-full border-b border-white/10 overflow-hidden">
       <Stars className="absolute top-8 right-4 md:right-16 w-10 md:w-14 animate-float-slow" />
+      <DotGrid className="absolute bottom-8 left-4 md:left-10 w-28 md:w-36 opacity-30 animate-float-slow" color="#FFF4C6" />
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 pt-8 md:pt-14 pb-16 md:pb-20">
         <div className="flex flex-wrap items-center justify-between gap-2 pb-5 border-b border-white/10 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-white/50">
           <span className="flex items-center gap-2">
@@ -30,6 +31,7 @@ export default function ContactHero() {
                   style={{ WebkitTextStroke: "2px rgba(249,168,212,0.85)" }}
                 >
                   &amp; Informasi
+                  <Plus className="inline-block w-6 h-6 md:w-9 md:h-9 ml-4 -mt-3 align-middle" color="#FC75A7" />
                 </span>
               </h1>
             </Reveal>

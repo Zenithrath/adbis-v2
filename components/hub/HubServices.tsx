@@ -39,7 +39,7 @@ const SERVICES = [
 export default function HubServices() {
   return (
     <section className="w-full">
-      <div className="max-w-[1400px] mx-auto px-8 md:px-16 py-12 md:py-16">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-16 py-12 md:py-16">
         <Reveal>
           <div className="flex items-end justify-between gap-6 mb-10 border-b border-white/10 pb-6">
             <div>

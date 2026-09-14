@@ -4,7 +4,7 @@ import { ArrowDown, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
 import Stars from "@/components/ui/Stars";
-import { Sparkle } from "@/components/ui/Decorations";
+import { Sparkle, Diamond, DotGrid } from "@/components/ui/Decorations";
 
 export default function HubHero() {
   return (
@@ -18,7 +18,8 @@ export default function HubHero() {
         className="absolute -top-16 -left-20 md:-left-14 w-40 md:w-60 h-auto opacity-25 animate-float-slow-reverse pointer-events-none select-none"
       />
       <Stars className="absolute top-10 right-6 md:right-16 w-10 md:w-14 animate-float-slow" />
-      <div className="max-w-[1400px] mx-auto px-8 md:px-16 pt-14 md:pt-20 pb-12 md:pb-16 text-center">
+      <DotGrid rows={4} cols={6} className="absolute bottom-8 right-4 md:right-12 w-24 md:w-32 opacity-30 animate-float-slow-reverse" color="#FFF4C6" />
+      <div className="max-w-[1400px] mx-auto px-5 md:px-16 pt-14 md:pt-20 pb-12 md:pb-16 text-center">
         <Reveal>
           <span className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.24em] uppercase text-[#FFA6C8]">
             <span className="text-[#FF7AAC]">✱</span> Adbis Hub — Satu Atap
@@ -28,6 +29,7 @@ export default function HubHero() {
             Satu Atap
             <br />
             Semua Layanan
+            <Diamond className="inline-block w-5 h-5 md:w-8 md:h-8 ml-4 -mt-3 align-middle" color="#FFF4C6" />
           </h1>
           <p className="mt-6 text-sm md:text-base text-[#FFFBEB]/60 leading-relaxed max-w-xl mx-auto">
             Pusat layanan dan informasi mahasiswa: pendaftaran open

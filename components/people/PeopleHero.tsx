@@ -3,7 +3,7 @@
 import { Reveal } from "@/components/ui/reveal";
 import DeptStepper from "@/components/people/DeptStepper";
 import Stars from "@/components/ui/Stars";
-import { Sparkle } from "@/components/ui/Decorations";
+import { Sparkle, Diamond, DotGrid } from "@/components/ui/Decorations";
 
 export default function PeopleHero({
   activeDeptId,
@@ -16,6 +16,7 @@ export default function PeopleHero({
     <section className="relative w-full border-b border-white/10 overflow-hidden">
       <Stars className="absolute top-8 right-4 md:right-16 w-10 md:w-14 animate-float-slow" />
       <Stars className="absolute bottom-10 left-4 md:left-16 w-20 md:w-28 opacity-30 animate-float-slow-reverse" />
+      <DotGrid rows={4} cols={6} className="absolute bottom-8 right-4 md:right-12 w-24 md:w-32 opacity-30 animate-float-slow" color="#FFF4C6" />
       <div className="relative max-w-[1400px] mx-auto px-6 md:px-16 pt-8 md:pt-14 pb-12 md:pb-16">
         <Reveal>
           <div className="text-center">
@@ -34,7 +35,8 @@ export default function PeopleHero({
               style={{ WebkitTextStroke: "2px rgba(249,168,212,0.85)" }}
             >
               Sentra Nawasena
-            </span>
+            </span>{" "}
+            <Diamond className="inline-block w-5 h-5 md:w-8 md:h-8 -mt-2 align-middle" color="#FFF4C6" />
           </h1>
         </Reveal>
 

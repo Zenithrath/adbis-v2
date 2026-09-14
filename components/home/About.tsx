@@ -3,15 +3,16 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
 import Stars from "@/components/ui/Stars";
-import { Sparkle } from "@/components/ui/Decorations";
+import { Sparkle, Plus, DotGrid } from "@/components/ui/Decorations";
 
 export default function About() {
   return (
     <section
-      className="relative w-full text-[#FFFBEB] py-20 px-8 md:px-16 border-t border-white/10 overflow-hidden"
+      className="relative w-full text-[#FFFBEB] py-20 px-5 md:px-16 border-t border-white/10 overflow-hidden"
       id="about"
     >
       <Stars className="absolute top-10 right-6 md:right-14 w-10 md:w-14 animate-float-slow" />
+      <DotGrid className="absolute bottom-8 left-4 md:left-10 w-28 md:w-36 opacity-30 animate-float-slow" color="#FFF4C6" />
       <div className="max-w-[1400px] mx-auto">
         {/* Top: Tentang + Deskripsi */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
@@ -23,6 +24,7 @@ export default function About() {
               </span>
               <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-[1.1] max-w-2xl">
                 PUSAT PENGGERAK INTI BERORIENTASI MASA DEPAN CERAH.
+                <Plus className="inline-block w-5 h-5 md:w-6 md:h-6 ml-3 -mt-2 align-middle" color="#FC75A7" />
               </h3>
               <p className="mt-6 text-[10px] font-bold uppercase tracking-widest text-white/40 leading-relaxed">
                 PUSAT PENGGERAK INTI — MASA DEPAN YANG CERAH
