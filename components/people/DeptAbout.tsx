@@ -2,6 +2,7 @@
 
 import { Reveal } from "@/components/ui/reveal";
 import type { Department } from "@/data/organization";
+import { deptTextOnDark } from "@/lib/deptColor";
 
 export default function DeptAbout({ dept }: { dept: Department }) {
   const memberCount = dept.staff.length + 2;
@@ -30,7 +31,7 @@ export default function DeptAbout({ dept }: { dept: Department }) {
             <div className="h-full bg-white/[0.04] border border-white/10 rounded-2xl p-6 md:p-8">
               <p
                 className="text-xl md:text-2xl font-black uppercase tracking-tight mb-4"
-                style={{ color: dept.color === "#FFFBEB" ? "#F9A8D4" : dept.color }}
+                style={{ color: deptTextOnDark(dept.color) }}
               >
                 {dept.tagline}
               </p>

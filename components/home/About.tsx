@@ -32,7 +32,7 @@ export default function About() {
             </div>
           </Reveal>
           <Reveal className="md:col-span-6" delay={0.1}>
-            <div className="bg-white/[0.07] backdrop-blur-xl border border-white/15 rounded-2xl p-6 md:p-8 space-y-6">
+            <div className="bg-white/[0.07] backdrop-blur-xl max-md:backdrop-blur-none max-md:bg-white/[0.08] border border-white/15 rounded-2xl p-6 md:p-8 space-y-6">
               <p className="text-xs text-white/85 leading-relaxed">
                 <strong className="text-white">
                   &ldquo;Sentra Nawasena&rdquo;
@@ -103,8 +103,8 @@ export default function About() {
               },
             ].map((m, i) => (
               <Reveal key={m.no} delay={i * 0.08} y={20} className="h-full">
-                <div className="group h-full rounded-2xl border border-white/15 bg-white/[0.07] backdrop-blur-sm p-7 md:p-8 flex flex-col transition-all duration-300 [@media(hover:hover)]:hover:-translate-y-2 [@media(hover:hover)]:hover:border-[#FF7AAC]/60 [@media(hover:hover)]:hover:bg-white/[0.1] [@media(hover:hover)]:hover:shadow-[0_20px_50px_-20px_rgba(244,114,182,0.45)] cursor-default">
-                  <span className="text-4xl md:text-5xl font-black leading-none text-white/25 transition-colors duration-300 [@media(hover:hover)]:group-hover:text-[#FF7AAC]">
+                <div className="group h-full rounded-2xl border border-white/15 bg-white/[0.07] backdrop-blur-sm max-md:backdrop-blur-none max-md:bg-white/[0.09] max-md:border-[#FF7AAC]/40 max-md:shadow-[0_20px_50px_-20px_rgba(244,114,182,0.35)] p-7 md:p-8 flex flex-col transition-all duration-300 [@media(hover:hover)]:hover:-translate-y-2 [@media(hover:hover)]:hover:border-[#FF7AAC]/60 [@media(hover:hover)]:hover:bg-white/[0.1] [@media(hover:hover)]:hover:shadow-[0_20px_50px_-20px_rgba(244,114,182,0.45)] cursor-default">
+                  <span className="text-4xl md:text-5xl font-black leading-none text-white/25 transition-colors duration-300 [@media(hover:hover)]:group-hover:text-[#FF7AAC] max-md:text-[#FF7AAC]">
                     {m.no}
                   </span>
                   <h4 className="font-black text-lg md:text-xl uppercase tracking-tight text-white mt-5 mb-3">
@@ -113,7 +113,7 @@ export default function About() {
                   <p className="text-sm text-white/75 leading-relaxed">
                     {m.desc}
                   </p>
-                  <span className="mt-auto pt-6 block h-1 w-10 rounded-full bg-white/25 transition-all duration-300 [@media(hover:hover)]:group-hover:w-full [@media(hover:hover)]:group-hover:bg-[#FF7AAC]" />
+                  <span className="mt-auto pt-6 block h-1 w-10 rounded-full bg-white/25 transition-all duration-300 [@media(hover:hover)]:group-hover:w-full [@media(hover:hover)]:group-hover:bg-[#FF7AAC] max-md:w-full max-md:bg-[#FF7AAC]" />
                 </div>
               </Reveal>
             ))}

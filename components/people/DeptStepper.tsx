@@ -2,6 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DEPARTMENTS } from "@/data/organization";
+import { deptOnColor } from "@/lib/deptColor";
 import { cn } from "@/lib/utils";
 
 export default function DeptStepper({
@@ -37,7 +38,7 @@ export default function DeptStepper({
         <div className="flex-1 min-w-0 rounded-2xl border border-white/15 bg-white/[0.04] px-5 py-4 flex items-center gap-4">
           <span
             className="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center text-base font-black"
-            style={{ backgroundColor: dept.color, color: "#1A1B41" }}
+            style={{ backgroundColor: dept.color, color: deptOnColor(dept.color) }}
           >
             {dept.shortName.charAt(0)}
           </span>

@@ -93,7 +93,7 @@ export default function ValuesCulture() {
           {VALUES.map((v, i) => {
             return (
               <Reveal key={v.title} delay={(i % 5) * 0.07} y={20}>
-                <div className="group bg-white/[0.07] backdrop-blur-sm border border-white/15 rounded-2xl p-6 flex flex-col h-full transition-all duration-300 [@media(hover:hover)]:hover:-translate-y-1.5 [@media(hover:hover)]:hover:bg-white/[0.1] [@media(hover:hover)]:hover:border-white/25">
+                <div className="group bg-white/[0.07] backdrop-blur-sm max-md:backdrop-blur-none max-md:bg-white/[0.09] max-md:border-white/20 border border-white/15 rounded-2xl p-6 flex flex-col h-full transition-all duration-300 [@media(hover:hover)]:hover:-translate-y-1.5 [@media(hover:hover)]:hover:bg-white/[0.1] [@media(hover:hover)]:hover:border-white/25">
                   <span
                     className="text-4xl font-black tabular-nums leading-none mb-6"
                     style={{ color: v.color }}
@@ -107,7 +107,7 @@ export default function ValuesCulture() {
                     {v.desc}
                   </p>
                   <span
-                    className="mt-5 h-0.5 w-8 rounded-full transition-all duration-300 [@media(hover:hover)]:group-hover:w-full"
+                    className="mt-5 h-0.5 w-8 rounded-full transition-all duration-300 [@media(hover:hover)]:group-hover:w-full max-md:w-full"
                     style={{ backgroundColor: v.color }}
                   />
                 </div>
