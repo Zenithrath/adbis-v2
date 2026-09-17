@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { DEPARTMENTS, type Member } from "@/data/organization";
+import { DEPARTMENTS, EXECUTIVE_BOARD, type Member } from "@/data/organization";
 import PeopleHero from "@/components/people/PeopleHero";
+import BpiSection from "@/components/people/BpiSection";
 import DeptAbout from "@/components/people/DeptAbout";
 import DeptDetail from "@/components/people/DeptDetail";
 import ProkerShowcase from "@/components/people/ProkerShowcase";
 import MemberModal from "@/components/people/MemberModal";
 import { FooterTapedDesign } from "@/components/ui/footer-taped-design";
+import DeptStepper from "@/components/people/DeptStepper";
 
 export default function PeoplePage() {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
@@ -15,6 +17,8 @@ export default function PeoplePage() {
 
   const activeDept =
     DEPARTMENTS.find((d) => d.id === activeDeptId) || DEPARTMENTS[0];
+    
+  const bpiMembers = EXECUTIVE_BOARD;
 
   useEffect(() => {
     document.body.style.overflow = selectedMember ? "hidden" : "";
@@ -60,6 +64,10 @@ export default function PeoplePage() {
 
       <main className="relative z-10 w-full text-[#1e293b] overflow-x-clip">
         <PeopleHero activeDeptId={activeDeptId} onSelectDept={setActiveDeptId} />
+        <BpiSection bpiMembers={bpiMembers} />
+        <div className="max-w-[1400px] mx-auto px-6 md:px-16 pt-8 md:pt-14 pb-8 border-t border-white/10">
+           <DeptStepper activeId={activeDeptId} onSelect={setActiveDeptId} />
+        </div>
         <DeptAbout dept={activeDept} />
         <DeptDetail dept={activeDept} onSelectMember={setSelectedMember} />
         <ProkerShowcase key={activeDept.id} dept={activeDept} />

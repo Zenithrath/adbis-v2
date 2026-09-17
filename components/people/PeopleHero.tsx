@@ -47,12 +47,6 @@ export default function PeopleHero({
             oleh setiap departemen.
           </p>
         </Reveal>
-
-        <Reveal delay={0.2}>
-          <div className="mt-8 md:mt-10">
-            <DeptStepper activeId={activeDeptId} onSelect={onSelectDept} />
-          </div>
-        </Reveal>
       </div>
     </section>
   );
