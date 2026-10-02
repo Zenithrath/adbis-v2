@@ -149,9 +149,11 @@ export default function Footer() {
             </div>
 
             <p className="text-sm text-[#FFFBEB]/70 leading-relaxed mt-6 max-w-xs">
-              Jl. HS. Ronggo Waluyo, Puseurjaya,
+              Fakultas Vokasi Universitas Brawijaya
               <br />
-              Telukjambe Timur, Karawang
+              Jl. Veteran No. 12–14, Ketawanggede,
+              <br />
+              Kecamatan Lowokwaru, Kota Malang, Jawa Timur
             </p>
 
             <div className="flex items-center gap-3 mt-6">
