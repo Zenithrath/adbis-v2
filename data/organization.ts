@@ -45,7 +45,7 @@ export const EXECUTIVE_BOARD: Member[] = [
     departmentId: "bpi",
     departmentName: "Badan Pengurus Inti",
     major: "Administrasi Bisnis 2023",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+    image: "/images/BPI/Kahim.webp",
     bio: "Berkomitmen penuh mengarahkan komando HMPS Administrasi Bisnis sebagai wadah akselerasi potensi mahasiswa yang inklusif, profesional, dan berdampak nyata.",
     tasks: [
       "Penanggung jawab utama seluruh arah kebijakan & gerakan organisasi.",
@@ -61,7 +61,7 @@ export const EXECUTIVE_BOARD: Member[] = [
     departmentId: "bpi",
     departmentName: "Badan Pengurus Inti",
     major: "Administrasi Bisnis 2023",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80",
+    image: "/images/BPI/Wakahim.webp",
     bio: "Fokus pada penguatan mekanisme internal kabinet, efisiensi tata kelola program, dan pendampingan berkelanjutan bagi 7 departemen.",
     tasks: [
       "Mengawasi dan mengevaluasi operasional internal 7 departemen.",
@@ -77,7 +77,7 @@ export const EXECUTIVE_BOARD: Member[] = [
     departmentId: "bpi",
     departmentName: "Badan Pengurus Inti",
     major: "Administrasi Bisnis 2023",
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80",
+    image: "/images/BPI/63.webp",
     bio: "Pilar kerapihan administrasi, korespondensi resmi, dan arsip keorganisasian HMPS Administrasi Bisnis.",
     tasks: [
       "Pengelolaan persuratan, perizinan, dan arsip risalah rapat.",
@@ -92,7 +92,7 @@ export const EXECUTIVE_BOARD: Member[] = [
     departmentId: "bpi",
     departmentName: "Badan Pengurus Inti",
     major: "Administrasi Bisnis 2023",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+    image: "/images/BPI/65.webp",
     bio: "Menjaga transparansi, akuntabilitas, dan kesehatan arus kas finansial seluruh agenda program kerja.",
     tasks: [
       "Penyusunan Rencana Anggaran Biaya (RAB) tahunan.",
@@ -1063,3 +1063,4 @@ export const DEPARTMENTS: Department[] = [
     ]
   }
 ];
+
