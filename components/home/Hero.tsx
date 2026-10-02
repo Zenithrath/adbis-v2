@@ -152,35 +152,32 @@ export default function Hero() {
             <div aria-hidden="true" className="absolute -inset-16 rounded-[60px] bg-[#FF7AAC]/15 blur-[100px] pointer-events-none" />
 
             <div className="relative rounded-[20px] md:rounded-[28px] overflow-hidden h-[34svh] sm:h-[55vh] md:h-[60vh]">
-              {/* Logos bar — logo asli HMPS + Sentra, teks UB & Vokasi */}
-              <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-center pt-3 md:pt-5">
-                <div className="flex items-center gap-2 md:gap-3 px-4 md:px-5 py-1.5 md:py-2 rounded-full bg-[#1e293b]/50 backdrop-blur-md border border-white/10">
-                  {["UB", "VOKASI"].map((label) => (
-                    <span key={label} className="h-7 md:h-8 px-2.5 rounded-full bg-white/10 flex items-center justify-center text-[8px] font-black tracking-wider text-white/70">
-                      {label}
-                    </span>
-                  ))}
-                  {[
-                    { src: "/images/hmps-logo.webp", alt: "Logo HMPS Adbis" },
-                    { src: "/images/sentra-logo.webp", alt: "Logo Sentra Nawasena" },
-                  ].map((logo) => (
-                    <span key={logo.src} className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
-                      <Image
-                        src={logo.src}
-                        alt={logo.alt}
-                        width={32}
-                        height={32}
-                        className="w-5 h-5 md:w-6 md:h-6 object-contain"
-                      />
-                    </span>
-                  ))}
+                {/* Logos bar */}
+                <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-center pt-3 md:pt-5">
+                  <div className="flex items-center gap-2 md:gap-3 px-4 md:px-5 py-1.5 md:py-2 rounded-full bg-[#1e293b]/50 backdrop-blur-md border border-white/10">
+                    {[
+                      { src: "/images/logo-universitas.png", alt: "Logo Universitas Brawijaya" },
+                      { src: "/images/cropped-logo-vokasi.webp", alt: "Logo Vokasi UB" },
+                      { src: "/images/hmps-logo.webp", alt: "Logo HMPS Adbis" },
+                      { src: "/images/sentra-logo.webp", alt: "Logo Sentra Nawasena" },
+                    ].map((logo) => (
+                      <span key={logo.src} className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
+                        <Image
+                          src={logo.src}
+                          alt={logo.alt}
+                          width={32}
+                          height={32}
+                          className="w-5 h-5 md:w-6 md:h-6 object-contain"
+                        />
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Image */}
-              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop" alt="Pengurus HMPS Administrasi Bisnis" loading="lazy" decoding="async" className="w-full h-full object-cover block" />
-
-              {/* Vignette overlay */}
+                {/* Image */}
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop" alt="Pengurus HMPS Administrasi Bisnis" loading="lazy" decoding="async" className="w-full h-full object-cover block" />
+  
+                {/* Vignette overlay */}
               <div
                 aria-hidden="true"
                 className="absolute inset-0 pointer-events-none"
