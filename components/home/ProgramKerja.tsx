@@ -13,28 +13,28 @@ const BENTO_ITEMS = [
     name: "Invest Adbis",
     image:
       "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop",
-    desc: "Sekolah pasar modal dan simulasi trading saham bareng BEI — bekal melek finansial sejak dini sekaligus tameng dari jebakan investasi bodong.",
+    desc: "Program kerja berupa kegiatan orientasi studi dan pengenalan lingkungan kampus bagi mahasiswa baru D3 Administrasi Bisnis. Kegiatan ini dirancang untuk memperkenalkan mahasiswa baru pada lingkungan akademik, sosial, budaya, serta dinamika kehidupan kampus sebagai langkah awal memasuki dunia perkuliahan.",
   },
   {
     num: "02",
     name: "Bina Masyarakat",
     image:
       "https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=800&auto=format&fit=crop",
-    desc: "Terjun ke desa binaan melatih pencatatan keuangan dan pemasaran digital UMKM — ilmu bisnis yang langsung dirasakan masyarakat.",
+    desc: "Program kerja yang membantu masyarakat sekitar kita seperti ikut kerja bakti membersihkan sampah di lingkungan, ataupun di sungai, bersosialisasi memberikan ilmu baru kepada masyarakat tentang kewirausahaan, dan mengajak masyarakat untuk belajar peduli lingkungan.",
   },
   {
     num: "03",
     name: "Market Day",
     image:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop",
-    desc: "Festival expo kewirausahaan dengan belasan booth kuliner, fashion, dan produk kreatif — ajang validasi pasar produk mahasiswa.",
+    desc: "Wadah bagi mahasiswa untuk terjun langsung ke pasar dengan memasarkan produk inovasi yang mereka kembangkan. Program ini dirancang untuk memberikan pengalaman nyata dalam dunia bisnis dan penerapan ilmu bisnis.",
   },
   {
     num: "04",
     name: "Sencrea",
     image:
       "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop",
-    desc: "Panggung seni musik, tari, dan desain komunikasi visual — ruang ekspresi dan apresiasi talenta seni mahasiswa Adbis.",
+    desc: "Kegiatan yang bertujuan untuk menjadi wadah bagi generasi muda, khususnya mahasiswa, untuk menyalurkan ide, kreativitas, dan potensi mereka dalam bidang kewirausahaan.",
   },
 ];
 

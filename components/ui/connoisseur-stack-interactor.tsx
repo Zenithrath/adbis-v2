@@ -19,7 +19,7 @@ const defaultItems: MenuItem[] = [
     clipId: "clip-original",
     image:
       "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop",
-    desc: "Sekolah pasar modal dan simulasi trading saham bareng BEI — bekal melek finansial sejak dini sekaligus tameng dari jebakan investasi bodong.",
+    desc: "Program kerja berupa kegiatan orientasi studi dan pengenalan lingkungan kampus bagi mahasiswa baru D3 Administrasi Bisnis. Kegiatan ini dirancang untuk memperkenalkan mahasiswa baru pada lingkungan akademik, sosial, budaya, serta dinamika kehidupan kampus sebagai langkah awal memasuki dunia perkuliahan.",
   },
   {
     num: "02",
@@ -27,7 +27,7 @@ const defaultItems: MenuItem[] = [
     clipId: "clip-hexagons",
     image:
       "https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=800&auto=format&fit=crop",
-    desc: "Terjun ke desa binaan melatih pencatatan keuangan dan pemasaran digital UMKM — ilmu bisnis yang langsung dirasakan masyarakat.",
+    desc: "Program kerja yang membantu masyarakat sekitar kita seperti ikut kerja bakti membersihkan sampah di lingkungan, ataupun di sungai, bersosialisasi memberikan ilmu baru kepada masyarakat tentang kewirausahaan, dan mengajak masyarakat untuk belajar peduli lingkungan.",
   },
   {
     num: "03",
@@ -35,7 +35,7 @@ const defaultItems: MenuItem[] = [
     clipId: "clip-pixels",
     image:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop",
-    desc: "Festival expo kewirausahaan dengan belasan booth kuliner, fashion, dan produk kreatif — ajang validasi pasar produk mahasiswa.",
+    desc: "Wadah bagi mahasiswa untuk terjun langsung ke pasar dengan memasarkan produk inovasi yang mereka kembangkan. Program ini dirancang untuk memberikan pengalaman nyata dalam dunia bisnis dan penerapan ilmu bisnis.",
   },
   {
     num: "04",
@@ -43,7 +43,7 @@ const defaultItems: MenuItem[] = [
     clipId: "clip-squares",
     image:
       "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop",
-    desc: "Panggung seni musik, tari, dan desain komunikasi visual — ruang ekspresi dan apresiasi talenta seni mahasiswa Adbis.",
+    desc: "Kegiatan yang bertujuan untuk menjadi wadah bagi generasi muda, khususnya mahasiswa, untuk menyalurkan ide, kreativitas, dan potensi mereka dalam bidang kewirausahaan.",
   },
 ];
 
@@ -338,10 +338,10 @@ export const Component = ({
                           </span>
                           <span
                             className={cn(
-                              "mt-2 block max-w-xs text-[11px] leading-relaxed text-white/50 transition-all duration-500 lg:mt-3 lg:text-xs",
+                              "mt-2 block max-w-sm whitespace-pre-line text-sm leading-relaxed transition-all duration-500 lg:mt-3 lg:text-base lg:max-w-md drop-shadow-md",
                               isActive
-                                ? "translate-x-2 opacity-100 lg:translate-x-4"
-                                : "opacity-0"
+                                ? "translate-x-2 text-white/90 opacity-100 lg:translate-x-4"
+                                : "text-white/50 opacity-0"
                             )}
                           >
                             {item.desc}
